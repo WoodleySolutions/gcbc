@@ -1,16 +1,188 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Great Catholic Book Club - Every Book is Catholic">
+  <!-- Hero Section -->
+  <section class="bg-black-olive relative">
+    <!-- Subtle texture overlay for old book feel -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-90"></div>
+    <div class="max-w-7xl mx-auto px-4 py-16 sm:py-24 relative z-10">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-6xl font-bold text-champaign-100 mb-4 font-headline drop-shadow-lg">
+          Great Catholic Book Club
+        </h1>
+        <p class="text-2xl text-rust-400 font-semibold mb-6 font-headline">
+          "Every Book is Catholic"
+        </p>
+        <blockquote class="text-lg text-champaign-200 max-w-4xl mx-auto mb-8 italic leading-relaxed">
+          For as I walked around looking carefully at your shrines, I even discovered an altar inscribed, 'To an Unknown God.' What therefore you unknowingly worship, I proclaim to you. <span class="text-champaign-300">-Acts of the Apostles 17:23</span>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="bg-rust-800 text-champaign-100 rounded-lg p-8 text-center shadow-2xl border border-champaign-700/20">
+        <h2 class="text-3xl font-bold mb-4 font-headline">Sign up for in time for our September meeting now!</h2>
+        <a href="/join" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
+          Sign Up
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-champaign-100 mb-6 font-headline">Welcome to Great Catholic Book Club!</h2>
+        <p class="text-lg text-champaign-200 mb-8 leading-relaxed">
+          We are an online discussion club, content hub, and charitable ministry for people who want to grow in their relationship with Jesus Christ—wherever that is—by enjoying good literature and art through the lens of the Catholic faith. Together, we explore how the beauty of creativity and faith yields perfect spiritual fruit. We believe that art is how we become full human beings, and "the glory of God is man fully alive."
+        </p>
+
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
+          <h3 class="text-2xl font-bold text-champaign-100 mb-6 font-headline">How to participate:</h3>
+          <div class="text-left space-y-4">
+            <p class="text-champaign-200">
+              You can join the Book Club and download the 2025 Study Guide to participate in monthly online group discussions, get info about quarterly in-person movie night meet ups, and updates on our blog and video content! The next online meeting to discuss Dune will be held on September 29th at 7pm CST. Monthly online meetings will be held on the last Monday of every month from January to October 2025, and on the third Monday of November 2025. You can join anytime during the year, starting now!
+            </p>
+            <p class="text-champaign-200">
+              Or you can follow along on your own with our 2025 Book List, and subscribe to our newsletter to get updates on blog and video content that will be released throughout the year. Either option is free. Choose whatever works best for you!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-champaign-100 mb-4 font-headline">Subscribe to our YouTube Channel!</h2>
+        <p class="text-lg text-champaign-200 mb-8">Check out our video going over all the books on our 2025 List:</p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="aspect-video bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-2xl">
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/ysInxBrYBQ4"
+            title="2025 Book List Video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            class="w-full h-full"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Every Book is Catholic -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-champaign-100 mb-6 font-headline">Why is every book Catholic?</h2>
+
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl mb-8">
+          <p class="text-lg text-champaign-200 mb-4">
+            <strong class="text-champaign-100">Short answer:</strong> Because every book can (and in our humble opinion, should) be interpreted through the lens of the Catholic intellectual tradition.
+          </p>
+
+          <p class="text-lg text-champaign-200 mb-6">
+            <strong class="text-champaign-100">Long answer:</strong> Every book isn't intentionally Catholic. People create art from a variety of different cultural, historical, and personal viewpoints. We believe there is one perfect perspective that encompasses all that is true, good, and beautiful; it doesn't erase any point of view, but instead refines it. That is the perspective of Jesus Christ. If you really want to enjoy a good book, do it with Jesus!
+          </p>
+
+          <a href="/blog/every-book-is-catholic" class="text-rust-400 hover:text-rust-300 font-semibold transition-colors">
+            Read more here...
+          </a>
+        </div>
+
+        <p class="text-xl text-champaign-100 font-semibold mb-6 font-headline">
+          Join the book club to start that journey in 2025!
+        </p>
+        <a href="/join" class="inline-block bg-rust-800 text-champaign-100 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-rust-900 transition-colors shadow-md">
+          Join Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-champaign-100 mb-4 font-headline">Latest from the Blog</h2>
+        <p class="text-champaign-200">Explore our thoughts on faith, literature, and the Catholic intellectual tradition</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Blog posts will be populated by CMS -->
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 text-center shadow-xl">
+          <p class="text-champaign-300">Featured blog posts will appear here</p>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="/blog" class="inline-block bg-rust-800 text-champaign-100 px-8 py-3 rounded-lg font-semibold hover:bg-rust-900 transition-colors shadow-md">
+          View All Posts
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-champaign-100 mb-4 font-headline">Shop</h2>
+        <p class="text-champaign-200">Support the ministry with books and merchandise</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Store items will be populated by Printify -->
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 text-center shadow-2xl">
+          <p class="text-champaign-300">Store items will appear here</p>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="/shop" class="inline-block bg-rust-800 text-champaign-100 px-8 py-3 rounded-lg font-semibold hover:bg-rust-900 transition-colors shadow-md">
+          Visit Store
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="py-16 bg-rust-800 text-champaign-100">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4 font-headline">Sign up for newsletter</h2>
+      <p class="text-champaign-200 mb-8">
+        Get updates on blog and video content, book discussions, and event announcements.
+      </p>
+
+      <form name="newsletter" method="POST" data-netlify="true" class="max-w-md mx-auto flex gap-4">
+        <input type="hidden" name="form-name" value="newsletter" />
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          class="flex-1 px-4 py-3 rounded-lg text-black-olive bg-champaign-100 border border-champaign-300 focus:ring-2 focus:ring-champaign-200"
+          required
+        />
+        <button
+          type="submit"
+          class="bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md"
+        >
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+</Layout>

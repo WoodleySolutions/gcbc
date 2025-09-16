@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Join the Book Club - Great Catholic Book Club">
+  <!-- Header Section -->
+  <section class="bg-black-olive relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-95"></div>
+    <div class="max-w-7xl mx-auto px-4 py-16 relative z-10">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-8 font-headline drop-shadow-lg">
+          Join the Book Club
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Information Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 mb-12 shadow-2xl">
+        <p class="text-lg text-champaign-200 leading-relaxed">
+          Join the Book Club to get the 2025 Study Guide to participate in monthly online group discussions, get info about quarterly in-person movie night meet ups, and updates on our blog and video content! The next online meeting to discuss Dune will be held on September 29th at 7pm CST. Monthly online meetings will be held on the last Monday of every month from January to October 2025, and on the third Monday of November 2025. You can join anytime during the year, starting now!
+        </p>
+      </div>
+
+      <!-- Join Form -->
+      <div class="bg-black-olive border border-champaign-700/30 rounded-lg shadow-2xl p-8">
+        <h2 class="text-2xl font-bold text-champaign-100 mb-8 text-center font-headline">Sign Up Form</h2>
+
+        <form name="join-book-club" method="POST" data-netlify="true" class="space-y-6">
+          <input type="hidden" name="form-name" value="join-book-club" />
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- First Name -->
+            <div>
+              <label for="firstName" class="block text-sm font-medium text-champaign-200 mb-2">
+                First Name *
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                required
+                class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+              />
+            </div>
+
+            <!-- Last Name -->
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-champaign-200 mb-2">
+                Last Name *
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                required
+                class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+              />
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-champaign-200 mb-2">
+              Email *
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+            />
+          </div>
+
+          <!-- Birthday -->
+          <div>
+            <label for="birthday" class="block text-sm font-medium text-champaign-200 mb-2">
+              Birthday
+            </label>
+            <input
+              type="date"
+              id="birthday"
+              name="birthday"
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+            />
+          </div>
+
+          <!-- Location -->
+          <div>
+            <label for="location" class="block text-sm font-medium text-champaign-200 mb-2">
+              Where are you from?
+            </label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="City, State/Country"
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 placeholder-champaign-300 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+            />
+          </div>
+
+          <!-- How did you hear about us -->
+          <div>
+            <label for="hearAboutUs" class="block text-sm font-medium text-champaign-200 mb-2">
+              How did you hear about us?
+            </label>
+            <select
+              id="hearAboutUs"
+              name="hearAboutUs"
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+            >
+              <option value="">Please select...</option>
+              <option value="social-media">Social Media</option>
+              <option value="friend-referral">Friend/Family Referral</option>
+              <option value="search-engine">Search Engine</option>
+              <option value="youtube">YouTube</option>
+              <option value="blog">Blog/Website</option>
+              <option value="podcast">Podcast</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- About Yourself -->
+          <div>
+            <label for="aboutYourself" class="block text-sm font-medium text-champaign-200 mb-2">
+              Tell us about yourself!
+            </label>
+            <p class="text-sm text-champaign-300 mb-3">
+              Cradle Catholic? Convert? Or just interested in the books? Any books you really like on the list? Share whatever you like:
+            </p>
+            <textarea
+              id="aboutYourself"
+              name="aboutYourself"
+              rows="6"
+              placeholder="Tell us your story, faith journey, favorite books from our list, or anything else you'd like to share..."
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 placeholder-champaign-300 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button
+              type="submit"
+              class="bg-rust-800 text-champaign-100 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-rust-900 transition-colors shadow-md"
+            >
+              Join the Book Club
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Happens Next -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-champaign-100 mb-6 font-headline">What Happens Next?</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
+          <div class="text-rust-800 text-4xl mb-4 font-bold">1</div>
+          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Welcome Email</h3>
+          <p class="text-champaign-200">You'll receive a welcome email with the 2025 Study Guide and meeting details.</p>
+        </div>
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
+          <div class="text-rust-800 text-4xl mb-4 font-bold">2</div>
+          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Monthly Updates</h3>
+          <p class="text-champaign-200">Get reminders about upcoming meetings, book discussions, and new content.</p>
+        </div>
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
+          <div class="text-rust-800 text-4xl mb-4 font-bold">3</div>
+          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Join Discussions</h3>
+          <p class="text-champaign-200">Participate in online meetings and connect with fellow Catholic book lovers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

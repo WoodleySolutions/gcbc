@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact Us - Great Catholic Book Club">
+  <!-- Hero Section -->
+  <section class="bg-black-olive relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-95"></div>
+    <div class="max-w-4xl mx-auto px-4 py-16 relative z-10 text-center">
+      <div class="mb-8">
+        <div class="w-32 h-32 mx-auto mb-6 bg-black-olive border border-champaign-700/30 rounded-lg flex items-center justify-center shadow-inner">
+          <!-- Placeholder for Our Lady with books image -->
+          <span class="text-champaign-300 text-sm">Our Lady with books.jpg</span>
+        </div>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-6 font-headline drop-shadow-lg">Contact Us</h1>
+      <p class="text-lg text-champaign-200 leading-relaxed">
+        Questions about the Great Catholic Book Club? Want to book Catholic scholar and speaker Sadie Elizabeth Woodley for your next retreat or event? Reach out to us here!
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-2xl mx-auto px-4">
+      <div class="bg-black-olive border border-champaign-700/30 rounded-lg shadow-2xl p-8">
+        <h2 class="text-2xl font-bold text-champaign-100 mb-8 text-center font-headline">Contact Form</h2>
+
+        <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- First Name -->
+            <div>
+              <label for="firstName" class="block text-sm font-medium text-champaign-200 mb-2">
+                First Name *
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                required
+                class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+              />
+            </div>
+
+            <!-- Last Name -->
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-champaign-200 mb-2">
+                Last Name *
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                required
+                class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+              />
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-champaign-200 mb-2">
+              Email *
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+            />
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-sm font-medium text-champaign-200 mb-2">
+              Message *
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 placeholder-champaign-300 rounded-lg focus:ring-2 focus:ring-rust-800 focus:border-rust-800"
+              placeholder="Tell us about your question, speaking request, or anything else you'd like to share..."
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button
+              type="submit"
+              class="bg-rust-800 text-champaign-100 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-rust-900 transition-colors shadow-md"
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,222 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Blog - Great Catholic Book Club">
+  <!-- Header Section -->
+  <section class="bg-black-olive relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-95"></div>
+    <div class="max-w-7xl mx-auto px-4 py-16 relative z-10">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-8 font-headline drop-shadow-lg">
+          GCBC Blog
+        </h1>
+        <p class="text-xl text-champaign-200">
+          Thoughts on faith, literature, and the Catholic intellectual tradition
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Posts Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-6xl mx-auto px-4">
+      <!-- Featured Post -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-champaign-100 mb-8 font-headline">Featured Post</h2>
+        <article class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
+          <div class="grid md:grid-cols-3 gap-8 items-center">
+            <div class="aspect-video bg-black-olive border border-champaign-700/20 rounded-lg flex items-center justify-center shadow-inner">
+              <span class="text-champaign-300">Featured Image</span>
+            </div>
+            <div class="md:col-span-2">
+              <h3 class="text-2xl font-bold text-champaign-100 mb-4 font-headline">Every Book is Catholic</h3>
+              <p class="text-champaign-200 mb-4 leading-relaxed">
+                An exploration of how we can interpret all literature through the lens of the Catholic intellectual tradition. Why every story, regardless of its author's intent, can be understood through the perspective of Jesus Christ.
+              </p>
+              <div class="flex items-center text-sm text-champaign-300 mb-4">
+                <span>By Sadie & Tyler</span>
+                <span class="mx-2">•</span>
+                <time>Coming Soon</time>
+              </div>
+              <a href="/blog/every-book-is-catholic" class="inline-block bg-rust-800 text-champaign-100 px-6 py-3 rounded-lg hover:bg-rust-900 transition-colors shadow-md">
+                Read Article
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Recent Posts Grid -->
+      <div>
+        <h2 class="text-2xl font-bold text-champaign-100 mb-8 font-headline">Recent Posts</h2>
+
+        <!-- CMS Note -->
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 text-center mb-12 shadow-xl">
+          <h3 class="text-lg font-semibold text-champaign-100 mb-4 font-headline">Blog Content Coming Soon!</h3>
+          <p class="text-champaign-200 mb-4">
+            This blog section will be populated by the CMS. Here you'll find:
+          </p>
+          <ul class="text-left text-champaign-200 max-w-md mx-auto space-y-2">
+            <li>• Book reviews and analysis</li>
+            <li>• Faith and literature discussions</li>
+            <li>• Member spotlights</li>
+            <li>• Reading guides and study notes</li>
+            <li>• Event recaps and announcements</li>
+          </ul>
+        </div>
+
+        <!-- Placeholder Blog Posts -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Post 1 -->
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="aspect-video bg-gray-300 flex items-center justify-center">
+              <span class="text-gray-600">Post Image</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 font-headline">Finding God in Science Fiction</h3>
+              <p class="text-gray-600 mb-4">
+                How authors like Frank Herbert and Isaac Asimov unknowingly explored profound spiritual themes...
+              </p>
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <time>Coming Soon</time>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#SciFi</span>
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Faith</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 2 -->
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="aspect-video bg-gray-300 flex items-center justify-center">
+              <span class="text-gray-600">Post Image</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 font-headline">The Catholic Roots of Jane Austen</h3>
+              <p class="text-gray-600 mb-4">
+                Exploring the moral framework and sacramental understanding in Pride and Prejudice...
+              </p>
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <time>Coming Soon</time>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Classics</span>
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Marriage</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 3 -->
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="aspect-video bg-gray-300 flex items-center justify-center">
+              <span class="text-gray-600">Post Image</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 font-headline">From Muslim to Catholic: A Reading Journey</h3>
+              <p class="text-gray-600 mb-4">
+                Sadie shares how literature played a role in her conversion story and spiritual journey...
+              </p>
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <time>Coming Soon</time>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Conversion</span>
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Testimony</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 4 -->
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="aspect-video bg-gray-300 flex items-center justify-center">
+              <span class="text-gray-600">Post Image</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 font-headline">Music, Books, and Faith</h3>
+              <p class="text-gray-600 mb-4">
+                Tyler reflects on how his background in music influenced his approach to reading and faith...
+              </p>
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <time>Coming Soon</time>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Music</span>
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Art</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 5 -->
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="aspect-video bg-gray-300 flex items-center justify-center">
+              <span class="text-gray-600">Post Image</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 font-headline">Raising Kids with Great Books</h3>
+              <p class="text-gray-600 mb-4">
+                Practical tips for introducing children to literature that forms both mind and heart...
+              </p>
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <time>Coming Soon</time>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Parenting</span>
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Education</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 6 -->
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="aspect-video bg-gray-300 flex items-center justify-center">
+              <span class="text-gray-600">Post Image</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 font-headline">Why We Love Book Clubs</h3>
+              <p class="text-gray-600 mb-4">
+                The power of community discussion in deepening our understanding of literature and faith...
+              </p>
+              <div class="flex items-center text-sm text-gray-500 mb-4">
+                <time>Coming Soon</time>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Community</span>
+                <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-sm">#Discussion</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="py-16 bg-rust-800">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-champaign-100 mb-4 font-headline">Stay Updated</h2>
+      <p class="text-champaign-200 mb-8">
+        Subscribe to our newsletter to get notified when new blog posts are published.
+      </p>
+      <div class="max-w-md mx-auto">
+        <form name="blog-newsletter" method="POST" data-netlify="true" class="flex gap-4">
+          <input type="hidden" name="form-name" value="blog-newsletter" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            class="flex-1 px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 placeholder-champaign-300 rounded-lg focus:ring-2 focus:ring-champaign-100 focus:border-champaign-100"
+            required
+          />
+          <button
+            type="submit"
+            class="bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
