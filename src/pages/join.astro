@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCurrentEventText } from '../lib/currentEvent';
+
+const eventText = getCurrentEventText();
 ---
 
 <Layout title="Join the Book Club - Great Catholic Book Club">
@@ -20,7 +23,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="max-w-4xl mx-auto px-4">
       <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 mb-12 shadow-2xl">
         <p class="text-lg text-champaign-200 leading-relaxed">
-          Join the Book Club to get the 2025 Study Guide to participate in monthly online group discussions, get info about quarterly in-person movie night meet ups, and updates on our blog and video content! The next online meeting to discuss Dune will be held on September 29th at 7pm CST. Monthly online meetings will be held on the last Monday of every month from January to October 2025, and on the third Monday of November 2025. You can join anytime during the year, starting now!
+          {eventText.joinPrompt} {eventText.scheduleText} {eventText.joinNowText}
         </p>
       </div>
 

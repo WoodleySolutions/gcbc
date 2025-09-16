@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCurrentEventText } from '../lib/currentEvent';
+
+const eventText = getCurrentEventText();
 ---
 
 <Layout title="2025 Book List - Great Catholic Book Club">
@@ -30,7 +33,7 @@ import Layout from '../layouts/Layout.astro';
           The list contains Amazon affiliate links. If you choose to buy the books through our links, we could receive some payment. We'd appreciate the support. But you can also get the books from your local library for free, or your local used bookstore for cheap. Do whatever works--we just want to enjoy discussing them with you!
         </p>
         <p class="text-lg text-champaign-200 leading-relaxed">
-          Join the Book Club to get the 2025 Study Guide to participate in monthly online group discussions, get info about quarterly in-person movie night meet ups, and updates on our blog and video content! The next online meeting to discuss Dune will be held on September 29th at 7pm CST. Monthly online meetings will be held on the last Monday of every month from January to October 2025, and on the third Monday of November 2025. You can join anytime during the year, starting now!
+          {eventText.joinPrompt} {eventText.scheduleText} {eventText.joinNowText}
         </p>
       </div>
     </div>
@@ -49,7 +52,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">January</div>
               <div class="text-champaign-300">1/27</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/HitchhikersGuideSplash.png" alt="The Hitchhiker's Guide to the Galaxy" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">The Hitchhiker's Guide to the Galaxy</h3>
               <p class="text-champaign-200 mb-2">By Douglas Adams</p>
@@ -65,7 +70,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">February</div>
               <div class="text-champaign-300">2/24</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/EndersGameSplash.png" alt="Ender's Game" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Ender's Game</h3>
               <p class="text-champaign-200 mb-2">By Orson Scott Card</p>
@@ -81,7 +88,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">March</div>
               <div class="text-champaign-300">3/31</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/WatchmenSplash.png" alt="Watchmen" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Watchmen</h3>
               <p class="text-champaign-200 mb-2">By Alan Moore & Dave Gibbons</p>
@@ -97,7 +106,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">April</div>
               <div class="text-champaign-300">4/28</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/PrideAndPrejSplash.png" alt="Pride and Prejudice" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Pride and Prejudice</h3>
               <p class="text-champaign-200 mb-2">By Jane Austin</p>
@@ -113,7 +124,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">May</div>
               <div class="text-champaign-300">5/26</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/BraveNewWorldSplash.png" alt="Brave New World" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Brave New World</h3>
               <p class="text-champaign-200 mb-2">By Aldous Huxley</p>
@@ -129,7 +142,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">June</div>
               <div class="text-champaign-300">6/30</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/JurassicParkSplash.png" alt="Jurassic Park" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Jurassic Park</h3>
               <p class="text-champaign-200 mb-2">By Michael Crichton</p>
@@ -145,7 +160,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">July</div>
               <div class="text-champaign-300">7/28</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/FoundationSplash.png" alt="Foundation" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Foundation</h3>
               <p class="text-champaign-200 mb-2">By Isaac Asimov</p>
@@ -161,7 +178,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">August</div>
               <div class="text-champaign-300">8/25</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/BourneSplash.png" alt="The Bourne Identity" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">The Bourne Identity</h3>
               <p class="text-champaign-200 mb-2">By Robert Ludlum</p>
@@ -178,7 +197,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-champaign-300">9/29</div>
               <div class="bg-rust-800 text-champaign-100 px-2 py-1 rounded text-sm mt-2 shadow-md">Current</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/DuneSplash.png" alt="Dune" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Dune</h3>
               <p class="text-champaign-200 mb-2">By Frank Herbert</p>
@@ -194,7 +215,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">October</div>
               <div class="text-champaign-300">10/27</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/MartianSplash.png" alt="The Martian" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">The Martian</h3>
               <p class="text-champaign-200 mb-2">By Andy Weir</p>
@@ -210,7 +233,9 @@ import Layout from '../layouts/Layout.astro';
               <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">November</div>
               <div class="text-champaign-300">11/17</div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner"></div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              <img src="/images/2025BookImages/GreatDivorce.png" alt="The Great Divorce" class="w-full h-full object-cover" />
+            </div>
             <div class="md:col-span-2">
               <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">The Great Divorce</h3>
               <p class="text-champaign-200 mb-2">By C.S. Lewis</p>

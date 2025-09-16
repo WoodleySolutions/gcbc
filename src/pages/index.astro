@@ -1,12 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import NextEventBanner from '../components/NextEventBanner.astro';
+import { getCurrentEventText } from '../lib/currentEvent';
+
+const eventText = getCurrentEventText();
 ---
 
 <Layout title="Great Catholic Book Club - Every Book is Catholic">
   <!-- Hero Section -->
   <section class="bg-black-olive relative">
-    <!-- Subtle texture overlay for old book feel -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-90"></div>
+    <!-- Background image for ancient library feel -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/A vast dimly lit library full of ancient interesting and colorful books.jpg');"></div>
+    <!-- Overlay for readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive/80 via-black-olive/85 to-black-olive/90"></div>
     <div class="max-w-7xl mx-auto px-4 py-16 sm:py-24 relative z-10">
       <div class="text-center">
         <h1 class="text-4xl sm:text-6xl font-bold text-champaign-100 mb-4 font-headline drop-shadow-lg">
@@ -22,15 +28,10 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Call to Action Section -->
+  <!-- Next Event Banner -->
   <section class="py-16 bg-black-olive">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="bg-rust-800 text-champaign-100 rounded-lg p-8 text-center shadow-2xl border border-champaign-700/20">
-        <h2 class="text-3xl font-bold mb-4 font-headline">Sign up for in time for our September meeting now!</h2>
-        <a href="/join" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
-          Sign Up
-        </a>
-      </div>
+      <NextEventBanner showOnHomepage={true} />
     </div>
   </section>
 
@@ -47,7 +48,7 @@ import Layout from '../layouts/Layout.astro';
           <h3 class="text-2xl font-bold text-champaign-100 mb-6 font-headline">How to participate:</h3>
           <div class="text-left space-y-4">
             <p class="text-champaign-200">
-              You can join the Book Club and download the 2025 Study Guide to participate in monthly online group discussions, get info about quarterly in-person movie night meet ups, and updates on our blog and video content! The next online meeting to discuss Dune will be held on September 29th at 7pm CST. Monthly online meetings will be held on the last Monday of every month from January to October 2025, and on the third Monday of November 2025. You can join anytime during the year, starting now!
+              {eventText.joinPrompt} {eventText.scheduleText} {eventText.joinNowText}
             </p>
             <p class="text-champaign-200">
               Or you can follow along on your own with our 2025 Book List, and subscribe to our newsletter to get updates on blog and video content that will be released throughout the year. Either option is free. Choose whatever works best for you!

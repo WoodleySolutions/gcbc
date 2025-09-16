@@ -1,0 +1,40 @@
+---
+import { currentEvent, getCurrentEventText } from '../lib/currentEvent';
+
+export interface Props {
+  showOnHomepage?: boolean;
+}
+
+const { showOnHomepage = false } = Astro.props;
+const eventText = getCurrentEventText();
+---
+
+<div class="bg-rust-800 text-champaign-100 rounded-lg p-8 shadow-2xl border border-champaign-700/20 mb-12">
+  <div class="text-center">
+    <h3 class="text-2xl font-bold mb-4 font-headline">
+      {showOnHomepage ? "Join us for our next meeting!" : `Next Meeting: ${currentEvent.date}`}
+    </h3>
+    <p class="text-xl mb-4">
+      Discussing "{currentEvent.book}" by {currentEvent.author}
+    </p>
+    <p class="text-champaign-200 mb-2">
+      {currentEvent.time} - {currentEvent.type}
+    </p>
+    <p class="text-rust-300 mb-6 italic">
+      Theme: {currentEvent.theme}
+    </p>
+    <a
+      href="/join"
+      class="inline-block bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md"
+    >
+      {showOnHomepage ? "Sign Up for the Book Club" : "Join to Participate"}
+    </a>
+  </div>
+</div>
+
+<!-- CMS Integration Note (visible in development) -->
+{import.meta.env.DEV && (
+  <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-4 mb-4 text-yellow-800 text-sm">
+    <strong>Dev Note:</strong> This banner will be driven by CMS data to automatically show the next upcoming event.
+  </div>
+)}

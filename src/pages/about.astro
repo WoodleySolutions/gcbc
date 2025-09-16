@@ -5,7 +5,9 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="About Us - Great Catholic Book Club">
   <!-- Hero Section -->
   <section class="bg-black-olive relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-95"></div>
+    <!-- Background image with Catholic saints discussing books -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/Statues of catholic saints sitting around a warmly lit table discussing a book.jpg');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive/85 via-black-olive/90 to-black-olive/95"></div>
     <div class="max-w-4xl mx-auto px-4 py-16 relative z-10 text-center">
       <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-6 font-headline drop-shadow-lg">About Us</h1>
       <p class="text-2xl text-rust-400 font-semibold font-headline">
@@ -18,7 +20,14 @@ import Layout from '../layouts/Layout.astro';
   <section class="py-16 bg-black-olive">
     <div class="max-w-4xl mx-auto px-4">
       <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
-      <div class="prose prose-lg mx-auto text-champaign-200 leading-relaxed">
+        <!-- Featured Image of Tyler and Sadie -->
+        <div class="text-center mb-8">
+          <div class="max-w-md mx-auto">
+            <img src="/images/SiteImages/TylerAndSadie.png" alt="Tyler and Sadie" class="w-full h-auto rounded-lg shadow-lg border border-champaign-700/30" />
+          </div>
+        </div>
+
+        <div class="prose prose-lg mx-auto text-champaign-200 leading-relaxed">
         <p class="text-lg mb-6 text-champaign-100 font-medium">
           The first thing to know about us is that the Lord has worked a powerful goodness in our lives. Everything else is a result of that first thing.
         </p>

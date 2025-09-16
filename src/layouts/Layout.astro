@@ -13,21 +13,70 @@ const { title, description = "Great Catholic Book Club - Every Book is Catholic"
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/GCBC.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      .logo-responsive {
+        margin-bottom: -16px; /* Mobile default */
+      }
+      @media (min-width: 768px) {
+        .logo-responsive {
+          margin-bottom: -24px; /* Desktop */
+        }
+      }
+    </style>
     <title>{title}</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+          });
+
+          // Close menu when clicking outside
+          mobileMenu.addEventListener('click', function(e) {
+            if (e.target === mobileMenu || e.target.classList.contains('bg-black-olive/95')) {
+              mobileMenu.classList.add('hidden');
+            }
+          });
+
+          // Close menu when clicking on a link
+          const menuLinks = mobileMenu.querySelectorAll('a');
+          menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+              mobileMenu.classList.add('hidden');
+            });
+          });
+        }
+      });
+    </script>
   </head>
   <body class="bg-black-olive text-champaign-100">
-    <nav class="bg-black-olive border-b border-champaign-700/30 sticky top-0 z-50 shadow-lg">
+    <nav class="bg-black-olive border-b border-champaign-700/30 sticky top-0 z-50 shadow-lg overflow-visible">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-          <div class="flex items-center">
-            <a href="/" class="text-2xl font-bold text-champaign-100 font-headline hover:text-champaign-200 transition-colors">
-              Great Catholic Book Club
+          <div class="flex items-center relative">
+            <!-- Desktop flag background behind logo -->
+            <div class="absolute bg-black-olive border border-champaign-700/30 rounded-b-lg shadow-lg hidden md:block"
+                 style="width: 125px; height: 190px; z-index: 5; top: -40px; left: 0px;"></div>
+            <!-- Mobile flag (20% smaller) -->
+            <div class="absolute bg-black-olive border border-champaign-700/30 rounded-b-lg shadow-lg block md:hidden"
+                 style="width: 95px; height: 152px; z-index: 5; top: -32px; left: 0px;"></div>
+
+            <a href="/" class="flex items-center space-x-4 hover:opacity-90 transition-opacity relative z-10">
+              <img src="/GCBC_Logo_ForDarkBG.png" alt="Great Catholic Book Club" class="md:h-32 h-24 w-auto relative z-20 logo-responsive" style="margin-top: 48px;" />
+              <span class="text-xl font-bold text-champaign-100 font-headline">
+                <span class="whitespace-nowrap">Great Catholic</span>
+                <span class="whitespace-nowrap">Book Club</span>
+              </span>
             </a>
           </div>
+          <!-- Desktop Navigation -->
           <div class="hidden md:flex items-center space-x-8">
             <a href="/" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Home</a>
             <a href="/books" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">2025 Books</a>
@@ -38,6 +87,34 @@ const { title, description = "Great Catholic Book Club - Every Book is Catholic"
             <a href="/contact" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Contact</a>
             <a href="/join" class="bg-rust-800 text-champaign-100 px-4 py-2 rounded-md hover:bg-rust-900 transition-colors shadow-md">
               Join
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden flex items-center">
+            <button id="mobile-menu-button" class="text-champaign-200 hover:text-champaign-100 focus:outline-none focus:text-champaign-100 transition-colors">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Overlay -->
+      <div id="mobile-menu" class="md:hidden fixed inset-0 z-40 hidden">
+        <div class="fixed inset-0 bg-black-olive/95 backdrop-blur-sm"></div>
+        <div class="relative bg-black-olive border-t border-champaign-700/30 shadow-lg">
+          <div class="px-4 py-6 space-y-4 text-center">
+            <a href="/" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Home</a>
+            <a href="/books" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">2025 Books</a>
+            <a href="/events" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Events</a>
+            <a href="/blog" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Blog</a>
+            <a href="/shop" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Shop</a>
+            <a href="/about" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">About</a>
+            <a href="/contact" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Contact</a>
+            <a href="/join" class="block bg-rust-800 text-champaign-100 px-6 py-3 rounded-md hover:bg-rust-900 transition-colors shadow-md text-center font-semibold mt-4">
+              Join the Book Club
             </a>
           </div>
         </div>

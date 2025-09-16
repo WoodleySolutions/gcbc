@@ -1,11 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import NextEventBanner from '../components/NextEventBanner.astro';
 ---
 
 <Layout title="Events - Great Catholic Book Club">
   <!-- Header Section -->
   <section class="bg-black-olive relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-95"></div>
+    <!-- Background image with Supper at Emmaus for community theme -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/supper-at-emmaus-min_edited.jpg');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive/85 via-black-olive/90 to-black-olive/95"></div>
     <div class="max-w-7xl mx-auto px-4 py-16 relative z-10">
       <div class="text-center">
         <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-8 font-headline drop-shadow-lg">
@@ -23,17 +26,8 @@ import Layout from '../layouts/Layout.astro';
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-champaign-100 text-center mb-12 font-headline">Upcoming Events</h2>
 
-      <!-- Current Month Highlight -->
-      <div class="bg-rust-800 text-champaign-100 rounded-lg p-8 mb-12 shadow-2xl border border-champaign-700/20">
-        <div class="text-center">
-          <h3 class="text-2xl font-bold mb-4 font-headline">Next Meeting: September 29th</h3>
-          <p class="text-xl mb-4">Discussing "Dune" by Frank Herbert</p>
-          <p class="text-champaign-200 mb-6">7:00 PM CST - Online Meeting</p>
-          <a href="/join" class="inline-block bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
-            Join to Participate
-          </a>
-        </div>
-      </div>
+      <!-- Next Event Banner -->
+      <NextEventBanner showOnHomepage={false} />
 
       <!-- Events Calendar -->
       <div class="grid gap-6">
@@ -83,7 +77,7 @@ import Layout from '../layouts/Layout.astro';
               <p class="text-champaign-200">Monthly online discussion - Theme: Means and Ends, Use of Power</p>
             </div>
             <div class="text-center">
-              <span class="inline-block bg-rust-800/20 text-rust-400 px-3 py-1 rounded-full text-sm border border-rust-400/30">Movie Night</span>
+              <span class="inline-block bg-scholar-blue/20 text-scholar-blue px-3 py-1 rounded-full text-sm border border-scholar-blue/30">Online Meeting</span>
             </div>
           </div>
         </div>
@@ -134,7 +128,7 @@ import Layout from '../layouts/Layout.astro';
               <p class="text-champaign-200">Monthly online discussion - Theme: Natural Law and the Limits of Power</p>
             </div>
             <div class="text-center">
-              <span class="inline-block bg-rust-800/20 text-rust-400 px-3 py-1 rounded-full text-sm border border-rust-400/30">Movie Night</span>
+              <span class="inline-block bg-scholar-blue/20 text-scholar-blue px-3 py-1 rounded-full text-sm border border-scholar-blue/30">Online Meeting</span>
             </div>
           </div>
         </div>
@@ -166,7 +160,7 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Monthly Book Discussions</h3>
           <p class="text-champaign-200">
-            Online meetings held the last Monday of each month (except November - third Monday) to discuss our 2025 book list.
+            ALL book club meetings are online, held the last Monday of each month (except November - third Monday) to discuss our 2025 book list.
           </p>
         </div>
 
@@ -177,9 +171,9 @@ import Layout from '../layouts/Layout.astro';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 011 1v14a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1h4zM9 3v1h6V3H9zm-2 4h10v11H7V7z" />
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Quarterly Movie Nights</h3>
+          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Movie Nights & Special Events</h3>
           <p class="text-champaign-200">
-            In-person meet-ups every quarter to watch film adaptations or related movies, followed by discussions.
+            Separate events for movie nights and special gatherings - these will be announced via the CMS as they are scheduled.
           </p>
         </div>
 
@@ -190,9 +184,9 @@ import Layout from '../layouts/Layout.astro';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l10-6z" />
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Special Events & Speeches</h3>
+          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">CMS-Managed Events</h3>
           <p class="text-champaign-200">
-            Guest speakers, author interviews, and special themed discussions throughout the year.
+            All events are managed through our CMS system. Guest speakers, special discussions, and announcements will appear here dynamically.
           </p>
         </div>
       </div>
