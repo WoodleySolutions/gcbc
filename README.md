@@ -16,7 +16,7 @@ The website embodies an "ancient library" aesthetic - evoking the feeling of a t
 - **Styling**: Tailwind CSS with custom color palette
 - **Typography**: Cinzel (headlines) + Inter (body text)
 - **Hosting**: Netlify with form handling
-- **Content Management**: Prepared for Sanity CMS integration
+- **Content Management**: Sanity CMS fully integrated
 
 ## 📂 Project Structure
 
@@ -34,17 +34,29 @@ The website embodies an "ancient library" aesthetic - evoking the feeling of a t
 │   ├── layouts/
 │   │   └── Layout.astro       # Main layout with navigation
 │   ├── lib/
-│   │   └── currentEvent.ts    # Dynamic event management
+│   │   ├── currentEvent.ts    # Dynamic event management
+│   │   └── sanity.ts          # CMS client and TypeScript types
 │   ├── pages/
-│   │   ├── index.astro        # Homepage
+│   │   ├── index.astro        # Homepage (CMS-powered)
 │   │   ├── about.astro        # About page
-│   │   ├── books.astro        # 2025 book list
+│   │   ├── books.astro        # 2025 book list (CMS-powered)
 │   │   ├── join.astro         # Membership form
 │   │   ├── contact.astro      # Contact form
 │   │   ├── events.astro       # Events page
-│   │   ├── blog.astro         # Blog listing
+│   │   ├── blog.astro         # Blog listing (CMS-powered)
+│   │   ├── blog/[slug].astro  # Individual blog posts (CMS-powered)
 │   │   └── shop.astro         # Store page
 │   └── styles/
+├── sanity-studio/             # Sanity CMS Studio
+│   ├── schemaTypes/
+│   │   ├── monthlyBook.ts     # Books schema
+│   │   ├── blogPost.ts        # Blog posts schema
+│   │   ├── event.ts           # Events schema
+│   │   ├── siteSettings.ts    # Site settings schema
+│   │   └── index.ts           # Schema exports
+│   ├── sanity.config.ts       # Studio configuration
+│   └── package.json           # Studio dependencies
+├── .env                       # Environment variables for Sanity
 └── tailwind.config.mjs        # Custom color configuration
 ```
 
@@ -80,8 +92,17 @@ The website embodies an "ancient library" aesthetic - evoking the feeling of a t
 - Accessible form design with proper labeling
 - Success/error handling ready for implementation
 
+### 🎛️ Content Management System
+- **Sanity CMS** fully integrated with TypeScript support
+- **Dynamic content** for books, blog posts, and events
+- **Featured content** management for homepage highlighting
+- **SEO optimization** with meta titles and descriptions
+- **Image management** with automatic optimization and CDN
+- **Real-time updates** - changes in CMS appear immediately on site
+
 ## 🧞 Commands
 
+### Main Website
 All commands are run from the root of the project:
 
 | Command                   | Action                                           |
@@ -93,6 +114,15 @@ All commands are run from the root of the project:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+### Sanity CMS Studio
+Commands for the CMS (run from `sanity-studio/` directory):
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm run dev`             | Starts CMS studio at `localhost:3333`           |
+| `npm run build`           | Build the studio for production                 |
+| `sanity deploy`           | Deploy studio to Sanity's hosting               |
+
 ## 🚀 Deployment
 
 The site is configured for deployment on Netlify with:
@@ -103,13 +133,30 @@ The site is configured for deployment on Netlify with:
 
 ## 📚 Content Management
 
-### Current Event Updates
-To update the current monthly book and event:
-1. Edit `src/lib/currentEvent.ts`
-2. Update the `currentEvent` object with new book details
-3. The changes will automatically propagate across all pages
+### 🎛️ Using Sanity CMS
 
-### Adding New Content
+**Starting the CMS:**
+1. Run `npm run dev` (main website)
+2. Run `cd sanity-studio && npm run dev` (CMS interface)
+3. Visit `http://localhost:3333` for the CMS
+
+**Content Types Available:**
+- **Monthly Books**: Book details, meeting dates, discussion questions, themes
+- **Blog Posts**: Full blog system with featured posts, categories, SEO
+- **Events**: Meeting management with locations, registration details
+- **Site Settings**: Global site configuration and announcements
+
+**Key Workflows:**
+1. **Set Current Book**: Edit any book → check "Is Current Month's Book?"
+2. **Feature Blog Posts**: Edit any post → check "Featured Post"
+3. **Add Discussion Questions**: From your GCBC Study Guide to book entries
+4. **Manage Images**: Upload directly in CMS with automatic optimization
+
+### 📅 Legacy Event Updates (Fallback)
+For event text customization:
+1. Edit `src/lib/currentEvent.ts`
+2. Update the `currentEvent` object with new text
+3. Changes propagate across all pages automatically
 - **Blog Posts**: Add to `src/pages/blog/` directory
 - **Book Images**: Place in `public/images/2025BookImages/`
 - **Site Images**: Add to `public/images/SiteImages/`

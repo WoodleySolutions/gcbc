@@ -2,8 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import NextEventBanner from '../components/NextEventBanner.astro';
 import { getCurrentEventText } from '../lib/currentEvent';
+import { client, queries, urlFor, getSiteSettings, getCurrentBook, getFeaturedPosts, type BlogPost } from '../lib/sanity';
 
 const eventText = getCurrentEventText();
+
+// Fetch CMS data
+const [siteSettings, currentBook, featuredPosts, everyBookCatholicPost] = await Promise.all([
+  getSiteSettings(),
+  getCurrentBook(),
+  getFeaturedPosts(),
+  client.fetch(`*[_type == "blogPost" && slug.current == "why-is-every-book-catholic"][0]`)
+]);
+
+// Helper function to format dates
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
 ---
 
 <Layout title="Great Catholic Book Club - Every Book is Catholic">
@@ -28,36 +46,106 @@ const eventText = getCurrentEventText();
     </div>
   </section>
 
-  <!-- Next Event Banner -->
-  <section class="py-16 bg-black-olive">
-    <div class="max-w-7xl mx-auto px-4">
-      <NextEventBanner showOnHomepage={true} />
-    </div>
-  </section>
-
   <!-- Welcome Section -->
-  <section class="py-16 bg-black-olive">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-champaign-100 mb-6 font-headline">Welcome to Great Catholic Book Club!</h2>
-        <p class="text-lg text-champaign-200 mb-8 leading-relaxed">
-          We are an online discussion club, content hub, and charitable ministry for people who want to grow in their relationship with Jesus Christ—wherever that is—by enjoying good literature and art through the lens of the Catholic faith. Together, we explore how the beauty of creativity and faith yields perfect spiritual fruit. We believe that art is how we become full human beings, and "the glory of God is man fully alive."
-        </p>
+  <section class="py-20 bg-gradient-to-b from-black-olive via-black-olive to-rust-800/20 relative">
+    <!-- Decorative background pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-10 left-10 w-32 h-32 border border-champaign-300 rounded-full"></div>
+      <div class="absolute top-32 right-20 w-24 h-24 border border-rust-400 rounded-full"></div>
+      <div class="absolute bottom-20 left-1/4 w-20 h-20 border border-champaign-300 rounded-full"></div>
+      <div class="absolute bottom-10 right-1/3 w-28 h-28 border border-rust-400 rounded-full"></div>
+    </div>
 
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
-          <h3 class="text-2xl font-bold text-champaign-100 mb-6 font-headline">How to participate:</h3>
-          <div class="text-left space-y-4">
-            <p class="text-champaign-200">
-              {eventText.joinPrompt} {eventText.scheduleText} {eventText.joinNowText}
-            </p>
-            <p class="text-champaign-200">
-              Or you can follow along on your own with our 2025 Book List, and subscribe to our newsletter to get updates on blog and video content that will be released throughout the year. Either option is free. Choose whatever works best for you!
-            </p>
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="max-w-5xl mx-auto">
+        <div class="bg-gradient-to-br from-black-olive/90 to-black-olive/70 border-2 border-champaign-700/40 rounded-2xl p-12 shadow-2xl backdrop-blur-sm">
+          <div class="text-center">
+            <div class="mb-8">
+              <h2 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-4 font-headline drop-shadow-lg">
+                Welcome to<br />Great Catholic Book Club!
+              </h2>
+              <div class="w-24 h-1 bg-gradient-to-r from-rust-400 to-champaign-300 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="space-y-6">
+              <p class="text-xl text-champaign-200 leading-relaxed font-medium">
+                We are an online discussion club, content hub, and charitable ministry for people who want to grow in their relationship with Jesus Christ—wherever that is—by enjoying good literature and art through the lens of the Catholic faith.
+              </p>
+
+              <div class="bg-rust-800/30 border border-rust-600/30 rounded-xl p-6 mx-auto max-w-3xl">
+                <p class="text-lg text-champaign-100 leading-relaxed italic">
+                  "Together, we explore how the beauty of creativity and faith yields perfect spiritual fruit. We believe that art is how we become full human beings, and
+                  <span class="text-rust-300 font-semibold">'the glory of God is man fully alive.'"</span>
+                </p>
+              </div>
+
+              <p class="text-lg text-champaign-200 leading-relaxed">
+                Follow along on your own with our 2025 Book List, and subscribe to our newsletter to get updates on blog and video content that will be released throughout the year.
+                <span class="text-rust-300 font-semibold">Everything is free.</span> Choose whatever works best for you!
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Current Book Section -->
+  {currentBook && (
+    <section class="py-16 bg-rust-800">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-champaign-100 mb-4 font-headline">Currently Reading</h2>
+          <p class="text-champaign-200">
+            {currentBook.meetingDate
+              ? `Join us for our ${formatDate(currentBook.meetingDate)} discussion`
+              : eventText.joinPrompt
+            }
+          </p>
+        </div>
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
+          <div class="grid md:grid-cols-3 gap-8 items-center">
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden mx-auto max-w-sm">
+              {currentBook.coverImage ? (
+                <img
+                  src={urlFor(currentBook.coverImage).width(300).height(400).url()}
+                  alt={currentBook.title}
+                  class="w-full h-full object-cover"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center text-champaign-300 text-center p-4">
+                  <span class="text-sm">No Cover Available</span>
+                </div>
+              )}
+            </div>
+            <div class="md:col-span-2">
+              <h3 class="text-2xl font-bold text-champaign-100 mb-2 font-headline">{currentBook.title}</h3>
+              <p class="text-champaign-200 mb-2 text-lg">By {currentBook.author}</p>
+              {currentBook.theme && (
+                <p class="text-rust-400 font-semibold font-headline mb-4">{currentBook.theme}</p>
+              )}
+              {currentBook.description && (
+                <p class="text-champaign-200 mb-4 leading-relaxed">{currentBook.description}</p>
+              )}
+              <div class="bg-black-olive/50 border border-champaign-700/20 rounded-lg p-4 mb-6">
+                <p class="text-champaign-200 text-sm leading-relaxed">
+                  {eventText.joinPrompt} {eventText.scheduleText} {eventText.joinNowText}
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-4">
+                <a href="/books" class="inline-block bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors">
+                  View Full Reading List
+                </a>
+                <a href="/join" class="inline-block bg-rust-600 text-champaign-100 px-6 py-3 rounded-lg font-semibold hover:bg-rust-700 transition-colors">
+                  Join Discussion
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- YouTube Section -->
   <section class="py-16 bg-black-olive">
@@ -99,9 +187,15 @@ const eventText = getCurrentEventText();
             <strong class="text-champaign-100">Long answer:</strong> Every book isn't intentionally Catholic. People create art from a variety of different cultural, historical, and personal viewpoints. We believe there is one perfect perspective that encompasses all that is true, good, and beautiful; it doesn't erase any point of view, but instead refines it. That is the perspective of Jesus Christ. If you really want to enjoy a good book, do it with Jesus!
           </p>
 
-          <a href="/blog/every-book-is-catholic" class="text-rust-400 hover:text-rust-300 font-semibold transition-colors">
-            Read more here...
-          </a>
+          {everyBookCatholicPost ? (
+            <a href={`/blog/${everyBookCatholicPost.slug.current}`} class="text-rust-400 hover:text-rust-300 font-semibold transition-colors">
+              Read more here...
+            </a>
+          ) : (
+            <a href="/blog" class="text-rust-400 hover:text-rust-300 font-semibold transition-colors">
+              Read more on our blog...
+            </a>
+          )}
         </div>
 
         <p class="text-xl text-champaign-100 font-semibold mb-6 font-headline">
@@ -123,10 +217,42 @@ const eventText = getCurrentEventText();
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        <!-- Blog posts will be populated by CMS -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 text-center shadow-xl">
-          <p class="text-champaign-300">Featured blog posts will appear here</p>
-        </div>
+        {featuredPosts && featuredPosts.length > 0 ? (
+          featuredPosts.map((post) => (
+            <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
+              {post.featuredImage && (
+                <div class="aspect-video overflow-hidden">
+                  <img
+                    src={urlFor(post.featuredImage).width(400).height(225).url()}
+                    alt={post.title}
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              )}
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline line-clamp-2">
+                  {post.title}
+                </h3>
+                <p class="text-champaign-300 text-sm mb-3">
+                  {formatDate(post.publishedAt)}
+                </p>
+                <p class="text-champaign-200 text-sm mb-4 line-clamp-3 leading-relaxed">
+                  {post.excerpt}
+                </p>
+                <a
+                  href={`/blog/${post.slug.current}`}
+                  class="inline-block text-rust-400 hover:text-rust-300 font-semibold text-sm transition-colors"
+                >
+                  Read More →
+                </a>
+              </div>
+            </article>
+          ))
+        ) : (
+          <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 text-center shadow-xl col-span-full">
+            <p class="text-champaign-300">Featured blog posts will appear here once created in the CMS</p>
+          </div>
+        )}
       </div>
 
       <div class="text-center">

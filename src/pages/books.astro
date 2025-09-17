@@ -1,8 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCurrentEventText } from '../lib/currentEvent';
+import { client, queries, urlFor, type MonthlyBook } from '../lib/sanity';
 
 const eventText = getCurrentEventText();
+
+// Fetch all monthly books and current book from CMS
+const [books, currentBook] = await Promise.all([
+  client.fetch(queries.allBooks),
+  client.fetch(queries.currentBook)
+]);
+
+// Helper function to format month names
+const formatMonthName = (month: string) => {
+  const monthMap: { [key: string]: string } = {
+    january: 'January',
+    february: 'February',
+    march: 'March',
+    april: 'April',
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    september: 'September',
+    october: 'October',
+    november: 'November',
+    december: 'December'
+  };
+  return monthMap[month.toLowerCase()] || month;
+};
+
+// Helper function to format meeting dates
+const formatMeetingDate = (dateString: string) => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return `${date.getMonth() + 1}/${date.getDate()}`;
+};
 ---
 
 <Layout title="2025 Book List - Great Catholic Book Club">
@@ -39,210 +72,144 @@ const eventText = getCurrentEventText();
     </div>
   </section>
 
+  <!-- Current Book Banner -->
+  {currentBook && (
+    <section class="py-12 bg-rust-800">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
+          <div class="grid md:grid-cols-4 gap-8 items-center">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-champaign-100 mb-2 font-headline">Current Book</h3>
+              <p class="text-rust-400 font-semibold">
+                {formatMonthName(currentBook.month)} {currentBook.year}
+              </p>
+              {currentBook.meetingDate && (
+                <p class="text-champaign-300 text-sm mt-1">
+                  Meeting: {formatMeetingDate(currentBook.meetingDate)}
+                </p>
+              )}
+            </div>
+            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+              {currentBook.coverImage ? (
+                <img
+                  src={urlFor(currentBook.coverImage).width(300).height(400).url()}
+                  alt={currentBook.title}
+                  class="w-full h-full object-cover"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center text-champaign-300 text-center p-4">
+                  <span class="text-sm">No Cover Available</span>
+                </div>
+              )}
+            </div>
+            <div class="md:col-span-2">
+              <h4 class="text-2xl font-bold text-champaign-100 mb-2 font-headline">{currentBook.title}</h4>
+              <p class="text-champaign-200 mb-2 text-lg">By {currentBook.author}</p>
+              {currentBook.theme && (
+                <p class="text-rust-400 font-semibold font-headline mb-4">{currentBook.theme}</p>
+              )}
+              {currentBook.description && (
+                <p class="text-champaign-200 mb-6 leading-relaxed">{currentBook.description}</p>
+              )}
+              <div class="flex flex-wrap gap-4">
+                {currentBook.amazonLink && (
+                  <a
+                    href={currentBook.amazonLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block bg-rust-600 text-champaign-100 px-6 py-3 rounded-lg font-semibold hover:bg-rust-700 transition-colors"
+                  >
+                    Get the Book
+                  </a>
+                )}
+                <a
+                  href="/join"
+                  class="inline-block bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors"
+                >
+                  Join Discussion
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Book List Section -->
   <section class="py-16 bg-black-olive">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-3xl font-bold text-champaign-100 text-center mb-12 font-headline">Monthly Reading Schedule</h2>
 
       <div class="grid gap-8">
-        <!-- January -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">January</div>
-              <div class="text-champaign-300">1/27</div>
+        {books.map((book) => (
+          <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
+            <div class="grid md:grid-cols-4 gap-6 items-center">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">
+                  {formatMonthName(book.month)}
+                </div>
+                {book.meetingDate && (
+                  <div class="text-champaign-300">
+                    {formatMeetingDate(book.meetingDate)}
+                  </div>
+                )}
+              </div>
+              <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+                {book.coverImage ? (
+                  <img
+                    src={urlFor(book.coverImage).width(300).height(400).url()}
+                    alt={book.title}
+                    class="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center text-champaign-300 text-center p-4">
+                    <span class="text-sm">No Cover Available</span>
+                  </div>
+                )}
+              </div>
+              <div class="md:col-span-2">
+                <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">{book.title}</h3>
+                <p class="text-champaign-200 mb-2">By {book.author}</p>
+                {book.theme && (
+                  <p class="text-rust-400 font-semibold font-headline">{book.theme}</p>
+                )}
+                {book.description && (
+                  <p class="text-champaign-300 text-sm mt-3 leading-relaxed">{book.description}</p>
+                )}
+                {book.amazonLink && (
+                  <div class="mt-4">
+                    <a
+                      href={book.amazonLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-block bg-rust-800 text-champaign-100 px-4 py-2 rounded text-sm font-semibold hover:bg-rust-900 transition-colors"
+                    >
+                      Buy on Amazon
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/HitchhikersGuideSplash.png" alt="The Hitchhiker's Guide to the Galaxy" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">The Hitchhiker's Guide to the Galaxy</h3>
-              <p class="text-champaign-200 mb-2">By Douglas Adams</p>
-              <p class="text-rust-400 font-semibold font-headline">The Purpose of Creation</p>
-            </div>
+            {book.discussionQuestions && book.discussionQuestions.length > 0 && (
+              <div class="mt-6 pt-6 border-t border-champaign-700/30">
+                <h4 class="text-lg font-semibold text-champaign-100 mb-3 font-headline">Sample Discussion Questions:</h4>
+                <div class="space-y-2">
+                  {book.discussionQuestions.slice(0, 3).map((question, index) => (
+                    <p class="text-champaign-200 text-sm leading-relaxed">
+                      <span class="text-rust-400 font-semibold">{index + 1}.</span> {question}
+                    </p>
+                  ))}
+                  {book.discussionQuestions.length > 3 && (
+                    <p class="text-champaign-300 text-xs italic">
+                      ...and {book.discussionQuestions.length - 3} more questions in our study guide
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-
-        <!-- February -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">February</div>
-              <div class="text-champaign-300">2/24</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/EndersGameSplash.png" alt="Ender's Game" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Ender's Game</h3>
-              <p class="text-champaign-200 mb-2">By Orson Scott Card</p>
-              <p class="text-rust-400 font-semibold font-headline">Moral Reasoning</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- March -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">March</div>
-              <div class="text-champaign-300">3/31</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/WatchmenSplash.png" alt="Watchmen" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Watchmen</h3>
-              <p class="text-champaign-200 mb-2">By Alan Moore & Dave Gibbons</p>
-              <p class="text-rust-400 font-semibold font-headline">Means and Ends, Use of Power</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- April -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">April</div>
-              <div class="text-champaign-300">4/28</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/PrideAndPrejSplash.png" alt="Pride and Prejudice" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Pride and Prejudice</h3>
-              <p class="text-champaign-200 mb-2">By Jane Austin</p>
-              <p class="text-rust-400 font-semibold font-headline">Virtue and the Sacrament of Marriage</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- May -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">May</div>
-              <div class="text-champaign-300">5/26</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/BraveNewWorldSplash.png" alt="Brave New World" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Brave New World</h3>
-              <p class="text-champaign-200 mb-2">By Aldous Huxley</p>
-              <p class="text-rust-400 font-semibold font-headline">Formation of Conscience, Kulturkampf</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- June -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">June</div>
-              <div class="text-champaign-300">6/30</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/JurassicParkSplash.png" alt="Jurassic Park" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Jurassic Park</h3>
-              <p class="text-champaign-200 mb-2">By Michael Crichton</p>
-              <p class="text-rust-400 font-semibold font-headline">Natural Law and the Limits of Power</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- July -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">July</div>
-              <div class="text-champaign-300">7/28</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/FoundationSplash.png" alt="Foundation" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Foundation</h3>
-              <p class="text-champaign-200 mb-2">By Isaac Asimov</p>
-              <p class="text-rust-400 font-semibold font-headline">The Deposit of Faith</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- August -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">August</div>
-              <div class="text-champaign-300">8/25</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/BourneSplash.png" alt="The Bourne Identity" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">The Bourne Identity</h3>
-              <p class="text-champaign-200 mb-2">By Robert Ludlum</p>
-              <p class="text-rust-400 font-semibold font-headline">Sacred Tradition and Identity</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- September -->
-        <div class="bg-black-olive border-2 border-rust-400 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">September</div>
-              <div class="text-champaign-300">9/29</div>
-              <div class="bg-rust-800 text-champaign-100 px-2 py-1 rounded text-sm mt-2 shadow-md">Current</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/DuneSplash.png" alt="Dune" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">Dune</h3>
-              <p class="text-champaign-200 mb-2">By Frank Herbert</p>
-              <p class="text-rust-400 font-semibold font-headline">Free Will and Prophecy</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- October -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">October</div>
-              <div class="text-champaign-300">10/27</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/MartianSplash.png" alt="The Martian" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">The Martian</h3>
-              <p class="text-champaign-200 mb-2">By Andy Weir</p>
-              <p class="text-rust-400 font-semibold font-headline">The Use of Will and Intellect</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- November -->
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-          <div class="grid md:grid-cols-4 gap-6 items-center">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">November</div>
-              <div class="text-champaign-300">11/17</div>
-            </div>
-            <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-              <img src="/images/2025BookImages/GreatDivorce.png" alt="The Great Divorce" class="w-full h-full object-cover" />
-            </div>
-            <div class="md:col-span-2">
-              <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">The Great Divorce</h3>
-              <p class="text-champaign-200 mb-2">By C.S. Lewis</p>
-              <p class="text-rust-400 font-semibold font-headline">Eschatology: The Four Last Things</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
