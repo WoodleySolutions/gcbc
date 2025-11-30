@@ -36,6 +36,29 @@ const { title, description = "Great Catholic Book Club - Every Book is Catholic"
           margin-bottom: -24px; /* Desktop */
         }
       }
+
+      /* Skip to main content link - hidden until focused */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #8B4513;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        z-index: 100;
+        border-radius: 0 0 4px 0;
+      }
+      .skip-link:focus {
+        top: 0;
+      }
+
+      /* Improved focus visibility for accessibility */
+      a:focus-visible, button:focus-visible {
+        outline: 2px solid #D4A574;
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
     </style>
     <title>{title}</title>
     <script>
@@ -45,7 +68,9 @@ const { title, description = "Great Catholic Book Club - Every Book is Catholic"
 
         if (mobileMenuButton && mobileMenu) {
           mobileMenuButton.addEventListener('click', function() {
+            const isExpanded = mobileMenu.classList.contains('hidden');
             mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', isExpanded);
           });
 
           // Close menu when clicking outside
@@ -67,7 +92,10 @@ const { title, description = "Great Catholic Book Club - Every Book is Catholic"
     </script>
   </head>
   <body class="bg-black-olive text-champaign-100">
-    <nav class="bg-black-olive border-b border-champaign-700/30 sticky top-0 z-50 shadow-lg overflow-visible">
+    <!-- Skip to main content link for keyboard navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav class="bg-black-olive border-b border-champaign-700/30 sticky top-0 z-50 shadow-lg overflow-visible" role="navigation" aria-label="Main navigation">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center relative">
@@ -101,8 +129,14 @@ const { title, description = "Great Catholic Book Club - Every Book is Catholic"
 
           <!-- Mobile Menu Button -->
           <div class="md:hidden flex items-center">
-            <button id="mobile-menu-button" class="text-champaign-200 hover:text-champaign-100 focus:outline-none focus:text-champaign-100 transition-colors">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button
+              id="mobile-menu-button"
+              class="text-champaign-200 hover:text-champaign-100 focus:outline-none focus:text-champaign-100 transition-colors"
+              aria-label="Open navigation menu"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+            >
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
@@ -128,8 +162,8 @@ const { title, description = "Great Catholic Book Club - Every Book is Catholic"
         </div>
       </div>
     </nav>
-    
-    <main>
+
+    <main id="main-content">
       <slot />
     </main>
 
