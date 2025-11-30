@@ -21,9 +21,29 @@ const formatDate = (dateString: string) => {
     day: 'numeric'
   });
 };
+
+// Structured data for homepage (Organization)
+const organizationData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Great Catholic Book Club",
+  "url": "https://greatcatholicbookclub.com",
+  "logo": "https://greatcatholicbookclub.com/GCBC_Logo_ForDarkBG.png",
+  "description": "An online discussion club and content hub for people who want to grow in their relationship with Jesus Christ by enjoying good literature and art through the lens of the Catholic faith.",
+  "slogan": "Every Book is Catholic",
+  "foundingDate": "2024",
+  "sameAs": [
+    "https://www.youtube.com/@TheGreatCatholicBookClub"
+  ]
+};
 ---
 
-<Layout title="Great Catholic Book Club - Every Book is Catholic">
+<Layout
+  title="Great Catholic Book Club - Every Book is Catholic"
+  description="Join our Catholic book club exploring great literature through faith. Monthly discussions, reading guides, and a community growing in Christ through books and art."
+>
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify(organizationData)} />
   <!-- Hero Section -->
   <section class="bg-black-olive relative">
     <!-- Background image for ancient library feel -->

@@ -44,9 +44,47 @@ const renderBlockText = (blocks: any[]) => {
 
 const pageTitle = post.seo?.metaTitle || post.title;
 const pageDescription = post.seo?.metaDescription || post.excerpt;
+
+// Generate featured image URL for structured data
+const featuredImageUrl = post.postType === 'video' && post.youtubeVideo
+  ? `https://img.youtube.com/vi/${post.youtubeVideo.videoId}/maxresdefault.jpg`
+  : post.featuredImage
+  ? urlFor(post.featuredImage).width(1200).height(630).url()
+  : null;
+
+// Structured data for SEO (Schema.org)
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": post.postType === 'video' ? "VideoObject" : "BlogPosting",
+  "headline": post.title,
+  "description": pageDescription,
+  "author": {
+    "@type": "Person",
+    "name": post.author || "Great Catholic Book Club"
+  },
+  "datePublished": post.publishedAt,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Great Catholic Book Club",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://greatcatholicbookclub.com/GCBC_Logo_ForDarkBG.png"
+    }
+  },
+  ...(featuredImageUrl && { "image": featuredImageUrl }),
+  ...(post.postType === 'video' && post.youtubeVideo && {
+    "name": post.title,
+    "uploadDate": post.publishedAt,
+    "thumbnailUrl": `https://img.youtube.com/vi/${post.youtubeVideo.videoId}/maxresdefault.jpg`,
+    "embedUrl": `https://www.youtube.com/embed/${post.youtubeVideo.videoId}`,
+    ...(post.youtubeVideo.duration && { "duration": post.youtubeVideo.duration })
+  })
+};
 ---
 
 <Layout title={`${pageTitle} - Great Catholic Book Club`} description={pageDescription}>
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <!-- Blog Post Header -->
   <section class="bg-black-olive relative pt-16 pb-8">
     <div class="max-w-4xl mx-auto px-4">
