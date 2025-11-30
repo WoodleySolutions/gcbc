@@ -4,38 +4,51 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Ancient Library Color Palette
-        'black-olive': '#393d32',
+        // 2026 Epic Fantasy Color Palette - Based on hero image
+        'black-olive': '#1a2332', // Deep navy blue background
+        'midnight-blue': '#0f1827', // Darkest blue
         'rust': {
-          50: '#fdf4f2',
-          100: '#fbe8e3',
-          200: '#f6d5cd',
-          300: '#eeb8a9',
-          400: '#e29277',
-          500: '#d4704f',
-          600: '#c15637',
-          700: '#a24429',
-          800: '#aa3d1d', // Primary rust red
-          900: '#7c2f17'
+          50: '#fff4ed',
+          100: '#ffe6d5',
+          200: '#fecdaa',
+          300: '#fdab74',
+          400: '#fb8043',
+          500: '#f85d1f', // Vibrant orange
+          600: '#e94310',
+          700: '#c2320f',
+          800: '#9a2915', // Primary orange-red
+          900: '#7c2414'
         },
-        'scholar-blue': '#5c80bc',
+        'flame': {
+          100: '#fff3e0',
+          200: '#ffe0b2',
+          300: '#ffcc80',
+          400: '#ffb74d',
+          500: '#ffa726', // Golden flame
+          600: '#fb8c00',
+          700: '#f57c00',
+          800: '#ef6c00', // Primary flame orange
+          900: '#e65100'
+        },
+        'steel-blue': '#4a5f7f', // Metal/ship color
         'champaign': {
-          100: '#f1e3c8', // Light champaign for backgrounds
-          200: '#ebe0c5',
-          300: '#e3d8c0',
-          400: '#d8c8a8',
-          500: '#cdb896',
-          600: '#c2a885',
-          700: '#b49a67', // Primary champaign for text
-          800: '#a08a5a',
-          900: '#8c7a4d'
+          100: '#f5e6d3', // Warm parchment for text
+          200: '#ede1cf',
+          300: '#e5dccb',
+          400: '#d9cdb8',
+          500: '#cdbea5',
+          600: '#c1af92',
+          700: '#b5a07f', // Primary warm beige for text
+          800: '#a39070',
+          900: '#918061'
         },
-        // Legacy red colors for compatibility
+        // Legacy compatibility
+        'scholar-blue': '#4a5f7f',
         red: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          800: '#aa3d1d', // Map to rust
-          900: '#7c2f17'  // Map to darker rust
+          50: '#fff4ed',
+          100: '#ffe6d5',
+          800: '#9a2915',
+          900: '#7c2414'
         }
       },
       fontFamily: {

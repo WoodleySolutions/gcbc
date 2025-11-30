@@ -31,26 +31,26 @@ export const currentEvent: CurrentEvent = {
 export function getCurrentEventText() {
   return {
     // For homepage and join page
-    nextMeetingText: `The next online meeting to discuss ${currentEvent.book} will be held on ${currentEvent.date} at ${currentEvent.time}.`,
+    nextMeetingText: `Join us for our 2026 reading adventure! Our first meeting will be held on January 26th at 7pm CST to discuss The Power and the Glory by Graham Greene.`,
 
     // For join page specific text
-    joinPrompt: `Join the Book Club to get the 2025 Study Guide to participate in monthly online group discussions, get info about quarterly in-person movie night meet ups, and updates on our blog and video content! The next online meeting to discuss ${currentEvent.book} will be held on ${currentEvent.date} at ${currentEvent.time}.`,
+    joinPrompt: `Join the Book Club to get the 2026 Study Guide and participate in monthly online group discussions! Our 2026 theme is "War is Heck"—exploring human conflict, virtue in adversity, and heroic sacrifice through the lens of Catholic faith. Our first meeting will be held on January 26th at 7pm CST to discuss The Power and the Glory by Graham Greene.`,
 
     // For banner usage
-    bannerText: `Discussing "${currentEvent.book}" by ${currentEvent.author}`,
+    bannerText: `Now Reading: The Power and the Glory`,
 
     // For current book references
-    currentBook: currentEvent.book,
-    currentAuthor: currentEvent.author,
-    currentDate: currentEvent.date,
-    currentTime: currentEvent.time,
+    currentBook: 'The Power and the Glory',
+    currentAuthor: 'Graham Greene',
+    currentDate: 'January 26th',
+    currentTime: '7pm CST',
 
     // Monthly schedule text (for various pages)
-    scheduleText: `Monthly online meetings will be held on the last Monday of every month from January to October 2025, and on the third Monday of November 2025.`,
+    scheduleText: `Monthly online meetings will be held on the last Monday of every month throughout 2026 (except November, which is the 3rd Monday to avoid Thanksgiving week). Our first meeting is January 26th at 7pm CST.`,
 
     // Call to action variations
     joinNowText: `You can join anytime during the year, starting now!`,
-    signUpPrompt: `Sign up now to get the 2025 Study Guide and participate in our monthly meetings!`
+    signUpPrompt: `Sign up now to get the 2026 Study Guide and participate in our monthly meetings!`
   };
 }
 

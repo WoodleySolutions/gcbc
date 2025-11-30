@@ -1,0 +1,148 @@
+{
+  "articles": [
+    {
+      "filename": "2025 Book List Introduction and January Book.pdf",
+      "name": "2025 Book List Introduction and January Book",
+      "type": "article"
+    },
+    {
+      "filename": "Against Brave New World.pdf",
+      "name": "Against Brave New World",
+      "type": "article"
+    },
+    {
+      "filename": "Ender's Game Fatherhood, Failure, and Forgiveness.pdf",
+      "name": "Ender's Game Fatherhood, Failure, and Forgiveness",
+      "type": "article"
+    },
+    {
+      "filename": "Good Kid mAAd Catholic A Journey Through Faith.pdf",
+      "name": "Good Kid mAAd Catholic A Journey Through Faith",
+      "type": "article"
+    },
+    {
+      "filename": "Reading Scripture every day is awesome.pdf",
+      "name": "Reading Scripture every day is awesome",
+      "type": "article"
+    },
+    {
+      "filename": "The Family Is the Foundation.pdf",
+      "name": "The Family Is the Foundation",
+      "type": "article"
+    },
+    {
+      "filename": "The Hitchhiker's Guide to the Galaxy.pdf",
+      "name": "The Hitchhiker's Guide to the Galaxy",
+      "type": "article"
+    },
+    {
+      "filename": "The Life, Works, and Faith of JRR Tolkien.pdf",
+      "name": "The Life, Works, and Faith of JRR Tolkien",
+      "type": "article"
+    },
+    {
+      "filename": "The Theology of Bob's Burgers, Part 1.pdf",
+      "name": "The Theology of Bob's Burgers, Part 1",
+      "type": "article"
+    },
+    {
+      "filename": "Watchmen Power, Morality, and Being a Dad.pdf",
+      "name": "Watchmen Power, Morality, and Being a Dad",
+      "type": "article"
+    },
+    {
+      "filename": "WhyIsEveryBookCatholic.pdf",
+      "name": "WhyIsEveryBookCatholic",
+      "type": "article"
+    },
+    {
+      "filename": "Walking Through the Jungle.pdf",
+      "name": "Walking Through the Jungle",
+      "type": "article"
+    }
+  ],
+  "videos": [
+    {
+      "filename": "Jane Austen, Pride and Prejudice vs The New York Times.pdf",
+      "name": "Jane Austen, Pride and Prejudice vs The New York Times",
+      "type": "video"
+    },
+    {
+      "filename": "Jason Bourne, Marie, and the Covenant of Presence.pdf",
+      "name": "Jason Bourne, Marie, and the Covenant of Presence",
+      "type": "video"
+    },
+    {
+      "filename": "My Catholic Conversion Story, Part 2.pdf",
+      "name": "My Catholic Conversion Story, Part 2",
+      "type": "video"
+    },
+    {
+      "filename": "My Conversion Story Speech by Sadie Woodley.pdf",
+      "name": "My Conversion Story Speech by Sadie Woodley",
+      "type": "video"
+    },
+    {
+      "filename": "New Video Brave New World Marriage and Family vs The World.pdf",
+      "name": "New Video Brave New World Marriage and Family vs The World",
+      "type": "video"
+    },
+    {
+      "filename": "New Video The Miseducation of Lauryn Hill Pro Life and Other Catholic Things in Hip Hop.pdf",
+      "name": "New Video The Miseducation of Lauryn Hill Pro Life and Other Catholic Things in Hip Hop",
+      "type": "video"
+    },
+    {
+      "filename": "Pride and Prejudice A Catholic Take on Virtue and.pdf",
+      "name": "Pride and Prejudice A Catholic Take on Virtue and",
+      "type": "video"
+    },
+    {
+      "filename": "The Bourne Identity Genesis, Original Sin, and the Christian Love Story.pdf",
+      "name": "The Bourne Identity Genesis, Original Sin, and the Christian Love Story",
+      "type": "video"
+    },
+    {
+      "filename": "The Bright Side of Blasphemy.pdf",
+      "name": "The Bright Side of Blasphemy",
+      "type": "video"
+    },
+    {
+      "filename": "The Masculine Art of Listening Lessons from Pride.pdf",
+      "name": "The Masculine Art of Listening Lessons from Pride",
+      "type": "video"
+    },
+    {
+      "filename": "Theology of The Office.pdf",
+      "name": "Theology of The Office",
+      "type": "video"
+    },
+    {
+      "filename": "Watchmen A Catholic Take on Means and Ends, Use.pdf",
+      "name": "Watchmen A Catholic Take on Means and Ends, Use",
+      "type": "video"
+    },
+    {
+      "filename": "Woman Plans to Divorce and.pdf",
+      "name": "Woman Plans to Divorce and",
+      "type": "video"
+    },
+    {
+      "filename": "Flannery O'Connor and the Catholic Imagination.pdf",
+      "name": "Flannery O'Connor and the Catholic Imagination",
+      "type": "video"
+    },
+    {
+      "filename": "Introduction to Ender's Game.pdf",
+      "name": "Introduction to Ender's Game",
+      "type": "video"
+    }
+  ],
+  "unknown": [],
+  "summary": {
+    "articleCount": 12,
+    "videoCount": 15,
+    "unknownCount": 0,
+    "totalCount": 27
+  }
+}

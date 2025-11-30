@@ -1,15 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCurrentEventText } from '../lib/currentEvent';
 import { client, queries, urlFor, type MonthlyBook } from '../lib/sanity';
 
-const eventText = getCurrentEventText();
-
-// Fetch all monthly books and current book from CMS
-const [books, currentBook] = await Promise.all([
+// Fetch books grouped by year and current book from CMS
+const [allBooks, currentBook] = await Promise.all([
   client.fetch(queries.allBooks),
   client.fetch(queries.currentBook)
 ]);
+
+// Group books by year
+const books2025 = allBooks.filter((book: MonthlyBook) => book.year === 2025);
+const books2026 = allBooks.filter((book: MonthlyBook) => book.year === 2026);
 
 // Helper function to format month names
 const formatMonthName = (month: string) => {
@@ -30,43 +31,26 @@ const formatMonthName = (month: string) => {
   return monthMap[month.toLowerCase()] || month;
 };
 
-// Helper function to format meeting dates
+// Helper function to format meeting dates (parses as local date to avoid timezone issues)
 const formatMeetingDate = (dateString: string) => {
   if (!dateString) return '';
-  const date = new Date(dateString);
+  // Append time to parse as local date instead of UTC
+  const date = new Date(dateString + 'T12:00:00');
   return `${date.getMonth() + 1}/${date.getDate()}`;
 };
 ---
 
-<Layout title="2025 Book List - Great Catholic Book Club">
+<Layout title="Book List - Great Catholic Book Club">
   <!-- Header Section -->
   <section class="bg-black-olive relative">
     <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-95"></div>
     <div class="max-w-7xl mx-auto px-4 py-16 relative z-10">
       <div class="text-center">
         <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-4 font-headline drop-shadow-lg">
-          2025 Book List
+          Book List
         </h1>
-        <p class="text-2xl text-rust-400 font-semibold mb-8 font-headline">
-          Theme: Protoevangelium
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Introduction Section -->
-  <section class="py-16 bg-black-olive">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 mb-8 shadow-2xl">
-        <h2 class="text-2xl font-bold text-champaign-100 mb-6 font-headline">About Our 2025 List</h2>
-        <p class="text-lg text-champaign-200 mb-6 leading-relaxed">
-          Our inaugural 2025 list features the books that introduced us to the ideas that helped us come to understand and embrace the Gospel. These are our beloved favorites, as sci-fi nerds and products of the pop culture of the early 2000's. We can look back now and appreciate the beautiful Christian truths in them!
-        </p>
-        <p class="text-lg text-champaign-200 mb-6 leading-relaxed">
-          The list contains Amazon affiliate links. If you choose to buy the books through our links, we could receive some payment. We'd appreciate the support. But you can also get the books from your local library for free, or your local used bookstore for cheap. Do whatever works--we just want to enjoy discussing them with you!
-        </p>
-        <p class="text-lg text-champaign-200 leading-relaxed">
-          {eventText.joinPrompt} {eventText.scheduleText} {eventText.joinNowText}
+        <p class="text-lg text-champaign-200">
+          Explore our reading lists by year
         </p>
       </div>
     </div>
@@ -80,7 +64,7 @@ const formatMeetingDate = (dateString: string) => {
           <div class="grid md:grid-cols-4 gap-8 items-center">
             <div class="text-center">
               <h3 class="text-2xl font-bold text-champaign-100 mb-2 font-headline">Current Book</h3>
-              <p class="text-rust-400 font-semibold">
+              <p class="text-flame-400 font-semibold">
                 {formatMonthName(currentBook.month)} {currentBook.year}
               </p>
               {currentBook.meetingDate && (
@@ -106,7 +90,7 @@ const formatMeetingDate = (dateString: string) => {
               <h4 class="text-2xl font-bold text-champaign-100 mb-2 font-headline">{currentBook.title}</h4>
               <p class="text-champaign-200 mb-2 text-lg">By {currentBook.author}</p>
               {currentBook.theme && (
-                <p class="text-rust-400 font-semibold font-headline mb-4">{currentBook.theme}</p>
+                <p class="text-flame-400 font-semibold font-headline mb-4">{currentBook.theme}</p>
               )}
               {currentBook.description && (
                 <p class="text-champaign-200 mb-6 leading-relaxed">{currentBook.description}</p>
@@ -136,80 +120,204 @@ const formatMeetingDate = (dateString: string) => {
     </section>
   )}
 
-  <!-- Book List Section -->
+  <!-- Year Tabs and Book List Section -->
   <section class="py-16 bg-black-olive">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-champaign-100 text-center mb-12 font-headline">Monthly Reading Schedule</h2>
+      <!-- Year Tabs -->
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex rounded-lg border border-champaign-700/30 bg-midnight-blue p-1">
+          <button
+            id="tab-2026"
+            class="tab-button px-8 py-3 rounded-lg font-semibold transition-all duration-200 bg-rust-800 text-champaign-100"
+          >
+            2026 - War is Heck
+          </button>
+          <button
+            id="tab-2025"
+            class="tab-button px-8 py-3 rounded-lg font-semibold transition-all duration-200 text-champaign-300 hover:text-champaign-100"
+          >
+            2025 - Protoevangelium
+          </button>
+        </div>
+      </div>
 
-      <div class="grid gap-8">
-        {books.map((book) => (
-          <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
-            <div class="grid md:grid-cols-4 gap-6 items-center">
-              <div class="text-center">
-                <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">
-                  {formatMonthName(book.month)}
+      <!-- 2026 Book List -->
+      <div id="books-2026" class="books-content">
+        <div class="max-w-4xl mx-auto mb-12">
+          <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
+            <h2 class="text-2xl font-bold text-champaign-100 mb-6 font-headline">About Our 2026 List</h2>
+            <p class="text-lg text-champaign-200 mb-6 leading-relaxed">
+              Our 2026 list explores the theme <strong class="text-flame-400">"War is Heck"</strong> - examining human conflict through the lens of the Catholic Church. We explore hope and heroism in the midst of war and strife. What does it look like to do the right thing when it might cost your own life? What does it look like to choose virtue when cruelty and vice are all around you? Through stories of war, adventure, and cosmic conflict, we discover how faith transforms the battlefield.
+            </p>
+            <p class="text-lg text-champaign-200 leading-relaxed">
+              The list contains Amazon affiliate links. If you choose to buy the books through our links, we could receive some payment. We'd appreciate the support. But you can also get the books from your local library for free, or your local used bookstore for cheap. Do whatever works--we just want to enjoy discussing them with you!
+            </p>
+          </div>
+        </div>
+
+        <h3 class="text-3xl font-bold text-champaign-100 text-center mb-12 font-headline">2026 Monthly Reading Schedule</h3>
+
+        <div class="grid gap-8">
+          {books2026.map((book) => (
+            <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
+              <div class="grid md:grid-cols-4 gap-6 items-center">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-flame-400 mb-2 font-headline">
+                    {formatMonthName(book.month)}
+                  </div>
+                  {book.meetingDate && (
+                    <div class="text-champaign-300">
+                      {formatMeetingDate(book.meetingDate)}
+                    </div>
+                  )}
                 </div>
-                {book.meetingDate && (
-                  <div class="text-champaign-300">
-                    {formatMeetingDate(book.meetingDate)}
-                  </div>
-                )}
-              </div>
-              <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
-                {book.coverImage ? (
-                  <img
-                    src={urlFor(book.coverImage).width(300).height(400).url()}
-                    alt={book.title}
-                    class="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div class="w-full h-full flex items-center justify-center text-champaign-300 text-center p-4">
-                    <span class="text-sm">No Cover Available</span>
-                  </div>
-                )}
-              </div>
-              <div class="md:col-span-2">
-                <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">{book.title}</h3>
-                <p class="text-champaign-200 mb-2">By {book.author}</p>
-                {book.theme && (
-                  <p class="text-rust-400 font-semibold font-headline">{book.theme}</p>
-                )}
-                {book.description && (
-                  <p class="text-champaign-300 text-sm mt-3 leading-relaxed">{book.description}</p>
-                )}
-                {book.amazonLink && (
-                  <div class="mt-4">
-                    <a
-                      href={book.amazonLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-block bg-rust-800 text-champaign-100 px-4 py-2 rounded text-sm font-semibold hover:bg-rust-900 transition-colors"
-                    >
-                      Buy on Amazon
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-            {book.discussionQuestions && book.discussionQuestions.length > 0 && (
-              <div class="mt-6 pt-6 border-t border-champaign-700/30">
-                <h4 class="text-lg font-semibold text-champaign-100 mb-3 font-headline">Sample Discussion Questions:</h4>
-                <div class="space-y-2">
-                  {book.discussionQuestions.slice(0, 3).map((question, index) => (
-                    <p class="text-champaign-200 text-sm leading-relaxed">
-                      <span class="text-rust-400 font-semibold">{index + 1}.</span> {question}
-                    </p>
-                  ))}
-                  {book.discussionQuestions.length > 3 && (
-                    <p class="text-champaign-300 text-xs italic">
-                      ...and {book.discussionQuestions.length - 3} more questions in our study guide
-                    </p>
+                <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+                  {book.coverImage ? (
+                    <img
+                      src={urlFor(book.coverImage).width(300).height(400).url()}
+                      alt={book.title}
+                      class="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center text-champaign-300 text-center p-4">
+                      <span class="text-sm">Cover Coming Soon</span>
+                    </div>
+                  )}
+                </div>
+                <div class="md:col-span-2">
+                  <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">{book.title}</h3>
+                  <p class="text-champaign-200 mb-2">By {book.author}</p>
+                  {book.theme && (
+                    <p class="text-flame-400 font-semibold font-headline">{book.theme}</p>
+                  )}
+                  {book.description && (
+                    <p class="text-champaign-300 text-sm mt-3 leading-relaxed">{book.description}</p>
+                  )}
+                  {book.amazonLink && (
+                    <div class="mt-4">
+                      <a
+                        href={book.amazonLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block bg-rust-800 text-champaign-100 px-4 py-2 rounded text-sm font-semibold hover:bg-rust-900 transition-colors"
+                      >
+                        Buy on Amazon
+                      </a>
+                    </div>
                   )}
                 </div>
               </div>
-            )}
+              {book.discussionQuestions && book.discussionQuestions.length > 0 && (
+                <div class="mt-6 pt-6 border-t border-champaign-700/30">
+                  <h4 class="text-lg font-semibold text-champaign-100 mb-3 font-headline">Sample Discussion Questions:</h4>
+                  <div class="space-y-2">
+                    {book.discussionQuestions.slice(0, 3).map((question, index) => (
+                      <p class="text-champaign-200 text-sm leading-relaxed">
+                        <span class="text-flame-400 font-semibold">{index + 1}.</span> {question}
+                      </p>
+                    ))}
+                    {book.discussionQuestions.length > 3 && (
+                      <p class="text-champaign-300 text-xs italic">
+                        ...and {book.discussionQuestions.length - 3} more questions in our study guide
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 2025 Book List -->
+      <div id="books-2025" class="books-content hidden">
+        <div class="max-w-4xl mx-auto mb-12">
+          <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
+            <h2 class="text-2xl font-bold text-champaign-100 mb-6 font-headline">About Our 2025 List</h2>
+            <p class="text-lg text-champaign-200 mb-6 leading-relaxed">
+              Our inaugural 2025 list featured the books that introduced us to the ideas that helped us come to understand and embrace the Gospel. These are our beloved favorites, as sci-fi nerds and products of the pop culture of the early 2000's. We can look back now and appreciate the beautiful Christian truths in them!
+            </p>
+            <p class="text-lg text-champaign-200 mb-6 leading-relaxed">
+              The list contains Amazon affiliate links. If you choose to buy the books through our links, we could receive some payment. We'd appreciate the support. But you can also get the books from your local library for free, or your local used bookstore for cheap. Do whatever works--we just want to enjoy discussing them with you!
+            </p>
+            <p class="text-lg text-champaign-200 leading-relaxed">
+              <strong>Our 2025 book discussions have concluded.</strong> Check out our 2026 list above for this year's reading adventure!
+            </p>
           </div>
-        ))}
+        </div>
+
+        <h3 class="text-3xl font-bold text-champaign-100 text-center mb-12 font-headline">2025 Monthly Reading Schedule</h3>
+
+        <div class="grid gap-8">
+          {books2025.map((book) => (
+            <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl opacity-80">
+              <div class="grid md:grid-cols-4 gap-6 items-center">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">
+                    {formatMonthName(book.month)}
+                  </div>
+                  {book.meetingDate && (
+                    <div class="text-champaign-300">
+                      {formatMeetingDate(book.meetingDate)}
+                    </div>
+                  )}
+                </div>
+                <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
+                  {book.coverImage ? (
+                    <img
+                      src={urlFor(book.coverImage).width(300).height(400).url()}
+                      alt={book.title}
+                      class="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center text-champaign-300 text-center p-4">
+                      <span class="text-sm">No Cover Available</span>
+                    </div>
+                  )}
+                </div>
+                <div class="md:col-span-2">
+                  <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">{book.title}</h3>
+                  <p class="text-champaign-200 mb-2">By {book.author}</p>
+                  {book.theme && (
+                    <p class="text-rust-400 font-semibold font-headline">{book.theme}</p>
+                  )}
+                  {book.description && (
+                    <p class="text-champaign-300 text-sm mt-3 leading-relaxed">{book.description}</p>
+                  )}
+                  {book.amazonLink && (
+                    <div class="mt-4">
+                      <a
+                        href={book.amazonLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block bg-rust-800 text-champaign-100 px-4 py-2 rounded text-sm font-semibold hover:bg-rust-900 transition-colors"
+                      >
+                        Buy on Amazon
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+              {book.discussionQuestions && book.discussionQuestions.length > 0 && (
+                <div class="mt-6 pt-6 border-t border-champaign-700/30">
+                  <h4 class="text-lg font-semibold text-champaign-100 mb-3 font-headline">Sample Discussion Questions:</h4>
+                  <div class="space-y-2">
+                    {book.discussionQuestions.slice(0, 3).map((question, index) => (
+                      <p class="text-champaign-200 text-sm leading-relaxed">
+                        <span class="text-rust-400 font-semibold">{index + 1}.</span> {question}
+                      </p>
+                    ))}
+                    {book.discussionQuestions.length > 3 && (
+                      <p class="text-champaign-300 text-xs italic">
+                        ...and {book.discussionQuestions.length - 3} more questions in our study guide
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -217,13 +325,39 @@ const formatMeetingDate = (dateString: string) => {
   <!-- Call to Action -->
   <section class="py-16 bg-rust-800 text-champaign-100">
     <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-4 font-headline">Ready to Join the Discussion?</h2>
+      <h2 class="text-3xl font-bold mb-4 font-headline">Join the 2026 Adventure!</h2>
       <p class="text-champaign-200 mb-8 text-lg">
-        Sign up now to get the 2025 Study Guide and participate in our monthly meetings!
+        Sign up now to receive the 2026 Study Guide and participate in our monthly meetings!
       </p>
       <a href="/join" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
-        Join the Book Club
+        Subscribe
       </a>
     </div>
   </section>
+
+  <script>
+    // Tab switching functionality
+    const tab2026 = document.getElementById('tab-2026');
+    const tab2025 = document.getElementById('tab-2025');
+    const books2026 = document.getElementById('books-2026');
+    const books2025 = document.getElementById('books-2025');
+
+    tab2026?.addEventListener('click', () => {
+      tab2026.classList.add('bg-rust-800', 'text-champaign-100');
+      tab2026.classList.remove('text-champaign-300');
+      tab2025?.classList.remove('bg-rust-800', 'text-champaign-100');
+      tab2025?.classList.add('text-champaign-300');
+      books2026?.classList.remove('hidden');
+      books2025?.classList.add('hidden');
+    });
+
+    tab2025?.addEventListener('click', () => {
+      tab2025.classList.add('bg-rust-800', 'text-champaign-100');
+      tab2025.classList.remove('text-champaign-300');
+      tab2026?.classList.remove('bg-rust-800', 'text-champaign-100');
+      tab2026?.classList.add('text-champaign-300');
+      books2025?.classList.remove('hidden');
+      books2026?.classList.add('hidden');
+    });
+  </script>
 </Layout>

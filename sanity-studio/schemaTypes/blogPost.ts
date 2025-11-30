@@ -36,12 +36,67 @@ export default defineType({
       validation: (Rule) => Rule.required().max(200),
     }),
     defineField({
+      name: 'postType',
+      title: 'Post Type',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Article', value: 'article'},
+          {title: 'Video Post', value: 'video'},
+        ],
+      },
+      initialValue: 'article',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'featuredImage',
       title: 'Featured Image',
       type: 'image',
       options: {
         hotspot: true,
       },
+      hidden: ({document}) => document?.postType === 'video',
+    }),
+    defineField({
+      name: 'youtubeVideo',
+      title: 'YouTube Video',
+      type: 'object',
+      fields: [
+        {
+          name: 'url',
+          title: 'YouTube URL',
+          type: 'url',
+          description: 'Full YouTube video URL (e.g., https://www.youtube.com/watch?v=...)',
+          validation: (Rule) => Rule.required().custom((url) => {
+            if (!url) return true
+            const youtubeRegex = /^https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/
+            return youtubeRegex.test(url) || 'Please enter a valid YouTube URL'
+          }),
+        },
+        {
+          name: 'videoId',
+          title: 'Video ID',
+          type: 'string',
+          description: 'YouTube video ID (automatically extracted from URL)',
+          readOnly: true,
+        },
+        {
+          name: 'thumbnail',
+          title: 'Custom Thumbnail',
+          type: 'image',
+          description: 'Optional custom thumbnail (uses YouTube thumbnail if not provided)',
+          options: {
+            hotspot: true,
+          },
+        },
+        {
+          name: 'duration',
+          title: 'Video Duration',
+          type: 'string',
+          description: 'e.g., "15:30" for 15 minutes 30 seconds',
+        },
+      ],
+      hidden: ({document}) => document?.postType !== 'video',
     }),
     defineField({
       name: 'content',
@@ -125,6 +180,9 @@ export default defineType({
           {title: 'Discussion Guides', value: 'discussion-guides'},
           {title: 'Faith & Literature', value: 'faith-literature'},
           {title: 'Event Recaps', value: 'event-recaps'},
+          {title: 'Video Content', value: 'video-content'},
+          {title: 'Book Discussions', value: 'book-discussions'},
+          {title: 'Reading Lists', value: 'reading-lists'},
         ],
       },
     }),

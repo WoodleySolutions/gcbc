@@ -43,7 +43,14 @@ export interface BlogPost {
   slug: { current: string }
   author?: string
   excerpt: string
+  postType: 'article' | 'video'
   featuredImage?: any
+  youtubeVideo?: {
+    url: string
+    videoId?: string
+    thumbnail?: any
+    duration?: string
+  }
   content: any[]
   categories?: string[]
   tags?: string[]
@@ -180,7 +187,9 @@ export const queries = {
     title,
     slug,
     excerpt,
+    postType,
     featuredImage,
+    youtubeVideo,
     publishedAt,
     author,
     categories

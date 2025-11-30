@@ -1,8 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCurrentEventText } from '../lib/currentEvent';
+import { client, queries } from '../lib/sanity';
 
-const eventText = getCurrentEventText();
+// Fetch current book from CMS
+const currentBook = await client.fetch(queries.currentBook);
+
+// Helper function to format dates (parses as local date to avoid timezone issues)
+const formatDate = (dateString: string) => {
+  if (!dateString) return '';
+  // Append time to parse as local date instead of UTC
+  const date = new Date(dateString + 'T12:00:00');
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+const meetingDate = currentBook?.meetingDate ? formatDate(currentBook.meetingDate) : 'TBD';
 ---
 
 <Layout title="Join the Book Club - Great Catholic Book Club">
@@ -22,8 +36,22 @@ const eventText = getCurrentEventText();
   <section class="py-16 bg-black-olive">
     <div class="max-w-4xl mx-auto px-4">
       <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 mb-12 shadow-2xl">
+        {currentBook ? (
+          <>
+            <p class="text-lg text-champaign-200 leading-relaxed mb-4">
+              Join the Book Club to get the 2026 Study Guide and participate in monthly online group discussions! Our 2026 theme is <strong class="text-flame-400">"War is Heck"</strong>—exploring human conflict, virtue in adversity, and heroic sacrifice through the lens of Catholic faith. Our next meeting will be held on <strong>{meetingDate} at 7pm CST</strong> to discuss <em>{currentBook.title}</em> by {currentBook.author}.
+            </p>
+            <p class="text-lg text-champaign-200 leading-relaxed mb-4">
+              Monthly online meetings will be held on the last Monday of every month throughout 2026 (except November, which is the 3rd Monday to avoid Thanksgiving week). You can join anytime during the year, starting now!
+            </p>
+          </>
+        ) : (
+          <p class="text-lg text-champaign-200 leading-relaxed mb-4">
+            Join the Book Club to get the 2026 Study Guide and participate in monthly online group discussions! Our 2026 theme is <strong class="text-flame-400">"War is Heck"</strong>—exploring human conflict, virtue in adversity, and heroic sacrifice through the lens of Catholic faith.
+          </p>
+        )}
         <p class="text-lg text-champaign-200 leading-relaxed">
-          {eventText.joinPrompt} {eventText.scheduleText} {eventText.joinNowText}
+          Want to see what we're reading? <a href="/books" class="text-flame-400 hover:text-flame-300 underline font-semibold">Check out our complete 2026 book list</a> with meeting dates, themes, and discussion topics.
         </p>
       </div>
 
@@ -165,17 +193,17 @@ const eventText = getCurrentEventText();
         <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
           <div class="text-rust-800 text-4xl mb-4 font-bold">1</div>
           <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Welcome Email</h3>
-          <p class="text-champaign-200">You'll receive a welcome email with the 2025 Study Guide and meeting details.</p>
+          <p class="text-champaign-200">You'll receive a welcome email when you join our mailing list.</p>
         </div>
         <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
           <div class="text-rust-800 text-4xl mb-4 font-bold">2</div>
-          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Monthly Updates</h3>
-          <p class="text-champaign-200">Get reminders about upcoming meetings, book discussions, and new content.</p>
+          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">2026 Book List</h3>
+          <p class="text-champaign-200">Get notified in December when the 2026 Study Guide and book list are released.</p>
         </div>
         <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-2xl">
           <div class="text-rust-800 text-4xl mb-4 font-bold">3</div>
           <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Join Discussions</h3>
-          <p class="text-champaign-200">Participate in online meetings and connect with fellow Catholic book lovers.</p>
+          <p class="text-champaign-200">Participate in monthly online meetings starting January 26th and connect with fellow Catholic book lovers.</p>
         </div>
       </div>
     </div>

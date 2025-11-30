@@ -72,8 +72,28 @@ const pageDescription = post.seo?.metaDescription || post.excerpt;
     </div>
   </section>
 
-  <!-- Featured Image -->
-  {post.featuredImage && (
+  <!-- Featured Image or Video -->
+  {post.postType === 'video' && post.youtubeVideo ? (
+    <section class="bg-black-olive pb-8">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="aspect-video rounded-lg overflow-hidden shadow-2xl">
+          <iframe
+            src={`https://www.youtube.com/embed/${post.youtubeVideo.videoId}?rel=0&modestbranding=1`}
+            title={post.title}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            class="w-full h-full"
+          ></iframe>
+        </div>
+        {post.youtubeVideo.duration && (
+          <div class="text-center mt-2">
+            <span class="text-champaign-300 text-sm">Duration: {post.youtubeVideo.duration}</span>
+          </div>
+        )}
+      </div>
+    </section>
+  ) : post.featuredImage && (
     <section class="bg-black-olive pb-8">
       <div class="max-w-4xl mx-auto px-4">
         <div class="aspect-video rounded-lg overflow-hidden shadow-2xl">

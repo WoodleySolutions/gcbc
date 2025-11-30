@@ -1,10 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import NextEventBanner from '../components/NextEventBanner.astro';
-import { getCurrentEventText } from '../lib/currentEvent';
 import { client, queries, urlFor, getSiteSettings, getCurrentBook, getFeaturedPosts, type BlogPost } from '../lib/sanity';
-
-const eventText = getCurrentEventText();
 
 // Fetch CMS data
 const [siteSettings, currentBook, featuredPosts, everyBookCatholicPost] = await Promise.all([
@@ -14,9 +11,11 @@ const [siteSettings, currentBook, featuredPosts, everyBookCatholicPost] = await 
   client.fetch(`*[_type == "blogPost" && slug.current == "why-is-every-book-catholic"][0]`)
 ]);
 
-// Helper function to format dates
+// Helper function to format dates (parses as local date to avoid timezone issues)
 const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString('en-US', {
+  // Append time to parse as local date instead of UTC
+  const date = new Date(dateString + 'T12:00:00');
+  return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -79,10 +78,15 @@ const formatDate = (dateString: string) => {
                 </p>
               </div>
 
-              <p class="text-lg text-champaign-200 leading-relaxed">
-                Follow along on your own with our 2025 Book List, and subscribe to our newsletter to get updates on blog and video content that will be released throughout the year.
-                <span class="text-rust-300 font-semibold">Everything is free.</span> Choose whatever works best for you!
-              </p>
+              {currentBook ? (
+                <p class="text-lg text-champaign-200 leading-relaxed">
+                  Join us for our 2026 reading adventure exploring the theme <strong class="text-flame-400">"War is Heck"</strong>—examining human conflict, virtue in adversity, and heroic sacrifice through the lens of Catholic faith. Our next meeting will be held on {currentBook.meetingDate ? new Date(currentBook.meetingDate + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) : 'TBD'} at 7pm CST to discuss <em>{currentBook.title}</em> by {currentBook.author}. <a href="/books" class="text-flame-400 hover:text-flame-300 underline font-semibold">View our complete 2026 book list</a> or <a href="/join" class="text-flame-400 hover:text-flame-300 underline font-semibold">subscribe to get the Study Guide</a> and updates on our blog and video content!
+                </p>
+              ) : (
+                <p class="text-lg text-champaign-200 leading-relaxed">
+                  Join us for our 2026 reading adventure exploring the theme <strong class="text-flame-400">"War is Heck"</strong>—examining human conflict, virtue in adversity, and heroic sacrifice through the lens of Catholic faith. <a href="/books" class="text-flame-400 hover:text-flame-300 underline font-semibold">View our complete 2026 book list</a> or <a href="/join" class="text-flame-400 hover:text-flame-300 underline font-semibold">subscribe to get the Study Guide</a> and updates on our blog and video content!
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -129,7 +133,7 @@ const formatDate = (dateString: string) => {
               )}
               <div class="bg-black-olive/50 border border-champaign-700/20 rounded-lg p-4 mb-6">
                 <p class="text-champaign-200 text-sm leading-relaxed">
-                  {eventText.joinPrompt} {eventText.scheduleText} {eventText.joinNowText}
+                  Join the Book Club to get the 2026 Study Guide and participate in monthly online group discussions! Monthly meetings are held on the last Monday of every month at 7pm CST (except November, which is the 3rd Monday to avoid Thanksgiving week). You can join anytime during the year, starting now!
                 </p>
               </div>
               <div class="flex flex-wrap gap-4">
@@ -199,7 +203,7 @@ const formatDate = (dateString: string) => {
         </div>
 
         <p class="text-xl text-champaign-100 font-semibold mb-6 font-headline">
-          Join the book club to start that journey in 2025!
+          Join the book club to start that journey in 2026!
         </p>
         <a href="/join" class="inline-block bg-rust-800 text-champaign-100 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-rust-900 transition-colors shadow-md">
           Join Now
@@ -220,7 +224,15 @@ const formatDate = (dateString: string) => {
         {featuredPosts && featuredPosts.length > 0 ? (
           featuredPosts.map((post) => (
             <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
-              {post.featuredImage && (
+              {post.postType === 'video' && post.youtubeVideo?.videoId ? (
+                <div class="aspect-video overflow-hidden">
+                  <img
+                    src={`https://img.youtube.com/vi/${post.youtubeVideo.videoId}/maxresdefault.jpg`}
+                    alt={post.title}
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ) : post.featuredImage ? (
                 <div class="aspect-video overflow-hidden">
                   <img
                     src={urlFor(post.featuredImage).width(400).height(225).url()}
@@ -228,7 +240,7 @@ const formatDate = (dateString: string) => {
                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-              )}
+              ) : null}
               <div class="p-6">
                 <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline line-clamp-2">
                   {post.title}
