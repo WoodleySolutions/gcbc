@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { client, queries, urlFor, type BlogPost } from '../lib/sanity';
+import { client, queries, urlFor, extractYouTubeId, type BlogPost } from '../lib/sanity';
 
 // Fetch all blog posts from CMS
 const allPosts: BlogPost[] = await client.fetch(`
@@ -36,6 +36,14 @@ const formatDate = (dateString: string) => {
 const formatCategory = (category: string) => {
   return category.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
 };
+
+// Helper function to get YouTube video ID from post
+const getVideoId = (post: BlogPost): string | null => {
+  if (post.postType === 'video' && post.youtubeVideo?.url) {
+    return extractYouTubeId(post.youtubeVideo.url);
+  }
+  return null;
+};
 ---
 
 <Layout title="Blog - Great Catholic Book Club">
@@ -66,10 +74,10 @@ const formatCategory = (category: string) => {
             <article class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
               <div class="grid md:grid-cols-3 gap-8 items-center">
                 <div class="aspect-video rounded-lg overflow-hidden shadow-inner relative">
-                  {post.postType === 'video' && post.youtubeVideo ? (
+                  {getVideoId(post) ? (
                     <>
                       <img
-                        src={`https://img.youtube.com/vi/${post.youtubeVideo.videoId}/hqdefault.jpg`}
+                        src={`https://img.youtube.com/vi/${getVideoId(post)}/hqdefault.jpg`}
                         alt={post.title}
                         class="w-full h-full object-cover"
                       />
@@ -81,7 +89,7 @@ const formatCategory = (category: string) => {
                         </div>
                       </div>
                       <div class="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                        {post.youtubeVideo.duration || 'VIDEO'}
+                        {post.youtubeVideo?.duration || 'VIDEO'}
                       </div>
                     </>
                   ) : post.featuredImage ? (
@@ -139,10 +147,10 @@ const formatCategory = (category: string) => {
           {(featuredPosts.length > 0 ? regularPosts : allPosts).map((post) => (
             <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
               <div class="aspect-video overflow-hidden relative">
-                {post.postType === 'video' && post.youtubeVideo ? (
+                {getVideoId(post) ? (
                   <>
                     <img
-                      src={`https://img.youtube.com/vi/${post.youtubeVideo.videoId}/hqdefault.jpg`}
+                      src={`https://img.youtube.com/vi/${getVideoId(post)}/hqdefault.jpg`}
                       alt={post.title}
                       class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
@@ -154,7 +162,7 @@ const formatCategory = (category: string) => {
                       </div>
                     </div>
                     <div class="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                      {post.youtubeVideo.duration || 'VIDEO'}
+                      {post.youtubeVideo?.duration || 'VIDEO'}
                     </div>
                   </>
                 ) : post.featuredImage ? (

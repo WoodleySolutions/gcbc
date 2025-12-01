@@ -47,7 +47,6 @@ export interface BlogPost {
   featuredImage?: any
   youtubeVideo?: {
     url: string
-    videoId?: string
     thumbnail?: any
     duration?: string
   }
@@ -293,4 +292,27 @@ export async function getFeaturedPosts(): Promise<BlogPost[]> {
     console.error('Error fetching featured posts:', error)
     return []
   }
+}
+
+// Extract YouTube video ID from various YouTube URL formats
+export function extractYouTubeId(url: string): string | null {
+  if (!url) return null
+
+  // Match patterns:
+  // https://www.youtube.com/watch?v=VIDEO_ID
+  // https://youtu.be/VIDEO_ID
+  // https://www.youtube.com/embed/VIDEO_ID
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\?\/]+)/,
+    /^([a-zA-Z0-9_-]{11})$/ // Direct video ID
+  ]
+
+  for (const pattern of patterns) {
+    const match = url.match(pattern)
+    if (match && match[1]) {
+      return match[1]
+    }
+  }
+
+  return null
 }

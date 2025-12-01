@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { client, queries, urlFor, type BlogPost } from '../../lib/sanity';
+import { client, queries, urlFor, extractYouTubeId, type BlogPost } from '../../lib/sanity';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -45,9 +45,14 @@ const renderBlockText = (blocks: any[]) => {
 const pageTitle = post.seo?.metaTitle || post.title;
 const pageDescription = post.seo?.metaDescription || post.excerpt;
 
+// Extract YouTube video ID from URL if it's a video post
+const youtubeVideoId = post.postType === 'video' && post.youtubeVideo?.url
+  ? extractYouTubeId(post.youtubeVideo.url)
+  : null;
+
 // Generate featured image URL for structured data
-const featuredImageUrl = post.postType === 'video' && post.youtubeVideo
-  ? `https://img.youtube.com/vi/${post.youtubeVideo.videoId}/maxresdefault.jpg`
+const featuredImageUrl = post.postType === 'video' && youtubeVideoId
+  ? `https://img.youtube.com/vi/${youtubeVideoId}/maxresdefault.jpg`
   : post.featuredImage
   ? urlFor(post.featuredImage).width(1200).height(630).url()
   : null;
@@ -72,12 +77,12 @@ const structuredData = {
     }
   },
   ...(featuredImageUrl && { "image": featuredImageUrl }),
-  ...(post.postType === 'video' && post.youtubeVideo && {
+  ...(post.postType === 'video' && youtubeVideoId && {
     "name": post.title,
     "uploadDate": post.publishedAt,
-    "thumbnailUrl": `https://img.youtube.com/vi/${post.youtubeVideo.videoId}/maxresdefault.jpg`,
-    "embedUrl": `https://www.youtube.com/embed/${post.youtubeVideo.videoId}`,
-    ...(post.youtubeVideo.duration && { "duration": post.youtubeVideo.duration })
+    "thumbnailUrl": `https://img.youtube.com/vi/${youtubeVideoId}/maxresdefault.jpg`,
+    "embedUrl": `https://www.youtube.com/embed/${youtubeVideoId}`,
+    ...(post.youtubeVideo?.duration && { "duration": post.youtubeVideo.duration })
   })
 };
 ---
@@ -111,12 +116,12 @@ const structuredData = {
   </section>
 
   <!-- Featured Image or Video -->
-  {post.postType === 'video' && post.youtubeVideo ? (
+  {post.postType === 'video' && youtubeVideoId ? (
     <section class="bg-black-olive pb-8">
       <div class="max-w-4xl mx-auto px-4">
         <div class="aspect-video rounded-lg overflow-hidden shadow-2xl">
           <iframe
-            src={`https://www.youtube.com/embed/${post.youtubeVideo.videoId}?rel=0&modestbranding=1`}
+            src={`https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1`}
             title={post.title}
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -124,7 +129,7 @@ const structuredData = {
             class="w-full h-full"
           ></iframe>
         </div>
-        {post.youtubeVideo.duration && (
+        {post.youtubeVideo?.duration && (
           <div class="text-center mt-2">
             <span class="text-champaign-300 text-sm">Duration: {post.youtubeVideo.duration}</span>
           </div>

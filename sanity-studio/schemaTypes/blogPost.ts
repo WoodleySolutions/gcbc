@@ -66,19 +66,12 @@ export default defineType({
           name: 'url',
           title: 'YouTube URL',
           type: 'url',
-          description: 'Full YouTube video URL (e.g., https://www.youtube.com/watch?v=...)',
+          description: 'Full YouTube video URL (e.g., https://www.youtube.com/watch?v=... or https://youtu.be/...)',
           validation: (Rule) => Rule.required().custom((url) => {
             if (!url) return true
             const youtubeRegex = /^https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/
             return youtubeRegex.test(url) || 'Please enter a valid YouTube URL'
           }),
-        },
-        {
-          name: 'videoId',
-          title: 'Video ID',
-          type: 'string',
-          description: 'YouTube video ID (automatically extracted from URL)',
-          readOnly: true,
         },
         {
           name: 'thumbnail',

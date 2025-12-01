@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import NextEventBanner from '../components/NextEventBanner.astro';
-import { client, queries, urlFor, getSiteSettings, getCurrentBook, getFeaturedPosts, type BlogPost } from '../lib/sanity';
+import { client, queries, urlFor, extractYouTubeId, getSiteSettings, getCurrentBook, getFeaturedPosts, type BlogPost } from '../lib/sanity';
 
 // Fetch CMS data
 const [siteSettings, currentBook, featuredPosts, everyBookCatholicPost] = await Promise.all([
@@ -20,6 +20,14 @@ const formatDate = (dateString: string) => {
     month: 'long',
     day: 'numeric'
   });
+};
+
+// Helper function to get YouTube video ID from post
+const getVideoId = (post: BlogPost): string | null => {
+  if (post.postType === 'video' && post.youtubeVideo?.url) {
+    return extractYouTubeId(post.youtubeVideo.url);
+  }
+  return null;
 };
 
 // Structured data for homepage (Organization)
@@ -244,10 +252,10 @@ const organizationData = {
         {featuredPosts && featuredPosts.length > 0 ? (
           featuredPosts.map((post) => (
             <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
-              {post.postType === 'video' && post.youtubeVideo?.videoId ? (
+              {getVideoId(post) ? (
                 <div class="aspect-video overflow-hidden">
                   <img
-                    src={`https://img.youtube.com/vi/${post.youtubeVideo.videoId}/maxresdefault.jpg`}
+                    src={`https://img.youtube.com/vi/${getVideoId(post)}/maxresdefault.jpg`}
                     alt={post.title}
                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
