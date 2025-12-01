@@ -2,219 +2,192 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Shop - Great Catholic Book Club">
+<Layout
+  title="Store - Great Catholic Book Club"
+  description="Shop official Great Catholic Book Club merchandise. Coffee mugs and tote bags for readers who believe every book is Catholic."
+>
   <!-- Header Section -->
   <section class="bg-black-olive relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-95"></div>
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/A vast dimly lit library full of ancient interesting and colorful books.jpg');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive/80 via-black-olive/90 to-black-olive/95"></div>
     <div class="max-w-7xl mx-auto px-4 py-16 relative z-10">
       <div class="text-center">
         <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-8 font-headline drop-shadow-lg">
-          Shop
+          GCBC Store
         </h1>
         <p class="text-xl text-champaign-200">
-          Support the ministry with books and merchandise
+          Support the club and show your love for good literature
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Store Integration Notice -->
-  <section class="py-16 bg-black-olive">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 text-center mb-12 shadow-2xl">
-        <h2 class="text-2xl font-bold text-champaign-100 mb-4 font-headline">Printify Store Integration</h2>
-        <p class="text-champaign-200 mb-6">
-          Our store is powered by Printify for high-quality, print-on-demand books and merchandise.
-          This section will display our curated selection of:
-        </p>
-        <div class="grid md:grid-cols-2 gap-6 text-left max-w-2xl mx-auto">
-          <ul class="space-y-2 text-champaign-200">
-            <li>• 2025 Book List titles</li>
-            <li>• Catholic classics</li>
-            <li>• Study guides and resources</li>
-          </ul>
-          <ul class="space-y-2 text-champaign-200">
-            <li>• GCBC branded merchandise</li>
-            <li>• Bookmarks and accessories</li>
-            <li>• Gift items for book lovers</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Placeholder Products Section -->
+  <!-- Products Section -->
   <section class="py-16 bg-black-olive">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-champaign-100 text-center mb-12 font-headline">Featured Products</h2>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- 2025 Study Guide -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div class="aspect-[3/4] bg-gray-300 flex items-center justify-center">
-            <span class="text-gray-600">Study Guide Cover</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 font-headline">2025 Study Guide</h3>
-            <p class="text-gray-600 mb-4">
-              Complete discussion guides for all 11 books on our 2025 reading list.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-2xl font-bold text-red-800">$15.99</span>
-              <button class="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-900 transition-colors">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- GCBC T-Shirt -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div class="aspect-[3/4] bg-gray-300 flex items-center justify-center">
-            <span class="text-gray-600">T-Shirt Design</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 font-headline">"Every Book is Catholic" T-Shirt</h3>
-            <p class="text-gray-600 mb-4">
-              Show your love for Catholic literature with our signature motto tee.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-2xl font-bold text-red-800">$24.99</span>
-              <button class="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-900 transition-colors">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Book Bundle -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div class="aspect-[3/4] bg-gray-300 flex items-center justify-center">
-            <span class="text-gray-600">Book Bundle</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 font-headline">2025 Complete Book Set</h3>
-            <p class="text-gray-600 mb-4">
-              All 11 books from our 2025 reading list at a discounted bundle price.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-2xl font-bold text-red-800">$199.99</span>
-              <button class="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-900 transition-colors">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 
         <!-- Coffee Mug -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div class="aspect-[3/4] bg-gray-300 flex items-center justify-center">
-            <span class="text-gray-600">Coffee Mug</span>
+        <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-xl">
+          <div class="aspect-square overflow-hidden bg-white">
+            <img
+              src="/images/products/mug-main.png"
+              alt="Great Catholic Book Club Coffee Mug"
+              class="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+            />
           </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 font-headline">GCBC Reading Mug</h3>
-            <p class="text-gray-600 mb-4">
-              Perfect for your morning coffee while reading your current book club selection.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-2xl font-bold text-red-800">$18.99</span>
-              <button class="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-900 transition-colors">
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        </div>
+          <div class="p-8">
+            <h2 class="text-2xl font-bold text-champaign-100 mb-2 font-headline">
+              Great Catholic Book Club Coffee Mug
+            </h2>
+            <p class="text-3xl font-bold text-champaign-100 mb-4">$15</p>
+            <p class="text-champaign-300 text-sm mb-6">Free shipping included</p>
 
-        <!-- Bookmark Set -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div class="aspect-[3/4] bg-gray-300 flex items-center justify-center">
-            <span class="text-gray-600">Bookmark Set</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 font-headline">Catholic Quote Bookmarks</h3>
-            <p class="text-gray-600 mb-4">
-              Beautiful bookmarks featuring inspiring quotes from Catholic authors and saints.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-2xl font-bold text-red-800">$12.99</span>
-              <button class="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-900 transition-colors">
-                Add to Cart
-              </button>
+            <div class="mb-6">
+              <p class="text-champaign-200 mb-4 leading-relaxed">
+                Start your reading session with a warm cup of coffee in the official Great Catholic Book Club mug. Featuring our "Every Book is Catholic" logo, this 15oz ceramic mug is perfect for those quiet mornings with Scripture, contemplative afternoons with the month's selection, or late-night discussions with fellow readers.
+              </p>
+              <p class="text-champaign-200 mb-4 leading-relaxed">
+                Whether you're savoring your favorite blend while diving into Tolkien or warming up with tea during your Lenten reading, this mug is a daily reminder that all good literature can lead us closer to Christ.
+              </p>
             </div>
+
+            <details class="mb-6">
+              <summary class="text-champaign-100 font-semibold cursor-pointer hover:text-champaign-200 transition-colors mb-2">
+                Product Features
+              </summary>
+              <ul class="text-champaign-300 text-sm space-y-1 ml-4 mt-2">
+                <li>• 15oz capacity - perfect for coffee, tea, or hot chocolate</li>
+                <li>• Glossy ceramic finish with vibrant, crisp printing</li>
+                <li>• Microwave and dishwasher safe</li>
+                <li>• Durable white ceramic construction</li>
+                <li>• Features the Great Catholic Book Club logo</li>
+              </ul>
+            </details>
+
+            <details class="mb-6">
+              <summary class="text-champaign-100 font-semibold cursor-pointer hover:text-champaign-200 transition-colors mb-2">
+                Care Instructions
+              </summary>
+              <p class="text-champaign-300 text-sm ml-4 mt-2">
+                Clean in dishwasher or wash by hand with warm water and dish soap.
+              </p>
+            </details>
+
+            <a
+              href="https://square.link/u/HGnAzoFF"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full bg-rust-800 text-champaign-100 text-center px-8 py-4 rounded-lg text-lg font-semibold hover:bg-rust-900 transition-colors shadow-md"
+            >
+              Buy Now
+            </a>
           </div>
-        </div>
+        </article>
 
         <!-- Tote Bag -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div class="aspect-[3/4] bg-gray-300 flex items-center justify-center">
-            <span class="text-gray-600">Tote Bag</span>
+        <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-xl">
+          <div class="aspect-square overflow-hidden bg-white">
+            <img
+              src="/images/products/tote-front.png"
+              alt="GCBC Reader's Tote Bag"
+              class="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+            />
           </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 font-headline">Book Lover's Tote Bag</h3>
-            <p class="text-gray-600 mb-4">
-              Carry your books in style with our durable, eco-friendly tote bag.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-2xl font-bold text-red-800">$22.99</span>
-              <button class="bg-red-800 text-white px-4 py-2 rounded-lg hover:bg-red-900 transition-colors">
-                Add to Cart
-              </button>
+          <div class="p-8">
+            <h2 class="text-2xl font-bold text-champaign-100 mb-2 font-headline">
+              GCBC Reader's Tote Bag
+            </h2>
+            <p class="text-3xl font-bold text-champaign-100 mb-4">$25</p>
+            <p class="text-champaign-300 text-sm mb-6">Free shipping included</p>
+
+            <div class="mb-6">
+              <p class="text-champaign-200 mb-4 leading-relaxed">
+                Carry your books, journals, and reading essentials in style with the Great Catholic Book Club tote bag. Built for readers who take their books seriously, this spacious 18" x 18" tote is perfect for hauling your monthly selection, prayer books, notebooks, and everything else you need for book club meetings or personal reading time.
+              </p>
+              <p class="text-champaign-200 mb-4 leading-relaxed">
+                Whether you're headed to Mass with your missal, the library with your stack of holds, or a coffee shop for quiet reading, this durable tote proclaims what we believe: Every Book is Catholic.
+              </p>
             </div>
+
+            <details class="mb-6">
+              <summary class="text-champaign-100 font-semibold cursor-pointer hover:text-champaign-200 transition-colors mb-2">
+                Product Features
+              </summary>
+              <ul class="text-champaign-300 text-sm space-y-1 ml-4 mt-2">
+                <li>• Generous 18" x 18" size - fits multiple books with room to spare</li>
+                <li>• Durable 100% polyester construction</li>
+                <li>• Reinforced stitching on handles for heavy loads</li>
+                <li>• Boxed corners for extra capacity and structure</li>
+                <li>• Features the Great Catholic Book Club logo</li>
+              </ul>
+            </details>
+
+            <details class="mb-6">
+              <summary class="text-champaign-100 font-semibold cursor-pointer hover:text-champaign-200 transition-colors mb-2">
+                Care Instructions
+              </summary>
+              <p class="text-champaign-300 text-sm ml-4 mt-2">
+                Remove all items before cleaning. Pretreat visible stains with stain remover. Mix warm water with laundry detergent and clean with a soft cloth or bristle brush. Air dry completely.
+              </p>
+            </details>
+
+            <a
+              href="https://square.link/u/chgdycJa"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full bg-rust-800 text-champaign-100 text-center px-8 py-4 rounded-lg text-lg font-semibold hover:bg-rust-900 transition-colors shadow-md"
+            >
+              Buy Now
+            </a>
           </div>
-        </div>
-      </div>
+        </article>
 
-      <!-- Amazon Affiliate Notice -->
-      <div class="mt-12 text-center">
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-xl">
-          <h3 class="text-lg font-semibold text-champaign-100 mb-4 font-headline">Amazon Affiliate Program</h3>
-          <p class="text-champaign-200">
-            We also participate in the Amazon Associates program. When you purchase books through our affiliate links,
-            you support the ministry at no extra cost to you. However, we encourage you to buy from your local library,
-            used bookstore, or wherever is most convenient for you - we just want you to read these great books!
-          </p>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- Support Section -->
-  <section class="py-16 bg-black-olive">
+  <!-- Info Section -->
+  <section class="py-16 bg-rust-800">
     <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-champaign-100 mb-6 font-headline">Supporting Our Ministry</h2>
-      <p class="text-lg text-champaign-200 mb-8 leading-relaxed">
-        Every purchase helps support Great Catholic Book Club's mission to foster deeper faith and meaningful
-        community through Catholic literature. Thank you for helping us spread the joy of reading and faith!
+      <h2 class="text-3xl font-bold text-champaign-100 mb-4 font-headline">Join the Conversation</h2>
+      <p class="text-champaign-200 mb-8 text-lg leading-relaxed">
+        Merchandise purchases help support the club, but joining our reading community is always free. Check out our current book list and join the discussion!
       </p>
-      <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-xl">
-          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Free Resources</h3>
-          <p class="text-champaign-200">
-            Remember, joining the book club and participating in discussions is completely free.
-            Our merchandise helps support the ministry while you show your love for Catholic literature.
-          </p>
-        </div>
-        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-xl">
-          <h3 class="text-xl font-semibold text-champaign-100 mb-3 font-headline">Quality Products</h3>
-          <p class="text-champaign-200">
-            All merchandise is carefully designed and produced with high-quality materials
-            through our Printify partnership, ensuring you receive items you'll love and use.
-          </p>
-        </div>
+      <div class="flex justify-center gap-4 flex-wrap">
+        <a href="/books" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
+          View Reading List
+        </a>
+        <a href="/join" class="inline-block bg-rust-600 text-champaign-100 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-rust-700 transition-colors shadow-md">
+          Join Book Club
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Join CTA -->
-  <section class="py-16 bg-rust-800 text-champaign-100">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-4 font-headline">Ready to Start Reading?</h2>
-      <p class="text-champaign-200 mb-8 text-lg">
-        Don't forget to join the book club to participate in our discussions and community!
-      </p>
-      <a href="/join" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
-        Join the Book Club
-      </a>
+  <!-- Shipping & Returns Info -->
+  <section class="py-12 bg-black-olive border-t border-champaign-700/30">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+          <h3 class="text-lg font-bold text-champaign-100 mb-2">Free Shipping</h3>
+          <p class="text-champaign-300 text-sm">
+            All prices include free domestic shipping. Orders typically ship within 3-5 business days.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-champaign-100 mb-2">Secure Checkout</h3>
+          <p class="text-champaign-300 text-sm">
+            Powered by Square. Your payment information is secure and encrypted.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-champaign-100 mb-2">Questions?</h3>
+          <p class="text-champaign-300 text-sm">
+            Email us at <a href="mailto:woodleys@greatcatholicbookclub.com" class="text-rust-400 hover:text-rust-300">woodleys@greatcatholicbookclub.com</a>
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>
