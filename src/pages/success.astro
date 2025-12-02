@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Get the form type from query parameter
+const url = new URL(Astro.request.url);
+const formType = url.searchParams.get('form') || 'general';
+
+// Define messages for each form type
+const messages = {
+  newsletter: {
+    title: "Welcome to Our Community!",
+    message: "Thank you for subscribing to our newsletter. You'll receive updates on blog posts, videos, book discussions, and upcoming events.",
+    icon: "✉️"
+  },
+  join: {
+    title: "Welcome to the Book Club!",
+    message: "Thank you for joining the Great Catholic Book Club! We're excited to have you in our reading community. You'll receive an email shortly with details about our next meeting and how to access the 2026 Study Guide.",
+    icon: "📚"
+  },
+  contact: {
+    title: "Message Received!",
+    message: "Thank you for reaching out to us. We've received your message and will get back to you as soon as possible.",
+    icon: "✓"
+  },
+  general: {
+    title: "Thank You!",
+    message: "Your submission has been received successfully.",
+    icon: "✓"
+  }
+};
+
+const currentMessage = messages[formType as keyof typeof messages] || messages.general;
+---
+
+<Layout
+  title={`${currentMessage.title} - Great Catholic Book Club`}
+  description="Thank you for your submission to Great Catholic Book Club."
+>
+  <!-- Success Section -->
+  <section class="bg-black-olive relative min-h-screen flex items-center justify-center">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/A vast dimly lit library full of ancient interesting and colorful books.jpg');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive/90 via-black-olive/95 to-black-olive/90"></div>
+
+    <div class="max-w-2xl mx-auto px-4 py-16 relative z-10 text-center">
+      <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-12 shadow-2xl">
+        <div class="text-6xl mb-6">{currentMessage.icon}</div>
+        <h1 class="text-4xl font-bold text-champaign-100 mb-6 font-headline">
+          {currentMessage.title}
+        </h1>
+        <p class="text-xl text-champaign-200 mb-8 leading-relaxed">
+          {currentMessage.message}
+        </p>
+
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a href="/" class="inline-block bg-rust-800 text-champaign-100 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-rust-900 transition-colors shadow-md">
+            Back to Home
+          </a>
+          {formType === 'newsletter' || formType === 'join' ? (
+            <a href="/books" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
+              View Reading List
+            </a>
+          ) : (
+            <a href="/blog" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
+              Read Our Blog
+            </a>
+          )}
+        </div>
+
+        {formType === 'join' && (
+          <div class="mt-8 pt-8 border-t border-champaign-700/30">
+            <p class="text-champaign-300 text-sm">
+              <strong>What's Next?</strong><br/>
+              Check your email for a welcome message with meeting details and instructions for accessing the 2026 Study Guide. Don't forget to check your spam folder if you don't see it within a few minutes!
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>

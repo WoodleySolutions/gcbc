@@ -385,21 +385,28 @@ const organizationData = {
         Get updates on blog and video content, book discussions, and event announcements.
       </p>
 
-      <form name="newsletter" method="POST" data-netlify="true" class="max-w-md mx-auto flex gap-4">
+      <form name="newsletter" method="POST" data-netlify="true" action="/success?form=newsletter" class="max-w-md mx-auto">
         <input type="hidden" name="form-name" value="newsletter" />
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          class="flex-1 px-4 py-3 rounded-lg text-black-olive bg-champaign-100 border border-champaign-300 focus:ring-2 focus:ring-champaign-200"
-          required
-        />
-        <button
-          type="submit"
-          class="bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md"
-        >
-          Subscribe
-        </button>
+        <div class="flex gap-4">
+          <div class="flex-1">
+            <label for="newsletter-email" class="sr-only">Email Address</label>
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              placeholder="Enter your email"
+              class="w-full px-4 py-3 rounded-lg text-black-olive bg-champaign-100 border border-champaign-300 focus:ring-2 focus:ring-champaign-200"
+              required
+              aria-required="true"
+            />
+          </div>
+          <button
+            type="submit"
+            class="bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md"
+          >
+            Subscribe
+          </button>
+        </div>
       </form>
     </div>
   </section>

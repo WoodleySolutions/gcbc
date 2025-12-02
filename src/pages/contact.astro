@@ -22,7 +22,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="bg-black-olive border border-champaign-700/30 rounded-lg shadow-2xl p-8">
         <h2 class="text-2xl font-bold text-champaign-100 mb-8 text-center font-headline">Contact Form</h2>
 
-        <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+        <form name="contact" method="POST" data-netlify="true" action="/success?form=contact" class="space-y-6">
           <input type="hidden" name="form-name" value="contact" />
 
           <div class="grid md:grid-cols-2 gap-6">
