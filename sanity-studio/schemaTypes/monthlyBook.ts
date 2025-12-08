@@ -97,6 +97,19 @@ export default defineType({
       description: 'Questions from the GCBC Study Guide to give visitors an idea of how discussions work',
     }),
     defineField({
+      name: 'studyGuideTitle',
+      title: 'Study Guide Title',
+      type: 'string',
+      description: 'The title/heading for the study guide article (e.g., "Life, the Universe, and Everything")',
+    }),
+    defineField({
+      name: 'studyGuideContent',
+      title: 'Study Guide Article',
+      type: 'array',
+      of: [{type: 'block'}],
+      description: 'Full study guide article content for this book (from the annual study guide PDF)',
+    }),
+    defineField({
       name: 'isCurrentBook',
       title: 'Is Current Month\'s Book?',
       type: 'boolean',

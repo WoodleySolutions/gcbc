@@ -189,7 +189,7 @@ const structuredData = {
         <h2 class="text-3xl font-bold text-champaign-100 text-center mb-12 font-headline">Related Books</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {post.relatedBooks.map((book) => (
-            <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-xl text-center">
+            <a href={`/books/${book.slug.current}`} class="bg-black-olive border border-champaign-700/30 rounded-lg p-6 shadow-xl text-center hover:border-flame-400/50 transition-all duration-300 block">
               {book.coverImage && (
                 <div class="aspect-[3/4] mb-4 mx-auto max-w-48">
                   <img
@@ -199,9 +199,9 @@ const structuredData = {
                   />
                 </div>
               )}
-              <h3 class="text-lg font-bold text-champaign-100 mb-2">{book.title}</h3>
+              <h3 class="text-lg font-bold text-champaign-100 mb-2 hover:text-flame-400 transition-colors">{book.title}</h3>
               <p class="text-champaign-200 text-sm">By {book.author}</p>
-            </div>
+            </a>
           ))}
         </div>
       </div>

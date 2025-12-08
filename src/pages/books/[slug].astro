@@ -1,0 +1,373 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { client, queries, urlFor, extractYouTubeId, type MonthlyBook, type BlogPost } from '../../lib/sanity';
+import { toHTML } from '@portabletext/to-html';
+
+export async function getStaticPaths() {
+  const books = await client.fetch<MonthlyBook[]>(queries.allBooks);
+
+  return books.map((book) => ({
+    params: { slug: book.slug.current },
+  }));
+}
+
+const { slug } = Astro.params;
+const book = await client.fetch<MonthlyBook & { relatedPosts: BlogPost[] }>(queries.bookBySlug(slug));
+
+if (!book) {
+  return Astro.redirect('/404');
+}
+
+// Get all books from the same year for prev/next navigation
+const allBooksInYear = await client.fetch<MonthlyBook[]>(
+  `*[_type == "monthlyBook" && year == ${book.year}] | order(meetingDate asc)`
+);
+
+// Find current book index
+const currentIndex = allBooksInYear.findIndex(b => b.slug.current === slug);
+const prevBook = currentIndex > 0 ? allBooksInYear[currentIndex - 1] : null;
+const nextBook = currentIndex < allBooksInYear.length - 1 ? allBooksInYear[currentIndex + 1] : null;
+
+// Helper function to format month names
+const formatMonthName = (month: string) => {
+  const monthMap: { [key: string]: string } = {
+    january: 'January',
+    february: 'February',
+    march: 'March',
+    april: 'April',
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    september: 'September',
+    october: 'October',
+    november: 'November',
+    december: 'December'
+  };
+  return monthMap[month.toLowerCase()] || month;
+};
+
+// Helper function to format meeting dates
+const formatMeetingDate = (dateString: string) => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+};
+
+// Convert Portable Text to HTML for study guide
+const studyGuideHTML = book.studyGuideContent ? toHTML(book.studyGuideContent, {
+  components: {
+    block: {
+      normal: ({children}) => `<p class="text-champaign-200 mb-4 leading-relaxed">${children}</p>`,
+      blockquote: ({children}) => `<blockquote class="border-l-4 border-flame-400 pl-6 pr-4 py-4 my-6 bg-midnight-blue/50 rounded-r-lg italic text-champaign-100 text-lg leading-relaxed">${children}</blockquote>`,
+      h1: ({children}) => `<h2 class="text-3xl font-bold text-champaign-100 mb-6 mt-8 font-headline">${children}</h2>`,
+      h2: ({children}) => `<h3 class="text-2xl font-bold text-champaign-100 mb-4 mt-6 font-headline">${children}</h3>`,
+      h3: ({children}) => `<h4 class="text-xl font-semibold text-champaign-100 mb-3 mt-4 font-headline">${children}</h4>`,
+    },
+    marks: {
+      strong: ({children}) => `<strong class="text-champaign-100 font-semibold">${children}</strong>`,
+      em: ({children}) => `<em class="italic">${children}</em>`,
+      link: ({value, children}) => {
+        const target = (value?.href || '').startsWith('http') ? '_blank' : undefined;
+        const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+        return `<a href="${value?.href}" target="${target}" rel="${rel}" class="text-flame-400 hover:text-flame-300 underline">${children}</a>`;
+      },
+    },
+  },
+}) : '';
+
+// SEO optimizations
+const seoTitle = `${book.title} Catholic Analysis & Discussion | Great Catholic Book Club`;
+const seoDescription = book.description || `Explore ${book.title} by ${book.author} through a Catholic lens. Study guide, discussion questions, and analysis of Catholic themes in literature.`;
+const seoKeywords = `${book.title} Catholic, ${book.title} Catholic analysis, ${book.author} Catholic perspective, Catholic book club, Catholic literature study, ${book.title} discussion questions, Catholic themes in ${book.title}`;
+const bookImage = book.coverImage ? urlFor(book.coverImage).width(1200).height(630).url() : '/GCBC.png';
+
+// Schema.org structured data for Book
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": book.title,
+  "author": {
+    "@type": "Person",
+    "name": book.author
+  },
+  "description": book.description,
+  "image": bookImage,
+  "aggregateRating": book.discussionQuestions?.length ? {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "1"
+  } : undefined,
+  "offers": book.amazonLink ? {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "url": book.amazonLink,
+    "seller": {
+      "@type": "Organization",
+      "name": "Amazon"
+    }
+  } : undefined,
+  "about": {
+    "@type": "Thing",
+    "name": "Catholic theology",
+    "description": "Catholic analysis and discussion"
+  }
+};
+---
+
+<Layout
+  title={seoTitle}
+  description={seoDescription}
+  keywords={seoKeywords}
+  image={bookImage}
+  author={book.author}
+  structuredData={structuredData}
+>
+  <!-- Hero Section -->
+  <section class="bg-black-olive relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive via-black-olive to-black-olive opacity-95"></div>
+    <div class="max-w-7xl mx-auto px-4 py-16 relative z-10">
+      <div class="text-center mb-4">
+        <a href="/books" class="text-champaign-300 hover:text-champaign-100 transition-colors">
+          ← Back to Book List
+        </a>
+      </div>
+
+      <div class="max-w-5xl mx-auto relative">
+        <!-- Prev/Next Navigation Arrows -->
+        <div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 hidden lg:block">
+          {prevBook ? (
+            <a
+              href={`/books/${prevBook.slug.current}`}
+              class="flex items-center justify-center w-12 h-12 rounded-full bg-rust-800 text-champaign-100 hover:bg-rust-700 transition-colors shadow-lg"
+              title={`Previous: ${prevBook.title}`}
+            >
+              <span class="text-2xl">←</span>
+            </a>
+          ) : (
+            <div class="w-12 h-12"></div>
+          )}
+        </div>
+
+        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 hidden lg:block">
+          {nextBook ? (
+            <a
+              href={`/books/${nextBook.slug.current}`}
+              class="flex items-center justify-center w-12 h-12 rounded-full bg-rust-800 text-champaign-100 hover:bg-rust-700 transition-colors shadow-lg"
+              title={`Next: ${nextBook.title}`}
+            >
+              <span class="text-2xl">→</span>
+            </a>
+          ) : (
+            <div class="w-12 h-12"></div>
+          )}
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 items-start">
+          <!-- Book Cover -->
+          <div class="aspect-[3/4] bg-black-olive border border-champaign-700/30 rounded-lg shadow-2xl overflow-hidden">
+            {book.coverImage ? (
+              <img
+                src={urlFor(book.coverImage).width(400).height(533).url()}
+                alt={book.title}
+                class="w-full h-full object-cover"
+              />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center text-champaign-300 text-center p-4">
+                <span>No Cover Available</span>
+              </div>
+            )}
+          </div>
+
+          <!-- Book Info -->
+          <div class="md:col-span-2">
+            <div class="mb-4">
+              <p class="text-flame-400 font-semibold font-headline">
+                {formatMonthName(book.month)} {book.year}
+              </p>
+              {book.meetingDate && (
+                <p class="text-champaign-300 text-sm">
+                  Meeting Date: {formatMeetingDate(book.meetingDate)}
+                </p>
+              )}
+            </div>
+
+            <h1 class="text-4xl font-bold text-champaign-100 mb-3 font-headline">
+              {book.title}
+            </h1>
+            <p class="text-2xl text-champaign-200 mb-4">By {book.author}</p>
+
+            {book.theme && (
+              <p class="text-xl text-flame-400 font-semibold font-headline mb-6">
+                {book.theme}
+              </p>
+            )}
+
+            {book.description && (
+              <p class="text-champaign-200 mb-8 leading-relaxed text-lg">
+                {book.description}
+              </p>
+            )}
+
+            <div class="flex flex-wrap gap-4">
+              {book.amazonLink && (
+                <a
+                  href={book.amazonLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block bg-rust-600 text-champaign-100 px-6 py-3 rounded-lg font-semibold hover:bg-rust-700 transition-colors"
+                >
+                  Buy on Amazon
+                </a>
+              )}
+              <a
+                href="/join"
+                class="inline-block bg-champaign-100 text-rust-800 px-6 py-3 rounded-lg font-semibold hover:bg-champaign-200 transition-colors"
+              >
+                Join Discussion
+              </a>
+            </div>
+
+            <!-- Mobile Navigation (shows below buttons on mobile) -->
+            <div class="mt-6 flex items-center justify-between lg:hidden">
+              {prevBook ? (
+                <a
+                  href={`/books/${prevBook.slug.current}`}
+                  class="flex items-center gap-2 text-champaign-300 hover:text-champaign-100 transition-colors"
+                >
+                  <span class="text-xl">←</span>
+                  <span class="text-sm">Previous</span>
+                </a>
+              ) : (
+                <div></div>
+              )}
+              {nextBook ? (
+                <a
+                  href={`/books/${nextBook.slug.current}`}
+                  class="flex items-center gap-2 text-champaign-300 hover:text-champaign-100 transition-colors"
+                >
+                  <span class="text-sm">Next</span>
+                  <span class="text-xl">→</span>
+                </a>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Study Guide Content -->
+  {studyGuideHTML && (
+    <section class="py-16 bg-midnight-blue">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
+          <h2 class="text-3xl font-bold text-champaign-100 mb-8 font-headline">
+            {book.studyGuideTitle || 'Study Guide'}
+          </h2>
+          <div class="prose prose-invert max-w-none" set:html={studyGuideHTML} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Discussion Questions -->
+  {book.discussionQuestions && book.discussionQuestions.length > 0 && (
+    <section class="py-16 bg-black-olive">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
+          <h2 class="text-3xl font-bold text-champaign-100 mb-8 font-headline">Discussion Questions</h2>
+          <div class="space-y-4">
+            {book.discussionQuestions.map((question, index) => (
+              <div class="border-l-4 border-flame-400 pl-4 py-2">
+                <p class="text-champaign-200 leading-relaxed">
+                  <span class="text-flame-400 font-semibold mr-2">{index + 1}.</span>
+                  {question}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Related Blog Posts & Videos -->
+  {book.relatedPosts && book.relatedPosts.length > 0 && (
+    <section class="py-16 bg-midnight-blue">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-champaign-100 mb-8 text-center font-headline">
+          Related Content
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {book.relatedPosts.map((post) => {
+            const videoId = post.postType === 'video' && post.youtubeVideo?.url
+              ? extractYouTubeId(post.youtubeVideo.url)
+              : null;
+
+            return (
+              <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-xl hover:border-flame-400/50 transition-all duration-300">
+                <a href={`/blog/${post.slug.current}`}>
+                  <div class="aspect-video overflow-hidden bg-midnight-blue">
+                    {post.postType === 'video' && videoId ? (
+                      <img
+                        src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                        alt={post.title}
+                        class="w-full h-full object-cover"
+                      />
+                    ) : post.featuredImage ? (
+                      <img
+                        src={urlFor(post.featuredImage).width(400).height(225).url()}
+                        alt={post.title}
+                        class="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div class="w-full h-full flex items-center justify-center">
+                        <span class="text-champaign-300 text-sm">No Image</span>
+                      </div>
+                    )}
+                  </div>
+                  <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                      {post.postType === 'video' && (
+                        <span class="inline-block bg-rust-800 text-champaign-100 text-xs px-2 py-1 rounded font-semibold">
+                          VIDEO
+                        </span>
+                      )}
+                      {post.postType === 'article' && (
+                        <span class="inline-block bg-champaign-700 text-midnight-blue text-xs px-2 py-1 rounded font-semibold">
+                          ARTICLE
+                        </span>
+                      )}
+                    </div>
+                    <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline hover:text-flame-400 transition-colors">
+                      {post.title}
+                    </h3>
+                    <p class="text-champaign-300 text-sm line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                  </div>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-rust-800 text-champaign-100">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4 font-headline">Join the Discussion</h2>
+      <p class="text-champaign-200 mb-8 text-lg">
+        Sign up to receive study guides and participate in our monthly book discussions!
+      </p>
+      <a href="/join" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
+        Join the Book Club
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -32,6 +32,8 @@ export interface MonthlyBook {
   amazonLink?: string
   meetingDate?: string
   discussionQuestions?: string[]
+  studyGuideTitle?: string
+  studyGuideContent?: any[]
   isCurrentBook?: boolean
   publishedAt: string
 }
@@ -173,9 +175,22 @@ export const queries = {
   booksByYear: (year: number) =>
     `*[_type == "monthlyBook" && year == ${year}] | order(month desc)`,
 
-  // Get single book by slug
+  // Get single book by slug with related blog posts
   bookBySlug: (slug: string) =>
-    `*[_type == "monthlyBook" && slug.current == "${slug}"][0]`,
+    `*[_type == "monthlyBook" && slug.current == "${slug}"][0]{
+      ...,
+      "relatedPosts": *[_type == "blogPost" && references(^._id)]{
+        _id,
+        title,
+        slug,
+        excerpt,
+        postType,
+        featuredImage,
+        youtubeVideo,
+        publishedAt,
+        author
+      }
+    }`,
 
   // Get all blog posts
   allPosts: `*[_type == "blogPost"] | order(publishedAt desc)`,

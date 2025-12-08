@@ -31,11 +31,10 @@ const formatMonthName = (month: string) => {
   return monthMap[month.toLowerCase()] || month;
 };
 
-// Helper function to format meeting dates (parses as local date to avoid timezone issues)
+// Helper function to format meeting dates
 const formatMeetingDate = (dateString: string) => {
   if (!dateString) return '';
-  // Append time to parse as local date instead of UTC
-  const date = new Date(dateString + 'T12:00:00');
+  const date = new Date(dateString);
   return `${date.getMonth() + 1}/${date.getDate()}`;
 };
 ---
@@ -188,7 +187,9 @@ const formatMeetingDate = (dateString: string) => {
                   )}
                 </div>
                 <div class="md:col-span-2">
-                  <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">{book.title}</h3>
+                  <a href={`/books/${book.slug.current}`}>
+                    <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline hover:text-flame-400 transition-colors">{book.title}</h3>
+                  </a>
                   <p class="text-champaign-200 mb-2">By {book.author}</p>
                   {book.theme && (
                     <p class="text-flame-400 font-semibold font-headline">{book.theme}</p>
@@ -196,8 +197,14 @@ const formatMeetingDate = (dateString: string) => {
                   {book.description && (
                     <p class="text-champaign-300 text-sm mt-3 leading-relaxed">{book.description}</p>
                   )}
-                  {book.amazonLink && (
-                    <div class="mt-4">
+                  <div class="mt-4 flex flex-wrap gap-3">
+                    <a
+                      href={`/books/${book.slug.current}`}
+                      class="inline-block bg-champaign-100 text-rust-800 px-4 py-2 rounded text-sm font-semibold hover:bg-champaign-200 transition-colors"
+                    >
+                      View Details
+                    </a>
+                    {book.amazonLink && (
                       <a
                         href={book.amazonLink}
                         target="_blank"
@@ -206,8 +213,8 @@ const formatMeetingDate = (dateString: string) => {
                       >
                         Buy on Amazon
                       </a>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
               {book.discussionQuestions && book.discussionQuestions.length > 0 && (
@@ -259,11 +266,6 @@ const formatMeetingDate = (dateString: string) => {
                   <div class="text-2xl font-bold text-rust-400 mb-2 font-headline">
                     {formatMonthName(book.month)}
                   </div>
-                  {book.meetingDate && (
-                    <div class="text-champaign-300">
-                      {formatMeetingDate(book.meetingDate)}
-                    </div>
-                  )}
                 </div>
                 <div class="aspect-[3/4] bg-black-olive border border-champaign-700/20 rounded-lg shadow-inner overflow-hidden">
                   {book.coverImage ? (
@@ -279,7 +281,9 @@ const formatMeetingDate = (dateString: string) => {
                   )}
                 </div>
                 <div class="md:col-span-2">
-                  <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline">{book.title}</h3>
+                  <a href={`/books/${book.slug.current}`}>
+                    <h3 class="text-xl font-bold text-champaign-100 mb-2 font-headline hover:text-flame-400 transition-colors">{book.title}</h3>
+                  </a>
                   <p class="text-champaign-200 mb-2">By {book.author}</p>
                   {book.theme && (
                     <p class="text-rust-400 font-semibold font-headline">{book.theme}</p>
@@ -287,8 +291,14 @@ const formatMeetingDate = (dateString: string) => {
                   {book.description && (
                     <p class="text-champaign-300 text-sm mt-3 leading-relaxed">{book.description}</p>
                   )}
-                  {book.amazonLink && (
-                    <div class="mt-4">
+                  <div class="mt-4 flex flex-wrap gap-3">
+                    <a
+                      href={`/books/${book.slug.current}`}
+                      class="inline-block bg-champaign-100 text-rust-800 px-4 py-2 rounded text-sm font-semibold hover:bg-champaign-200 transition-colors"
+                    >
+                      View Details
+                    </a>
+                    {book.amazonLink && (
                       <a
                         href={book.amazonLink}
                         target="_blank"
@@ -297,27 +307,10 @@ const formatMeetingDate = (dateString: string) => {
                       >
                         Buy on Amazon
                       </a>
-                    </div>
-                  )}
-                </div>
-              </div>
-              {book.discussionQuestions && book.discussionQuestions.length > 0 && (
-                <div class="mt-6 pt-6 border-t border-champaign-700/30">
-                  <h4 class="text-lg font-semibold text-champaign-100 mb-3 font-headline">Sample Discussion Questions:</h4>
-                  <div class="space-y-2">
-                    {book.discussionQuestions.slice(0, 3).map((question, index) => (
-                      <p class="text-champaign-200 text-sm leading-relaxed">
-                        <span class="text-rust-400 font-semibold">{index + 1}.</span> {question}
-                      </p>
-                    ))}
-                    {book.discussionQuestions.length > 3 && (
-                      <p class="text-champaign-300 text-xs italic">
-                        ...and {book.discussionQuestions.length - 3} more questions in our study guide
-                      </p>
                     )}
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
