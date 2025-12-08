@@ -228,6 +228,12 @@ const structuredData = {
               </a>
             </div>
 
+            {book.amazonLink && (
+              <p class="text-champaign-300 text-sm mt-4 italic">
+                As an Amazon Associate, we may earn a commission from qualifying purchases made through our affiliate links at no additional cost to you.
+              </p>
+            )}
+
             <!-- Mobile Navigation (shows below buttons on mobile) -->
             <div class="mt-6 flex items-center justify-between lg:hidden">
               {prevBook ? (
