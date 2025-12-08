@@ -165,12 +165,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <a href="/about" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">About</a>
             <a href="/contact" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Contact</a>
 
-            <!-- Global Search -->
-            <GlobalSearch client:load />
-
             <a href="/join" class="bg-rust-800 text-champaign-100 px-4 py-2 rounded-md hover:bg-rust-900 transition-colors shadow-md">
               Join
             </a>
+
+            <!-- Global Search - Far Right with spacing -->
+            <div class="ml-4 pl-4 border-l border-champaign-700/30">
+              <GlobalSearch client:load />
+            </div>
           </div>
 
           <!-- Mobile Navigation -->
