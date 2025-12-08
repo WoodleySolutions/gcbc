@@ -2,9 +2,24 @@
 export interface Props {
   title: string;
   description?: string;
+  image?: string;
+  keywords?: string;
+  author?: string;
+  publishedTime?: string;
+  structuredData?: object;
 }
 
-const { title, description = "Great Catholic Book Club - Every Book is Catholic" } = Astro.props;
+const {
+  title,
+  description = "Great Catholic Book Club - Every Book is Catholic",
+  image = "/GCBC.png",
+  keywords,
+  author = "Tyler & Sadie Woodley",
+  publishedTime,
+  structuredData
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -13,7 +28,29 @@ const { title, description = "Great Catholic Book Club - Every Book is Catholic"
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="author" content={author} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/png" href="/GCBC.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+    {structuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">

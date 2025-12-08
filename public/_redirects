@@ -87,9 +87,9 @@
 # DOMAIN VARIATIONS
 # ============================================
 
-# Redirect www to non-www (or vice versa if preferred)
-# Uncomment the version you want:
+# Redirect www to non-www (RECOMMENDED - Cleaner, Modern URL)
+# This ensures all traffic uses greatcatholicbookclub.com (without www)
+https://www.greatcatholicbookclub.com/* https://greatcatholicbookclub.com/:splat 301
 
+# Alternative: Redirect non-www to www (uncomment if preferred)
 # https://greatcatholicbookclub.com/* https://www.greatcatholicbookclub.com/:splat 301
-# OR
-# https://www.greatcatholicbookclub.com/* https://greatcatholicbookclub.com/:splat 301
