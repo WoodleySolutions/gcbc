@@ -1,0 +1,95 @@
+# Netlify Redirects for Great Catholic Book Club
+# Wix to Astro/Netlify Migration - 301 Permanent Redirects
+# Format: /old-path /new-path 301
+
+# ============================================
+# HIGH PRIORITY - Blog Posts with Clicks/Traffic
+# ============================================
+
+# Hitchhiker's Guide (slug apostrophe change)
+/post/the-hitchhiker-s-guide-to-the-galaxy-family-as-the-purpose-of-creation /blog/the-hitchhikers-guide-to-the-galaxy-family-as-the-purpose-of-creation 301
+
+# Bourne Identity (path change only)
+/post/the-bourne-identity-genesis-original-sin-and-the-christian-love-story /blog/the-bourne-identity-genesis-original-sin-and-the-christian-love-story 301
+
+# ============================================
+# MEDIUM PRIORITY - Blog Posts with Impressions
+# ============================================
+
+# Jason Bourne and Marie
+/post/jason-bourne-marie-and-the-covenant-of-presence /blog/jason-bourne-marie-and-the-covenant-of-presence 301
+
+# Dune and the Fremen
+/post/dune-the-fremen-and-the-gift-of-faith-how-god-shapes-his-people-through-suffering /blog/dune-the-fremen-and-the-gift-of-faith-how-god-shapes-his-people-through-suffering 301
+
+# The Martian
+/post/the-martian-training-for-the-mission-you-can-t-predict /blog/the-martian-training-for-the-mission-you-can-t-predict 301
+
+# Pride and Prejudice (slug wording change)
+/post/pride-and-prejudice-a-catholic-take-on-virtue-and-marriage-april-2025-book-of-the-month /blog/pride-and-prejudice-a-catholic-take-on-virtue-and-the-sacrament-of-marriage 301
+
+# Why is Every Book Catholic
+/post/why-is-every-book-catholic /blog/why-is-every-book-catholic 301
+
+# Flannery O'Connor
+/post/flannery-o-connor-and-the-catholic-imagination /blog/flannery-oconnor-and-the-catholic-imagination 301
+
+# ============================================
+# SLUG CHANGES - Different Content Titles
+# ============================================
+
+# Ender's Game intro (completely different slug - verify this is correct mapping)
+/post/introduction-to-ender-s-game /blog/enders-game-introduction-to-moral-reasoning-and-catholic-ethics 301
+
+# Bob's Burgers (different subtitle)
+/post/the-theology-of-bob-s-burgers-part-1-marriage-is-worth-it /blog/the-theology-of-bob-s-burgers-the-belchers-as-a-catholic-family 301
+
+# Sadie's Speech (post not migrated - redirect to blog home)
+/post/my-catholic-conversion-story-part-2-learning-to-read-the-bible-speech-by-sadie-woodley /blog 301
+
+# ============================================
+# PAGES THAT NO LONGER EXIST - Redirect to Best Alternative
+# ============================================
+
+# Book list page
+/2025-book-list /books 301
+
+# Events page (no longer exists)
+/events / 301
+
+# Study guide page (now via join form)
+/study-guide /join 301
+
+# Old event registration page
+/event-details-registration/jane-austen-x-pope-st-john-paul-ii-pride-prejudice-love-responsibility /blog/pride-and-prejudice-a-catholic-take-on-virtue-and-the-sacrament-of-marriage 301
+
+# Product categories
+/category/all-products /shop 301
+
+# Individual product pages
+/product-page/great-catholic-book-club-tote-bag /shop 301
+/product-page/ceramic-mug-11oz-15oz /shop 301
+
+# Blog category pages
+/blog/categories/the-great-catholic-book-club /blog 301
+
+# Contact us (slight URL change)
+/contactus /contact 301
+
+# ============================================
+# CATCH-ALL - Any other /post/* URLs
+# ============================================
+
+# Redirect any other blog posts from /post/ to /blog/
+/post/* /blog/:splat 301
+
+# ============================================
+# DOMAIN VARIATIONS
+# ============================================
+
+# Redirect www to non-www (or vice versa if preferred)
+# Uncomment the version you want:
+
+# https://greatcatholicbookclub.com/* https://www.greatcatholicbookclub.com/:splat 301
+# OR
+# https://www.greatcatholicbookclub.com/* https://greatcatholicbookclub.com/:splat 301
