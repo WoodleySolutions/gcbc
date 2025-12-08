@@ -214,10 +214,13 @@ export const queries = {
     `*[_type == "blogPost" && slug.current == "${slug}"][0]{
       ...,
       relatedBooks[]->{
+        _id,
         title,
         author,
         slug,
-        coverImage
+        coverImage,
+        year,
+        month
       }
     }`,
 
