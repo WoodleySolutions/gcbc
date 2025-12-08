@@ -27,10 +27,6 @@
 # Redirect rules (backup - primary redirects in public/_redirects)
 # 301 = permanent redirect, 302 = temporary redirect
 
-# Form detection and spam filtering
-[[plugins]]
-  package = "@netlify/plugin-forms"
-
 # Security headers
 [[headers]]
   # Apply to all routes
