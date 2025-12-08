@@ -153,14 +153,13 @@ export default function GlobalSearch() {
       {/* Search Trigger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 px-4 py-2 text-champaign-200 hover:text-champaign-100 transition-colors border border-champaign-700/30 rounded-md hover:border-champaign-500/50"
+        className="flex items-center justify-center w-10 h-10 text-champaign-200 hover:text-champaign-100 transition-colors border border-champaign-700/30 rounded-md hover:border-champaign-500/50"
         aria-label="Search site"
+        title="Search (Ctrl+K)"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
-        <span className="hidden md:inline text-sm">Search</span>
-        <kbd className="hidden md:inline px-2 py-1 text-xs bg-black-olive border border-champaign-700/30 rounded">⌘K</kbd>
       </button>
 
       {/* Search Modal */}
