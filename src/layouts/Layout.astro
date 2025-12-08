@@ -1,4 +1,6 @@
 ---
+import GlobalSearch from '../components/GlobalSearch.tsx';
+
 export interface Props {
   title: string;
   description?: string;
@@ -155,20 +157,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             </a>
           </div>
           <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center space-x-8">
+          <div class="hidden md:flex items-center space-x-6">
             <a href="/" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Home</a>
             <a href="/books" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Book List</a>
             <a href="/blog" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Blog</a>
             <a href="/shop" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Shop</a>
             <a href="/about" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">About</a>
             <a href="/contact" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Contact</a>
+
+            <!-- Global Search -->
+            <GlobalSearch client:load />
+
             <a href="/join" class="bg-rust-800 text-champaign-100 px-4 py-2 rounded-md hover:bg-rust-900 transition-colors shadow-md">
               Join
             </a>
           </div>
 
-          <!-- Mobile Menu Button -->
-          <div class="md:hidden flex items-center">
+          <!-- Mobile Navigation -->
+          <div class="md:hidden flex items-center gap-2">
+            <!-- Global Search Mobile -->
+            <GlobalSearch client:load />
             <button
               id="mobile-menu-button"
               class="text-champaign-200 hover:text-champaign-100 focus:outline-none focus:text-champaign-100 transition-colors"
