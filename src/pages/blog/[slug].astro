@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { client, queries, urlFor, extractYouTubeId, type BlogPost } from '../../lib/sanity';
+import LoveButton from '../../components/LoveButton.tsx';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -177,6 +178,14 @@ const structuredData = {
               </div>
             </div>
           )}
+
+          <!-- Love Button -->
+          <div class="mt-12 pt-8 border-t border-champaign-700/30">
+            <LoveButton client:load postId={post._id} postTitle={post.title} />
+            <p class="text-center text-champaign-400 text-sm mt-2">
+              Your feedback helps us create better content
+            </p>
+          </div>
         </div>
       </article>
     </div>
