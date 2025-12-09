@@ -99,13 +99,6 @@ const organizationData = {
                 We are an online discussion club and content hub for people who want to grow in their relationship with Jesus Christ—wherever that is—by enjoying good literature and art through the lens of the Catholic faith.
               </p>
 
-              <div class="bg-rust-800/30 border border-rust-600/30 rounded-xl p-6 mx-auto max-w-3xl">
-                <p class="text-lg text-champaign-100 leading-relaxed italic">
-                  "Together, we explore how the beauty of creativity and faith yields perfect spiritual fruit. We believe that art is how we become full human beings, and
-                  <span class="text-rust-300 font-semibold">'the glory of God is man fully alive.'"</span>
-                </p>
-              </div>
-
               {currentBook ? (
                 <p class="text-lg text-champaign-200 leading-relaxed">
                   Join us for our 2026 reading adventure exploring the theme <strong class="text-flame-400">"War is Heck"</strong>—examining human conflict, virtue in adversity, and heroic sacrifice through the lens of Catholic faith. Our next meeting will be held on {currentBook.meetingDate ? new Date(currentBook.meetingDate + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) : 'TBD'} at 7pm CST to discuss <em>{currentBook.title}</em> by {currentBook.author}. <a href="/books" class="text-flame-400 hover:text-flame-300 underline font-semibold">View our complete 2026 book list</a> or <a href="/join" class="text-flame-400 hover:text-flame-300 underline font-semibold">subscribe to get the Study Guide</a> and updates on our blog and video content!
