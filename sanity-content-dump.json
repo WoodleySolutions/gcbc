@@ -1,0 +1,7 @@
+npm warn exec The following package was not found and will be installed: sanity@4.20.3
+
+Error: Command "documents" is not available outside of a Sanity project context.
+Run the command again within a Sanity project directory, where "sanity"
+is installed as a dependency.
+    at CommandRunner.runCommand (C:/Users/woodl/AppData/Local/npm-cache/_npx/a3586cc356aa4ace/node_modules/@sanity/cli/lib/_chunks-cjs/cli.js:68326:13)
+    at Object.runCli (C:/Users/woodl/AppData/Local/npm-cache/_npx/a3586cc356aa4ace/node_modules/@sanity/cli/lib/_chunks-cjs/cli.js:69162:130)
