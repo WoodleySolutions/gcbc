@@ -23,9 +23,11 @@ const allPosts: BlogPost[] = await client.fetch(`
 const featuredPosts = allPosts.filter(post => post.featured);
 const regularPosts = allPosts.filter(post => !post.featured);
 
-// Helper function to format dates
+// Helper function to format dates (parses as local date to avoid timezone issues)
 const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString('en-US', {
+  // Append time to parse as local date instead of UTC
+  const date = new Date(dateString + 'T12:00:00');
+  return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
