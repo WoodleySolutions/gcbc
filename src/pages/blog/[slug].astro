@@ -23,8 +23,9 @@ if (!post) {
 
 // Helper function to format dates (parses as local date to avoid timezone issues)
 const formatDate = (dateString: string) => {
-  // Append time to parse as local date instead of UTC
-  const date = new Date(dateString + 'T12:00:00');
+  // Only append time if date doesn't already have a timestamp
+  const dateToParse = dateString.includes('T') ? dateString : dateString + 'T12:00:00';
+  const date = new Date(dateToParse);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
