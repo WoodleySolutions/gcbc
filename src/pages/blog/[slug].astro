@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { client, queries, urlFor, extractYouTubeId, type BlogPost } from '../../lib/sanity';
+import { toHTML } from '@portabletext/to-html';
 import LoveButton from '../../components/LoveButton.tsx';
 import type { GetStaticPaths } from 'astro';
 
@@ -33,18 +34,27 @@ const formatDate = (dateString: string) => {
   });
 };
 
-// Helper function to render Sanity block content
-const renderBlockText = (blocks: any[]) => {
-  return blocks
-    .filter((block) => block._type === 'block')
-    .map((block) => {
-      return block.children
-        ?.filter((child: any) => child._type === 'span')
-        .map((span: any) => span.text)
-        .join('');
-    })
-    .join('\n\n');
-};
+// Convert Portable Text to HTML for blog content
+const contentHTML = post.content ? toHTML(post.content, {
+  components: {
+    block: {
+      normal: ({children}) => `<p class="text-champaign-200 mb-4 leading-relaxed">${children}</p>`,
+      blockquote: ({children}) => `<blockquote class="border-l-4 border-flame-400 pl-6 pr-4 py-4 my-6 bg-midnight-blue/50 rounded-r-lg italic text-champaign-100 text-lg leading-relaxed">${children}</blockquote>`,
+      h1: ({children}) => `<h2 class="text-3xl font-bold text-champaign-100 mb-6 mt-8 font-headline">${children}</h2>`,
+      h2: ({children}) => `<h3 class="text-2xl font-bold text-champaign-100 mb-4 mt-6 font-headline">${children}</h3>`,
+      h3: ({children}) => `<h4 class="text-xl font-semibold text-champaign-100 mb-3 mt-4 font-headline">${children}</h4>`,
+    },
+    marks: {
+      strong: ({children}) => `<strong class="text-champaign-100 font-semibold">${children}</strong>`,
+      em: ({children}) => `<em class="italic">${children}</em>`,
+      link: ({value, children}) => {
+        const target = (value?.href || '').startsWith('http') ? '_blank' : undefined;
+        const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+        return `<a href="${value?.href}" target="${target}" rel="${rel}" class="text-flame-400 hover:text-flame-300 underline">${children}</a>`;
+      },
+    },
+  },
+}) : '';
 
 const pageTitle = post.seo?.metaTitle || post.title;
 const pageDescription = post.seo?.metaDescription || post.excerpt;
@@ -161,10 +171,8 @@ const structuredData = {
         <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 shadow-2xl">
           <!-- Content -->
           <div class="space-y-6">
-            {post.content && (
-              <div class="text-champaign-200 leading-relaxed whitespace-pre-line text-lg">
-                {renderBlockText(post.content)}
-              </div>
+            {contentHTML && (
+              <div class="text-champaign-200 leading-relaxed text-lg" set:html={contentHTML} />
             )}
           </div>
 
