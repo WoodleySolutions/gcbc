@@ -217,23 +217,6 @@ const formatMeetingDate = (dateString: string) => {
                   </div>
                 </div>
               </div>
-              {book.discussionQuestions && book.discussionQuestions.length > 0 && (
-                <div class="mt-6 pt-6 border-t border-champaign-700/30">
-                  <h4 class="text-lg font-semibold text-champaign-100 mb-3 font-headline">Sample Discussion Questions:</h4>
-                  <div class="space-y-2">
-                    {book.discussionQuestions.slice(0, 3).map((question, index) => (
-                      <p class="text-champaign-200 text-sm leading-relaxed">
-                        <span class="text-flame-400 font-semibold">{index + 1}.</span> {question}
-                      </p>
-                    ))}
-                    {book.discussionQuestions.length > 3 && (
-                      <p class="text-champaign-300 text-xs italic">
-                        ...and {book.discussionQuestions.length - 3} more questions in our study guide
-                      </p>
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
           ))}
         </div>
