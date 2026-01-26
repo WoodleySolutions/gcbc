@@ -98,6 +98,12 @@ const formatMeetingDate = (dateString: string) => {
                 <p class="text-champaign-200 mb-6 leading-relaxed">{currentBook.description}</p>
               )}
               <div class="flex flex-wrap gap-4">
+                <a
+                  href={`/books/${currentBook.slug.current}`}
+                  class="inline-block bg-flame-500 text-champaign-100 px-6 py-3 rounded-lg font-semibold hover:bg-flame-600 transition-colors"
+                >
+                  {currentBook.studyGuideContent && currentBook.studyGuideContent.length > 0 ? 'Read the Study Guide' : 'View Details'}
+                </a>
                 {currentBook.amazonLink && (
                   <a
                     href={currentBook.amazonLink}
