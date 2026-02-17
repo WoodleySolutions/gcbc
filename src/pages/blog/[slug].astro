@@ -101,7 +101,12 @@ const structuredData = {
 };
 ---
 
-<Layout title={`${pageTitle} - Great Catholic Book Club`} description={pageDescription}>
+<Layout
+  title={`${pageTitle} - Great Catholic Book Club`}
+  description={pageDescription}
+  image={featuredImageUrl || undefined}
+  publishedTime={post.publishedAt}
+>
   <!-- Structured Data for SEO -->
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <!-- Blog Post Header -->
