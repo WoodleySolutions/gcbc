@@ -22,6 +22,11 @@ const messages = {
     message: "Thank you for reaching out to us. We've received your message and will get back to you as soon as possible.",
     icon: "✓"
   },
+  support: {
+    title: "Thank You for Your Support!",
+    message: "Your generosity means the world to us. It goes directly toward keeping GCBC running — more books, more study guides, more discussions. From our family to yours, thank you.",
+    icon: "🙏"
+  },
   general: {
     title: "Thank You!",
     message: "Your submission has been received successfully.",
@@ -55,7 +60,7 @@ const currentMessage = messages[formType as keyof typeof messages] || messages.g
           <a href="/" class="inline-block bg-rust-800 text-champaign-100 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-rust-900 transition-colors shadow-md">
             Back to Home
           </a>
-          {formType === 'newsletter' || formType === 'join' ? (
+          {formType === 'newsletter' || formType === 'join' || formType === 'support' ? (
             <a href="/books" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
               View Reading List
             </a>
