@@ -11,6 +11,7 @@ export interface PodcastEpisode {
   episodeNumber?: number;
   season?: number;
   slug: string;
+  keywords: string[]; // itunes:keywords — used to link episodes to book slugs
 }
 
 const FEED_URL = 'https://feed.podbean.com/greatcatholicbookclub/feed.xml';
@@ -55,6 +56,7 @@ export async function fetchEpisodes(): Promise<PodcastEpisode[]> {
         ['itunes:image', 'itunesImage'],
         ['itunes:episode', 'episodeNumber'],
         ['itunes:season', 'season'],
+        ['itunes:keywords', 'itunesKeywords'],
       ],
     },
   });
@@ -84,6 +86,9 @@ export async function fetchEpisodes(): Promise<PodcastEpisode[]> {
       episodeNumber: item.episodeNumber ? parseInt(item.episodeNumber, 10) : undefined,
       season: item.season ? parseInt(item.season, 10) : undefined,
       slug: toSlug(item.title ?? 'episode'),
+      keywords: item.itunesKeywords
+        ? item.itunesKeywords.split(',').map((k: string) => k.trim().toLowerCase()).filter(Boolean)
+        : [],
     };
   });
 }
