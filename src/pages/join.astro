@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { client, queries } from '../lib/sanity';
+import { client, getCurrentBook } from '../lib/sanity';
 
 // Fetch current book from CMS
-const currentBook = await client.fetch(queries.currentBook);
+const currentBook = await getCurrentBook();
 
 // Helper function to format dates (parses as local date to avoid timezone issues)
 const formatDate = (dateString: string) => {

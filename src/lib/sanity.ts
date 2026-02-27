@@ -168,8 +168,9 @@ export const queries = {
   // Get all monthly books ordered by meeting date
   allBooks: `*[_type == "monthlyBook"] | order(meetingDate asc)`,
 
-  // Get current book
-  currentBook: `*[_type == "monthlyBook" && isCurrentBook == true][0]`,
+  // Get current book — the next upcoming meeting date on or after today
+  currentBook: (today: string) =>
+    `*[_type == "monthlyBook" && defined(meetingDate) && meetingDate >= $today] | order(meetingDate asc)[0]`,
 
   // Get books by year
   booksByYear: (year: number) =>
@@ -287,7 +288,8 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
 
 export async function getCurrentBook(): Promise<MonthlyBook | null> {
   try {
-    return await client.fetch(queries.currentBook)
+    const today = new Date().toISOString().slice(0, 10) // YYYY-MM-DD
+    return await client.fetch(queries.currentBook(today), { today })
   } catch (error) {
     console.error('Error fetching current book:', error)
     return null

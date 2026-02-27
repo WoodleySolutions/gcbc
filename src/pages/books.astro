@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { client, queries, urlFor, type MonthlyBook } from '../lib/sanity';
+import { client, queries, urlFor, getCurrentBook, type MonthlyBook } from '../lib/sanity';
 
 // Fetch books grouped by year and current book from CMS
 const [allBooks, currentBook] = await Promise.all([
   client.fetch(queries.allBooks),
-  client.fetch(queries.currentBook)
+  getCurrentBook(),
 ]);
 
 // Group books by year
