@@ -47,6 +47,7 @@
       font-src 'self' https://fonts.gstatic.com;
       img-src 'self' data: https: https://cdn.sanity.io https://img.youtube.com;
       connect-src 'self' https://www.google-analytics.com https://cdn.sanity.io https://*.sanity.io;
+      media-src 'self' https://*.podbean.com https://mcdn.podbean.com;
       frame-src https://www.youtube.com https://square.link;
       object-src 'none';
       base-uri 'self';

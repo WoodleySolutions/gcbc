@@ -108,7 +108,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       .logo-responsive {
         margin-bottom: -16px; /* Mobile default */
       }
-      @media (min-width: 768px) {
+      @media (min-width: 1024px) {
         .logo-responsive {
           margin-bottom: -24px; /* Desktop */
         }
@@ -177,14 +177,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <div class="flex justify-between h-16">
           <div class="flex items-center relative">
             <!-- Desktop flag background behind logo -->
-            <div class="absolute bg-black-olive border border-champaign-700/30 rounded-b-lg shadow-lg hidden md:block"
+            <div class="absolute bg-black-olive border border-champaign-700/30 rounded-b-lg shadow-lg hidden lg:block"
                  style="width: 125px; height: 190px; z-index: 5; top: -40px; left: 0px;"></div>
             <!-- Mobile flag (20% smaller) -->
-            <div class="absolute bg-black-olive border border-champaign-700/30 rounded-b-lg shadow-lg block md:hidden"
+            <div class="absolute bg-black-olive border border-champaign-700/30 rounded-b-lg shadow-lg block lg:hidden"
                  style="width: 95px; height: 152px; z-index: 5; top: -32px; left: 0px;"></div>
 
             <a href="/" class="flex items-center space-x-4 hover:opacity-90 transition-opacity relative z-10">
-              <img src="/GCBC_Logo_ForDarkBG.png" alt="Great Catholic Book Club" class="md:h-32 h-24 w-auto relative z-20 logo-responsive" style="margin-top: 48px;" />
+              <img src="/GCBC_Logo_ForDarkBG.png" alt="Great Catholic Book Club" class="lg:h-32 h-24 w-auto relative z-20 logo-responsive" style="margin-top: 48px;" />
               <span class="text-xl font-bold text-champaign-100 font-headline">
                 <span class="whitespace-nowrap">Great Catholic</span>
                 <span class="whitespace-nowrap">Book Club</span>
@@ -192,10 +192,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             </a>
           </div>
           <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center space-x-6">
+          <div class="hidden lg:flex items-center space-x-6">
             <a href="/" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Home</a>
-            <a href="/books" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Book List</a>
+            <a href="/books" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Books</a>
             <a href="/blog" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Blog</a>
+            <a href="/podcast" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Podcast</a>
             <a href="/shop" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Shop</a>
             <a href="/about" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">About</a>
             <a href="/contact" class="text-champaign-200 hover:text-champaign-100 font-medium transition-colors">Contact</a>
@@ -214,7 +215,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           </div>
 
           <!-- Mobile Navigation -->
-          <div class="md:hidden flex items-center gap-2">
+          <div class="lg:hidden flex items-center gap-2">
             <!-- Global Search Mobile -->
             <GlobalSearch client:load />
             <button
@@ -233,13 +234,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </div>
 
       <!-- Mobile Menu Overlay -->
-      <div id="mobile-menu" class="md:hidden fixed inset-0 z-40 hidden">
+      <div id="mobile-menu" class="lg:hidden fixed inset-0 z-40 hidden">
         <div class="fixed inset-0 bg-black-olive/95 backdrop-blur-sm"></div>
         <div class="relative bg-black-olive border-t border-champaign-700/30 shadow-lg">
           <div class="px-4 py-6 space-y-4 text-center">
             <a href="/" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Home</a>
-            <a href="/books" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Book List</a>
+            <a href="/books" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Books</a>
             <a href="/blog" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Blog</a>
+            <a href="/podcast" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Podcast</a>
             <a href="/shop" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Shop</a>
             <a href="/about" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">About</a>
             <a href="/contact" class="block text-lg text-champaign-200 hover:text-champaign-100 font-medium transition-colors py-2">Contact</a>
@@ -273,8 +275,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <div>
             <h4 class="font-semibold mb-4 font-headline text-champaign-100">Reading</h4>
             <ul class="space-y-2 text-champaign-200">
-              <li><a href="/books" class="hover:text-champaign-100 transition-colors">Book Lists</a></li>
+              <li><a href="/books" class="hover:text-champaign-100 transition-colors">Books</a></li>
               <li><a href="/blog" class="hover:text-champaign-100 transition-colors">Blog</a></li>
+              <li><a href="/podcast" class="hover:text-champaign-100 transition-colors">Podcast</a></li>
               <li><a href="/rss.xml" class="hover:text-champaign-100 transition-colors inline-flex items-center gap-1">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
