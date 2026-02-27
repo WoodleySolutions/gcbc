@@ -48,6 +48,16 @@ function toSlug(title: string): string {
     .replace(/\s+/g, '-');
 }
 
+// Parse [books: slug-one, slug-two] tags from episode show notes.
+// Returns the slugs found and the description with the tag stripped out.
+function parseBookTags(raw: string): { slugs: string[]; cleaned: string } {
+  const match = raw.match(/\[books:\s*([^\]]+)\]/i);
+  if (!match) return { slugs: [], cleaned: raw };
+  const slugs = match[1].split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  const cleaned = raw.replace(match[0], '').replace(/\s{2,}/g, ' ').trim();
+  return { slugs, cleaned };
+}
+
 export async function fetchEpisodes(): Promise<PodcastEpisode[]> {
   const parser = new Parser({
     customFields: {
@@ -75,10 +85,20 @@ export async function fetchEpisodes(): Promise<PodcastEpisode[]> {
       feed.image?.url ??
       '';
 
+    // Parse [books: ...] tag from the raw description, strip it from display text
+    const rawDescription = item.content ?? item.contentSnippet ?? item.summary ?? '';
+    const { slugs: taggedSlugs, cleaned: cleanedDescription } = parseBookTags(rawDescription);
+
+    // Merge with itunes:keywords if present (future-proofing)
+    const itunesKeywords: string[] = item.itunesKeywords
+      ? item.itunesKeywords.split(',').map((k: string) => k.trim().toLowerCase()).filter(Boolean)
+      : [];
+    const keywords = [...new Set([...taggedSlugs, ...itunesKeywords])];
+
     return {
       guid: item.guid ?? item.link ?? item.title ?? '',
       title: item.title ?? 'Untitled Episode',
-      description: item.contentSnippet ?? item.content ?? item.summary ?? '',
+      description: cleanedDescription,
       audioUrl,
       duration: formatDuration(item.duration),
       pubDate: new Date(item.pubDate ?? item.isoDate ?? Date.now()),
@@ -86,9 +106,7 @@ export async function fetchEpisodes(): Promise<PodcastEpisode[]> {
       episodeNumber: item.episodeNumber ? parseInt(item.episodeNumber, 10) : undefined,
       season: item.season ? parseInt(item.season, 10) : undefined,
       slug: toSlug(item.title ?? 'episode'),
-      keywords: item.itunesKeywords
-        ? item.itunesKeywords.split(',').map((k: string) => k.trim().toLowerCase()).filter(Boolean)
-        : [],
+      keywords,
     };
   });
 }
