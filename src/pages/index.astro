@@ -2,14 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import NextEventBanner from '../components/NextEventBanner.astro';
 import { client, queries, urlFor, extractYouTubeId, getSiteSettings, getCurrentBook, getFeaturedPosts, type BlogPost } from '../lib/sanity';
+import { fetchEpisodes, type PodcastEpisode } from '../lib/podcast';
 
-// Fetch CMS data
-const [siteSettings, currentBook, featuredPosts, everyBookCatholicPost] = await Promise.all([
+// Fetch CMS data and podcast feed in parallel
+let latestEpisode: PodcastEpisode | null = null;
+
+const [siteSettings, currentBook, featuredPosts, everyBookCatholicPost, podcastEpisodes] = await Promise.all([
   getSiteSettings(),
   getCurrentBook(),
   getFeaturedPosts(),
-  client.fetch(`*[_type == "blogPost" && slug.current == "why-is-every-book-catholic"][0]`)
+  client.fetch(`*[_type == "blogPost" && slug.current == "why-is-every-book-catholic"][0]`),
+  fetchEpisodes().catch(() => [] as PodcastEpisode[]),
 ]);
+
+latestEpisode = podcastEpisodes[0] ?? null;
 
 // Helper function to format dates (parses as local date to avoid timezone issues)
 const formatDate = (dateString: string) => {
@@ -205,6 +211,63 @@ const organizationData = {
       </div>
     </div>
   </section>
+
+  <!-- Latest Podcast Episode -->
+  {latestEpisode && (
+    <section class="py-8 bg-black-olive">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-champaign-100 mb-2 font-headline">Latest Episode</h2>
+          <p class="text-champaign-200">Listen to our newest podcast episode</p>
+        </div>
+        <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-2xl">
+          <div class="flex flex-col sm:flex-row gap-0">
+            {latestEpisode.episodeArt && (
+              <div class="sm:w-40 sm:shrink-0">
+                <img
+                  src={latestEpisode.episodeArt}
+                  alt={latestEpisode.title}
+                  class="w-full sm:w-40 sm:h-40 object-cover"
+                />
+              </div>
+            )}
+            <div class="flex-1 p-6">
+              <div class="flex items-start justify-between gap-4 mb-2">
+                <h3 class="text-xl font-bold text-champaign-100 font-headline leading-tight">
+                  {latestEpisode.title}
+                </h3>
+                {latestEpisode.duration && (
+                  <span class="shrink-0 bg-black-olive/60 border border-champaign-700/30 text-champaign-300 text-xs px-2 py-1 rounded">
+                    {latestEpisode.duration}
+                  </span>
+                )}
+              </div>
+              <p class="text-champaign-300 text-sm mb-3">
+                <time datetime={latestEpisode.pubDate.toISOString()}>
+                  {latestEpisode.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </time>
+              </p>
+              {latestEpisode.description && (
+                <p class="text-champaign-200 text-sm leading-relaxed mb-4 line-clamp-3">
+                  {latestEpisode.description}
+                </p>
+              )}
+              {latestEpisode.audioUrl && (
+                <audio controls preload="none" class="w-full mt-2" aria-label={`Play: ${latestEpisode.title}`}>
+                  <source src={latestEpisode.audioUrl} type="audio/mpeg" />
+                </audio>
+              )}
+            </div>
+          </div>
+        </article>
+        <div class="text-center mt-6">
+          <a href="/podcast" class="inline-block text-rust-400 hover:text-rust-300 font-semibold transition-colors">
+            See All Episodes →
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- Why Every Book is Catholic -->
   <section class="py-8 bg-black-olive">

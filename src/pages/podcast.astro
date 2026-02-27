@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { fetchEpisodes, type PodcastEpisode } from '../lib/podcast';
+
+let episodes: PodcastEpisode[] = [];
+let fetchError = false;
+
+try {
+  episodes = await fetchEpisodes();
+} catch (e) {
+  console.error('Failed to fetch podcast feed:', e);
+  fetchError = true;
+}
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const podcastPlatforms = [
+  {
+    name: 'Apple Podcasts',
+    href: 'https://podcasts.apple.com/podcast/great-catholic-book-club',
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 0C5.374 0 0 5.374 0 12s5.374 12 12 12 12-5.374 12-12S18.626 0 12 0zm.56 14.813c-.88.183-1.826-.215-2.274-.985-.447-.77-.297-1.752.357-2.344V8.25a.57.57 0 0 1 .57-.57.57.57 0 0 1 .57.57v3.234c.654.592.804 1.574.357 2.344a1.71 1.71 0 0 1-1.58.985zm3.09-2.188a3.435 3.435 0 0 1-.685 2.04 3.462 3.462 0 0 1-1.752 1.246 3.458 3.458 0 0 1-4.246-2.296 3.443 3.443 0 0 1 .685-3.383V7.68a4.59 4.59 0 0 1 1.348-3.24 4.607 4.607 0 0 1 6.513 0A4.59 4.59 0 0 1 18.86 7.68v2.553a3.447 3.447 0 0 1-.21 2.392z"/></svg>`,
+  },
+  {
+    name: 'Spotify',
+    href: 'https://open.spotify.com/show/greatcatholicbookclub',
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>`,
+  },
+  {
+    name: 'Podbean',
+    href: 'https://greatcatholicbookclub.podbean.com',
+    icon: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.8a7.2 7.2 0 1 1 0 14.4A7.2 7.2 0 0 1 12 4.8zm0 2.4a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 2.4a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8z"/></svg>`,
+  },
+];
+---
+
+<Layout
+  title="Podcast - Great Catholic Book Club"
+  description="Listen to the Great Catholic Book Club podcast. Audio discussions on faith, literature, and the Catholic intellectual tradition."
+>
+  <!-- Header Section -->
+  <section class="bg-black-olive relative">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/A candle lit ancient desk stacked with books and catholic relics including a statue of Mary.jpg');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black-olive/80 via-black-olive/90 to-black-olive/95"></div>
+    <div class="max-w-7xl mx-auto px-4 py-16 relative z-10">
+      <div class="text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-4 font-headline drop-shadow-lg">
+          GCBC Podcast
+        </h1>
+        <p class="text-xl text-champaign-200 mb-8">
+          Audio discussions on faith, literature, and the Catholic intellectual tradition
+        </p>
+
+        <!-- Platform Links -->
+        <div class="flex flex-wrap justify-center gap-3">
+          {podcastPlatforms.map((platform) => (
+            <a
+              href={platform.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-black-olive/60 border border-champaign-700/40 text-champaign-200 hover:text-champaign-100 hover:border-champaign-500 px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+            >
+              <span set:html={platform.icon} />
+              {platform.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Episodes Section -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-champaign-100 mb-12 font-headline text-center">All Episodes</h2>
+
+      {fetchError && (
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 text-center shadow-xl">
+          <p class="text-champaign-200">Episodes are temporarily unavailable. Please check back soon or listen on your favorite podcast app.</p>
+          <div class="flex flex-wrap justify-center gap-3 mt-6">
+            {podcastPlatforms.map((platform) => (
+              <a
+                href={platform.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-rust-800 text-champaign-100 hover:bg-rust-900 px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+              >
+                {platform.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!fetchError && episodes.length === 0 && (
+        <div class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 text-center shadow-xl">
+          <p class="text-champaign-200">No episodes published yet. Check back soon!</p>
+        </div>
+      )}
+
+      {!fetchError && episodes.length > 0 && (
+        <div class="space-y-8">
+          {episodes.map((episode, index) => (
+            <article class="bg-black-olive border border-champaign-700/30 rounded-lg overflow-hidden shadow-xl">
+              <div class="flex flex-col sm:flex-row gap-0">
+                <!-- Episode Art -->
+                {episode.episodeArt && (
+                  <div class="sm:w-40 sm:shrink-0">
+                    <img
+                      src={episode.episodeArt}
+                      alt={episode.title}
+                      class="w-full sm:w-40 sm:h-40 object-cover"
+                      loading={index < 3 ? 'eager' : 'lazy'}
+                    />
+                  </div>
+                )}
+                <!-- Episode Info -->
+                <div class="flex-1 p-6">
+                  <div class="flex items-start justify-between gap-4 mb-2">
+                    <h3 class="text-xl font-bold text-champaign-100 font-headline leading-tight">
+                      {episode.title}
+                    </h3>
+                    {episode.duration && (
+                      <span class="shrink-0 bg-black-olive/60 border border-champaign-700/30 text-champaign-300 text-xs px-2 py-1 rounded">
+                        {episode.duration}
+                      </span>
+                    )}
+                  </div>
+                  <p class="text-champaign-300 text-sm mb-3">
+                    <time datetime={episode.pubDate.toISOString()}>{formatDate(episode.pubDate)}</time>
+                    {episode.episodeNumber && (
+                      <span class="ml-2">· Episode {episode.episodeNumber}</span>
+                    )}
+                  </p>
+                  {episode.description && (
+                    <p class="text-champaign-200 text-sm leading-relaxed mb-4 line-clamp-3">
+                      {episode.description}
+                    </p>
+                  )}
+                  <!-- Audio Player -->
+                  {episode.audioUrl && (
+                    <audio
+                      controls
+                      preload="none"
+                      class="w-full mt-2"
+                      aria-label={`Play episode: ${episode.title}`}
+                    >
+                      <source src={episode.audioUrl} type="audio/mpeg" />
+                      Your browser does not support audio playback.
+                    </audio>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-rust-800">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-champaign-100 mb-4 font-headline">Subscribe & Never Miss an Episode</h2>
+      <p class="text-champaign-200 mb-8 text-lg">
+        Available on all major podcast platforms. Or join the book club to dive deeper with study guides and live discussions.
+      </p>
+      <div class="flex justify-center gap-4 flex-wrap">
+        <a href="/join" class="inline-block bg-champaign-100 text-rust-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-champaign-200 transition-colors shadow-md">
+          Join the Book Club
+        </a>
+        <a href="/books" class="inline-block border border-champaign-100 text-champaign-100 px-8 py-3 rounded-lg hover:bg-rust-900 transition-colors">
+          View Reading List
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
