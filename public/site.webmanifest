@@ -1,0 +1,16 @@
+{
+  "name": "Great Catholic Book Club",
+  "short_name": "GCBC",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#1a1a1a",
+  "background_color": "#1a1a1a",
+  "display": "standalone",
+  "start_url": "/",
+  "description": "Great Catholic Book Club - Every Book is Catholic. Join our community to explore literature through a Catholic lens."
+}
