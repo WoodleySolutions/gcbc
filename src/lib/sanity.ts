@@ -34,6 +34,7 @@ export interface MonthlyBook {
   discussionQuestions?: string[]
   studyGuideTitle?: string
   studyGuideContent?: any[]
+  collectionTeaser?: string
   isCurrentBook?: boolean
   publishedAt: string
 }

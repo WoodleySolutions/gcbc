@@ -110,6 +110,13 @@ export default defineType({
       description: 'Full study guide article content for this book (from the annual study guide PDF)',
     }),
     defineField({
+      name: 'collectionTeaser',
+      title: 'Collection Teaser',
+      type: 'text',
+      rows: 6,
+      description: 'Short teaser paragraph shown instead of the full study guide when this book is part of a paid collection. Leave blank to show the full study guide.',
+    }),
+    defineField({
       name: 'isCurrentBook',
       title: 'Is Current Month\'s Book?',
       type: 'boolean',
