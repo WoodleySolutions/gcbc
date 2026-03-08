@@ -1,0 +1,511 @@
+---
+/**
+ * The Protoevangelium Collection — Product Landing Page
+ *
+ * TODO: Before go-live, replace these placeholder links:
+ *   SQUARE_PDF_LINK      — ✓ set (Gumroad: https://woodleysolutions.gumroad.com/l/mvjdcz)
+ *   AMAZON_EBOOK_LINK    — ✓ set (https://a.co/d/09ItlAyt)
+ *   AMAZON_PAPERBACK_LINK — ✓ set (https://a.co/d/08hdB1kT)
+ *   Cover image        — ✓ set (/images/products/protoevangelium-collection-cover.png)
+ */
+
+import Layout from '../../layouts/Layout.astro';
+
+const SQUARE_PDF_LINK = 'https://woodleysolutions.gumroad.com/l/mvjdcz';
+const AMAZON_EBOOK_LINK = 'https://a.co/d/09ItlAyt';
+const AMAZON_PAPERBACK_LINK = 'https://a.co/d/08hdB1kT';
+
+const books = [
+  {
+    num: 'I',
+    title: 'The Hitchhiker\'s Guide to the Galaxy',
+    author: 'Douglas Adams',
+    teaser: `What is the point of life, the universe, and everything?
+
+Douglas Adams played it for laughs. But underneath the absurdity, it's the most serious question a person can ask. And it's exactly the right place to start.
+
+In our study guide, we explore what happens when human beings try to answer the ultimate question without divine revelation, why Adams can't help but make a universe where humans are the most important figures, and what St. Thomas Aquinas and Oolon Colluphid have in common. (Less than you'd think. More than you'd expect.)`,
+  },
+  {
+    num: 'II',
+    title: 'Ender\'s Game',
+    author: 'Orson Scott Card',
+    teaser: `What kind of people would put the weight of the world on the shoulders of a child?
+
+It's a question that Card explores with brutal honesty. It's also a question the Bible answers — and the answer might surprise you.
+
+Our study guide draws a striking parallel between Ender Wiggin and the young King David, explores the Wars of Religion and why every totalitarian government in history has tried to control the Church, and asks the hardest question in the book: how is what God did to David different from what the adults did to Ender?`,
+  },
+  {
+    num: 'III',
+    title: 'Watchmen',
+    author: 'Alan Moore & Dave Gibbons',
+    teaser: `Dr. Manhattan is not God. The very idea is absurd. But it is the kind of mix-up that the real God has been working to clear up from the beginning.
+
+Our study guide explores the difference between a being that controls creation and the One who created it out of nothing. We dig into why human beings keep worshipping false gods that can be used as weapons, what the Old Testament has to say about bringing your deity onto the battlefield, and why a relationship with the real God is about love, not leverage.`,
+  },
+  {
+    num: 'IV',
+    title: 'Pride and Prejudice',
+    author: 'Jane Austen',
+    teaser: `Three bad marriages. One masterclass in what the sacrament is actually for.
+
+Pride and Prejudice might be the most stirring treatise on Catholic marriage you'll ever read — and it was written by an Anglican. Our study guide analyzes Lydia and Wickham, Charlotte and Mr. Collins, and the painfully relatable Mr. and Mrs. Bennet, and shows how all of it shapes the extraordinary love story of Elizabeth and Darcy. It turns out that the most important thing in premarital prep is learning how to have a good fight.`,
+  },
+  {
+    num: 'V',
+    title: 'Brave New World',
+    author: 'Aldous Huxley',
+    teaser: `What if the greatest threat to human freedom isn't the tyrant who takes your rights, but the state that makes you forget you ever had them?
+
+Our study guide connects Huxley's dystopia to the real history of Bismarck's Kulturkampf, the invention of the modern welfare state, and the Church's ongoing battle for the conscience of the laity. We explore how the de-formation of conscience works, why the state always targets sexuality and family first, and why even in the darkest dystopia, Christ has already won.`,
+  },
+  {
+    num: 'VI',
+    title: 'The Bourne Identity',
+    author: 'Robert Ludlum',
+    teaser: `Who are you when you strip away everything you've pretended to be?
+
+Jason Bourne doesn't know. Neither did Saul of Tarsus.
+
+Our study guide finds genuine Pauline theology inside a pulpy spy novel. We explore the false self, the terror of honest self-examination, and the beautiful Christian truth that the real person underneath the wreckage is neither the monster you feared nor the hero you hoped for, but simply a human being — wounded, redeemable, and offered a new life.`,
+  },
+  {
+    num: 'VII',
+    title: 'Foundation',
+    author: 'Isaac Asimov',
+    teaser: `How does an avowed atheist end up writing one of the most profound defenses of faith in science fiction?
+
+Isaac Asimov had no patience for religious dogma. And yet in Foundation, he created characters who guard a deposit of sacred knowledge with their lives, submit their intellect and will to the plan of a prophet, and believe wholeheartedly that salvation comes from information they could never have discovered on their own. Sound familiar?
+
+Our study guide traces the remarkable parallels between Asimov's Foundation and the medieval Catholic Church, and explores why even atheists can't escape the human need for faith.`,
+  },
+  {
+    num: 'VIII',
+    title: 'Dune',
+    author: 'Frank Herbert',
+    teaser: `The most evocative Catholic tropes in science fiction, used to build a false messiah.
+
+Our study guide dives deep into Herbert's expert use of typology — the same interpretive method the Church uses to read the Bible — to construct the Kwisatz Haderach as a counterfeit Christ. We trace the parallels between the Holy Family and the Atreides family, explore how Mary's fiat becomes Jessica's anti-fiat, and ask the question at the heart of the novel: what happens to a human being who surrenders his free will to a manufactured destiny?`,
+  },
+  {
+    num: 'IX',
+    title: 'Jurassic Park',
+    author: 'Michael Crichton',
+    teaser: `Jurassic Park is a book about a theologian disguising himself as a mathematician. Also there are dinosaurs.
+
+Our study guide explores how Ian Malcolm is basically doing Catholic apologetics without knowing it, what the parable of the talents has to do with genetic engineering, and why the breakdown of the sacramental worldview during the Reformation and Enlightenment leads, with terrifying logic, to a theme park full of dinosaurs eating people. We also get into the Industrial Revolution, the natural law, and why "whether they could" is never the same question as "whether they should."`,
+  },
+  {
+    num: 'X',
+    title: 'The Martian',
+    author: 'Andy Weir',
+    teaser: `What if being stranded on Mars is actually a pretty good metaphor for being Adam?
+
+Our study guide draws a surprising parallel between Mark Watney and the first man, both waking up alone in an alien world with skills they've never tested, figuring out who they are by learning what they can do. We explore the proper use of free will and intellect, why surrender to God is the opposite of passivity, and why Mark Watney's sense of humor might be the most theologically significant thing about him.`,
+  },
+  {
+    num: 'XI',
+    title: 'The Great Divorce',
+    author: 'C.S. Lewis',
+    teaser: `The only explicitly Christian book in the collection, and the perfect place to end the journey.
+
+C.S. Lewis imagines the afterlife as a series of choices, and it turns out the hardest one is simply being honest about yourself. Our study guide explores how The Great Divorce makes a powerful case for Catholic teachings on purgatory, particular judgment, and the process of becoming holy. We look at why the ghosts can't walk on the grass, why Napoleon will never get on the bus, and why the painful work of facing ourselves is something we could be doing right now, today, in this life.
+
+Salvation is not a "one and done" deal. It's a "one and begun" journey. And the joy at the end is that it was heaven all along.`,
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "The Protoevangelium Collection",
+  "description": "Eleven study guides for eleven beloved books — Dune, Ender's Game, Pride and Prejudice, Jurassic Park, and more — read through the Catholic intellectual tradition.",
+  "brand": {
+    "@type": "Organization",
+    "name": "Great Catholic Book Club"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Tyler and Sadie Woodley"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Digital Download (PDF)",
+      "price": "14.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    {
+      "@type": "Offer",
+      "name": "Paperback",
+      "price": "18.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  ]
+};
+---
+
+<Layout
+  title="The Protoevangelium Collection — Great Catholic Book Club"
+  description="Eleven study guides for eleven beloved books — Dune, Ender's Game, Pride and Prejudice, Jurassic Park, and more — read through the Catholic intellectual tradition. By Tyler and Sadie Woodley."
+  keywords="Protoevangelium Collection, Catholic study guides, Catholic book club, Dune Catholic, Ender's Game Catholic, Pride and Prejudice Catholic, Catholic literature, Tyler Woodley, Sadie Woodley"
+  structuredData={structuredData}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="bg-black-olive relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/A vast dimly lit library full of ancient interesting and colorful books.jpg');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-midnight-blue/90 via-black-olive/92 to-black-olive"></div>
+
+    <div class="max-w-7xl mx-auto px-4 py-20 sm:py-28 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+        <!-- Left: Text -->
+        <div>
+          <p class="text-flame-400 font-semibold font-headline tracking-widest uppercase text-sm mb-4">
+            Great Catholic Book Club
+          </p>
+          <h1 class="text-5xl sm:text-6xl font-bold text-champaign-100 mb-4 font-headline leading-tight drop-shadow-lg">
+            The Protoevangelium Collection
+          </h1>
+          <div class="w-24 h-1 bg-gradient-to-r from-flame-400 to-rust-400 rounded-full mb-6"></div>
+          <p class="text-2xl text-champaign-200 mb-3 italic leading-relaxed">
+            Every Book is Catholic.
+          </p>
+          <p class="text-lg text-champaign-300 mb-8 leading-relaxed">
+            Eleven study guides. Eleven beloved books. One continuous journey — from the most basic question of whether life has meaning at all, to the threshold of eternity.
+          </p>
+
+          <!-- Purchase Options -->
+          <div class="flex flex-col sm:flex-row gap-4 mb-6">
+            <a
+              href={SQUARE_PDF_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex-1 bg-flame-500 hover:bg-flame-600 text-midnight-blue text-center px-6 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg font-headline"
+            >
+              PDF Download — $14.99
+            </a>
+            <div class="flex gap-3 flex-1">
+              <a
+                href={AMAZON_EBOOK_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 bg-rust-800 hover:bg-rust-900 text-champaign-100 text-center px-4 py-4 rounded-lg font-semibold transition-colors shadow-lg"
+              >
+                Ebook — $9.99
+              </a>
+              <a
+                href={AMAZON_PAPERBACK_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 bg-rust-800 hover:bg-rust-900 text-champaign-100 text-center px-4 py-4 rounded-lg font-semibold transition-colors shadow-lg"
+              >
+                Paperback — $18.99
+              </a>
+            </div>
+          </div>
+          <p class="text-champaign-400 text-sm italic">
+            Ebook and paperback available on Amazon. As an Amazon Associate, we may earn a commission.
+          </p>
+        </div>
+
+        <!-- Right: Cover Art -->
+        <div class="flex justify-center lg:justify-end">
+          <img
+            src="/images/products/protoevangelium-collection-cover.png"
+            alt="The Protoevangelium Collection cover"
+            class="max-w-sm w-full rounded-lg shadow-2xl"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PULL QUOTE — what "protoevangelium" means
+  ============================================================ -->
+  <section class="bg-rust-800 py-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-champaign-100 text-2xl sm:text-3xl font-headline italic leading-relaxed mb-4">
+        "Protoevangelium" means "first Gospel."
+      </p>
+      <p class="text-champaign-200 text-lg leading-relaxed">
+        It refers to Genesis 3:15 — the very first announcement of God's plan to save us. He tells us right at the beginning of the story: don't worry, I'm going to fix this. And then He begins the long, patient work of teaching us what that means.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT THE COLLECTION
+  ============================================================ -->
+  <section class="py-20 bg-black-olive">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-champaign-100 font-headline mb-4">About the Collection</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-flame-400 to-rust-400 rounded-full mx-auto"></div>
+      </div>
+
+      <div class="space-y-6 text-champaign-200 text-lg leading-relaxed">
+        <p>
+          What if the books you already love were trying to tell you something about God?
+        </p>
+        <p>
+          The Protoevangelium Collection is eleven study guides for eleven beloved books, read through the lens of the Catholic intellectual tradition. We're talking sci-fi, literary classics, a graphic novel, a spy thriller, dinosaurs, astronauts, and musings about Napoleon's fate in the afterlife. Not your typical theology reading list.
+        </p>
+        <p>
+          That's what these books are about, even though most of the authors had no idea. They're stories about people searching for meaning, building false gods, losing themselves, falling in love badly, falling in love well, fighting to survive, and stumbling toward a truth they can't quite name. They are, in their own way, protoevangelical — reaching toward a Gospel that hasn't arrived yet. The hole in every story is exactly the shape of the One who fills all things.
+        </p>
+        <p>
+          This collection arranges these eleven books as a journey. We start with the most basic question — is there meaning at all? — and move through moral reasoning, power, love, conscience, identity, faith, freedom, and the natural order, arriving finally at the threshold of eternity itself. It's the kind of journey a soul takes on its way to faith. It's also, in many ways, our story.
+        </p>
+        <p>
+          Each guide includes original theological and literary analysis, connections to Sacred Scripture and the Catechism, and discussion questions designed to push past surface-level conversation into the stuff that actually matters. Along the way, you'll encounter the natural law, the sacramental worldview, Church history, moral theology, and the Catholic intellectual tradition at work — not as abstract concepts, but as living tools for understanding the stories you love and the world you live in.
+        </p>
+        <p>
+          Whether you're a believer looking for a deeper language to talk about your faith, a skeptic who's curious about what the Catholic tradition actually sees when it looks at the world, or just someone who loves a good book and wants to think harder about it — we wrote this for you. We think you're going to find God in some unexpected places. We certainly did.
+        </p>
+      </div>
+
+      <!-- Mid-page CTA -->
+      <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={SQUARE_PDF_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-flame-500 hover:bg-flame-600 text-midnight-blue text-center px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg font-headline"
+        >
+          PDF Download — $14.99
+        </a>
+        <a
+          href={AMAZON_PAPERBACK_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-champaign-100 hover:bg-champaign-200 text-black-olive text-center px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg"
+        >
+          Paperback — $18.99
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE BOOKS
+  ============================================================ -->
+  <section class="py-20 bg-midnight-blue">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-champaign-100 font-headline mb-4">Eleven Books. Eleven Guides.</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-flame-400 to-rust-400 rounded-full mx-auto mb-6"></div>
+        <p class="text-champaign-300 text-lg max-w-2xl mx-auto">
+          Each guide can be read on its own, but they're arranged as a journey — the same kind of journey a soul takes on its way toward faith.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {books.map((book) => (
+          <article class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 hover:border-flame-400/40 transition-colors">
+            <div class="flex items-start gap-4 mb-4">
+              <span class="text-flame-400 font-headline text-2xl font-bold shrink-0 w-10 text-right">{book.num}</span>
+              <div>
+                <h3 class="text-xl font-bold text-champaign-100 font-headline leading-tight">{book.title}</h3>
+                <p class="text-champaign-400 text-sm mt-1">By {book.author}</p>
+              </div>
+            </div>
+            <div class="ml-14">
+              {book.teaser.split('\n\n').map((para) => (
+                <p class="text-champaign-300 text-sm leading-relaxed mb-3">{para}</p>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHAT'S INCLUDED / FORMATS & PRICING
+  ============================================================ -->
+  <section class="py-20 bg-black-olive">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-champaign-100 font-headline mb-4">What's Included</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-flame-400 to-rust-400 rounded-full mx-auto"></div>
+      </div>
+
+      <!-- Features list -->
+      <div class="grid md:grid-cols-2 gap-4 mb-16">
+        {[
+          'Eleven complete study guides covering eleven books',
+          'Original literary and theological analysis for each',
+          'Connections to Sacred Scripture and the Catechism',
+          'Discussion questions for each book',
+          'An introduction laying out the Catholic intellectual tradition',
+          'A conclusion that ties the whole journey together',
+          'Coverage of natural law, Church history, moral theology, and more',
+          '~70 pages total — dense, focused, and worth every page',
+        ].map((feature) => (
+          <div class="flex items-start gap-3 bg-midnight-blue border border-champaign-700/20 rounded-lg p-4">
+            <span class="text-flame-400 text-xl shrink-0 mt-0.5">✦</span>
+            <p class="text-champaign-200 leading-relaxed">{feature}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- PDF -->
+        <div class="bg-gradient-to-br from-flame-900/40 to-rust-900/30 border-2 border-flame-400/40 rounded-xl p-8 text-center shadow-xl">
+          <div class="text-flame-400 text-4xl mb-4">📄</div>
+          <h3 class="text-xl font-bold text-champaign-100 font-headline mb-2">PDF Download</h3>
+          <p class="text-4xl font-bold text-champaign-100 font-headline mb-2">$14.99</p>
+          <p class="text-champaign-300 text-sm mb-6">Instant download. Read on any device.</p>
+          <a
+            href={SQUARE_PDF_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-flame-500 hover:bg-flame-600 text-midnight-blue text-center px-6 py-3 rounded-lg font-bold transition-colors"
+          >
+            Buy PDF
+          </a>
+          <p class="text-champaign-400 text-xs mt-3">Secure checkout via Gumroad</p>
+        </div>
+
+        <!-- Ebook -->
+        <div class="bg-midnight-blue border border-champaign-700/30 rounded-xl p-8 text-center shadow-xl">
+          <div class="text-champaign-300 text-4xl mb-4">📱</div>
+          <h3 class="text-xl font-bold text-champaign-100 font-headline mb-2">Ebook</h3>
+          <p class="text-4xl font-bold text-champaign-100 font-headline mb-2">$9.99</p>
+          <p class="text-champaign-300 text-sm mb-2">For Kindle and Kindle apps on any device.</p>
+          <p class="text-flame-400 text-sm font-semibold mb-6">Free for Kindle Unlimited subscribers.</p>
+          <a
+            href={AMAZON_EBOOK_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-rust-800 hover:bg-rust-900 text-champaign-100 text-center px-6 py-3 rounded-lg font-bold transition-colors"
+          >
+            Buy on Amazon
+          </a>
+          <p class="text-champaign-400 text-xs mt-3">Via Amazon</p>
+        </div>
+
+        <!-- Paperback -->
+        <div class="bg-midnight-blue border border-champaign-700/30 rounded-xl p-8 text-center shadow-xl">
+          <div class="text-champaign-300 text-4xl mb-4">📚</div>
+          <h3 class="text-xl font-bold text-champaign-100 font-headline mb-2">Paperback</h3>
+          <p class="text-4xl font-bold text-champaign-100 font-headline mb-2">$18.99</p>
+          <p class="text-champaign-300 text-sm mb-6">A real book for your real bookshelf.</p>
+          <a
+            href={AMAZON_PAPERBACK_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-rust-800 hover:bg-rust-900 text-champaign-100 text-center px-6 py-3 rounded-lg font-bold transition-colors"
+          >
+            Buy on Amazon
+          </a>
+          <p class="text-champaign-400 text-xs mt-3">Via Amazon</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT THE AUTHORS
+  ============================================================ -->
+  <section class="py-20 bg-rust-800">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-4xl font-bold text-champaign-100 font-headline mb-4">About the Authors</h2>
+        <div class="w-24 h-1 bg-champaign-300/40 rounded-full mx-auto"></div>
+      </div>
+      <div class="bg-black-olive/40 border border-champaign-700/30 rounded-xl p-10 space-y-5">
+        <p class="text-champaign-100 text-lg leading-relaxed">
+          We're <strong class="text-champaign-100">Tyler and Sadie Woodley</strong>, and we run the Great Catholic Book Club. We're converts. We came to the Church from the secular world, and the books on our shelves came with us.
+        </p>
+        <p class="text-champaign-200 text-lg leading-relaxed">
+          The Great Catholic Book Club exists because we believe those books belong in the conversation — not as cautionary tales or guilty pleasures, but as genuine sources of truth, beauty, and goodness. The Protoevangelium Collection reflects the journey that brought us here: a couple using the only language we had in common — the books we both loved — to find our way to each other, and eventually to the Church.
+        </p>
+        <p class="text-champaign-200 text-lg leading-relaxed">
+          This collection doesn't talk down to secular readers or assume they're hostile. It doesn't talk down to Catholic readers or assume they need to be protected from difficult content. It trusts the reader to engage with challenging themes — violence, power, sexuality, despair, false gods, broken relationships — and to find Christ in the middle of all of it.
+        </p>
+        <p class="text-champaign-200 text-lg leading-relaxed italic">
+          That's what the Catholic intellectual tradition actually does. It doesn't hide from the world. It walks straight into it and finds God already there.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA
+  ============================================================ -->
+  <section class="py-20 bg-black-olive relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('/images/SiteImages/A vast dimly lit library full of ancient interesting and colorful books.jpg');"></div>
+    <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+      <h2 class="text-4xl sm:text-5xl font-bold text-champaign-100 font-headline mb-4">
+        Ready to start the journey?
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-flame-400 to-rust-400 rounded-full mx-auto mb-6"></div>
+      <p class="text-champaign-200 text-xl mb-10 leading-relaxed max-w-2xl mx-auto">
+        Eleven books. Eleven guides. One journey from the question of meaning to the threshold of eternity. We think you'll find God in some unexpected places.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <a
+          href={SQUARE_PDF_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-flame-500 hover:bg-flame-600 text-midnight-blue px-10 py-5 rounded-lg font-bold text-xl transition-colors shadow-xl font-headline"
+        >
+          PDF Download — $14.99
+        </a>
+        <div class="flex gap-4 justify-center">
+          <a
+            href={AMAZON_EBOOK_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-rust-800 hover:bg-rust-900 text-champaign-100 px-8 py-5 rounded-lg font-semibold text-lg transition-colors shadow-xl"
+          >
+            Ebook
+          </a>
+          <a
+            href={AMAZON_PAPERBACK_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-rust-800 hover:bg-rust-900 text-champaign-100 px-8 py-5 rounded-lg font-semibold text-lg transition-colors shadow-xl"
+          >
+            Paperback — $18.99
+          </a>
+        </div>
+      </div>
+      <p class="text-champaign-400 text-sm italic">
+        Ebook and paperback available on Amazon. As an Amazon Associate, we may earn a commission from qualifying purchases at no additional cost to you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BOTTOM NAV
+  ============================================================ -->
+  <section class="py-8 bg-midnight-blue border-t border-champaign-700/20">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+      <a href="/shop" class="text-champaign-400 hover:text-champaign-200 transition-colors">
+        ← Back to Store
+      </a>
+      <div class="flex gap-6">
+        <a href="/books" class="text-champaign-400 hover:text-champaign-200 transition-colors">Book List</a>
+        <a href="/about" class="text-champaign-400 hover:text-champaign-200 transition-colors">About Us</a>
+        <a href="/join" class="text-champaign-400 hover:text-champaign-200 transition-colors">Join the Club</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
