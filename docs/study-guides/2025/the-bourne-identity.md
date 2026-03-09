@@ -1,0 +1,67 @@
+# Salvation and Selfhood
+**By Robert Ludlum**
+
+---
+
+> "I do not understand my own actions. For I do not do what I want, but I do the very thing I hate...I do not do the good I want, but the evil I do not want is what I do. For I delight in the law of God in my inmost self, but I see in my members another law at war with the law of my mind, making me captive to the law of sin that dwells in my members. Wretched man that I am! Who will rescue me from this body of death?"
+
+— Romans 7:15, 19, 22
+
+Who are we?
+
+Option One: Fundamentally good, naïve creatures, full of guileless desire to experience life. Innocent and with good intentions. In love with our Creator, and desiring to know, love, and serve Him, without any real idea of what that means.
+
+Option Two: Wretched and broken fools who intentionally made bad choices, with our eyes open. Knowing there would be consequences, but with only a superficial understanding of what that meant. A foreboding sense that we have ruined everything good in our world, and there isn't any way to un-ring that bell. Despairing acceptance that the only path forward is to lean in and become absurdly defensive. Rationalize and justify. Maybe that way we can forget the innocent self was ever there in the first place. Incapable of turning back, and certain there is nothing to return home to anyway. How could you possibly recover lost innocence?
+
+Well those are both pretty terrible choices. Isn't there an Option Three?
+
+What about: Joyfully redeemed, a beloved sheep that was once lost but now is found? It might be impossible to return to that state of perfect innocence, but this new state is arguably better-there is a wisdom that the previously immature self could not have understood. There is also a genuine appreciation for what it means to be in relationship with the Creator. The devotion is no longer hypothetical and untested, nor is it taken for granted. Yes, there are scars and wounds. But this is a real self that could only have developed after walking through pain and loss. There had to be the experience of consequences and necessity of hard choices. Something beautiful and real could emerge from those conditions.
+
+St. Paul and Jason Bourne would likely have enjoyed this kind of conversation about identity over a few drinks.
+
+Robert Ludlum's THE BOURNE IDENTITY is a story about a man's struggle to know who he is, and somehow not run screaming from what he finds. The story centers around an obvious and surface level brokenness of self: Jason Bourne has amnesia, after suffering a terrible and traumatic accident. He has instincts, skills, and grasp of language, but no idea where any of it came from. The deeper level brokenness is his real problem though: the more he discovers about himself, the more disgusted he is with the kind of horrible person he believes himself to be. He doesn't want to know what lies beyond his conscious knowledge. As an amnesiac, maybe he gets a chance to be free of what the old self has done.
+
+The story presents a feint within a feint, within a feint, like any good dime-store spy novel. As an amnesiac Bourne displays several instances of heroic goodness, risking his life to save a woman that he falls deeply in love with. He'd like to hope against all odds that maybe he's a good guy; there is enough of a blank slate to entertain the idea. But then Bourne finds out that he is Cain, a ruthless and sociopathic international assassin who does gruesome things for money. His proficiency at violence, deception, and murder makes this story undeniably convincing. He can't connect emotionally at all with the identity of "Cain," but it seems true. He is trapped with it. But then he learns that the identity of Cain is itself a fiction. He is actually undercover intelligence operative Jason Bourne, who took on this false identity of a killer in order to draw out and catch the real international assassin. So...why exactly would he do that? It turns out "Jason Bourne" wasn't all that great of a guy either, with serious anger issues and a streak of violent extremism. But what about even before Jason Bourne went bad-who was he before he turned into the kind of person who would take on suicidal undercover missions?
+
+Underneath all the layers of Jason Bourne is a wounded, flawed, real man. He is a mixed bag of good and bad qualities, terrible experiences of loss and grief, and a history of not handling the pain all too well. He is a person who was in some really bad situations, and who made some bad decisions. He's imperfect-neither saintly hero nor evil killer. He is man with a chance to do something new with his life, if he can let the past go. With love, the old self (all its different versions) can die, and the new self can be reborn in hope.
+
+This is the fundamental choice in Christian conversion: God shows us through the story of the Fall and His plan of redemption that it is not possible to erase the past. But we can always write a new ending.
+
+> "...seeing that you have stripped off the old self with its practices and have clothed yourselves with the new self, which is being renewed in knowledge according to the image of its creator."
+
+- Colossians 3:9-10
+
+Turning back to St. Paul: He started out as Saul. Saul was a devout Pharisee-a zealot. This wasn't a pejorative; there were other zealots in the Gospels. Saul was a highly educated man, a Jew with a Roman citizenship, well versed in the law and well connected. When the disciples of Jesus of Nazareth began to be a problem, Saul's response was a defense of the truth of God. He was committed to erasing the insult that a common son of a carpenter, tortured and killed on a cross like any other criminal and political agitator, was the Messiah. A purity of righteousness motivated Saul in a way that could be understood by few people. The average person is typically beset by too much self-doubt to be very sure of their plan of action. Most of us don't believe we have the right to be entirely secure in our moral pronouncements. But Saul possessed the kind of personality that is totally convinced they are doing right-this is a mind can justify anything.
+
+To a person like Saul, it is a reasonable thing to imprison, scourge, and even round up and execute Christians. All actions are done under the cover of legitimacy, with procedures and bureaucratic layers allowing the executioner to maintain appropriate distance from the condemned. Saul stood in approval as young St. Stephen was stoned to death in front of him. Was it this moment when it might have occurred to him that this couldn't really be God's will? Maybe this was Saul's opportunity to get off the train of events he had just chosen-the one that would barrel him into increasingly persecuting and killing Christians to the point of developing a terrifying reputation throughout the region.
+
+It is reasonable to wonder if Saul had second thoughts as he went down the rabbit hole of killing people. He had no recorded history of being some kind of sociopathic murderer prior to these encounters with the Christians. He didn't come into the picture as amoral, blood thirsty, and happy to stumble across an excuse to do what he wanted to do anyway. Saul was a much more frightening person than that. This is the kind of person who talked himself into believing his actions were righteous, and he dove deeper and deeper into the hole as time passed.
+
+By the time Saul got on the road to Damascus, maybe he already had some doubts. Maybe he wasn't sure that what he was doing was good. But perhaps the good he wished to do; he could not do. The stakes were too high and he had built his identity on the correctness of his actions. The only thing he could do to keep up the act was to keep killing. That way at least no one suspects you are ashamed, that you think you made a mistake, that you wish you could stop.
+
+That's the nature of sin-Satan will give you all kinds of justifications and encouragement to do it, but as soon as you do, he turns on you and becomes the Accuser. Now there's no hope, you are just a living mausoleum for the evil you did, and the only way to save a shred of self-worth is to own it and make it your identity. There's no turning back, just doubling down so you don't have to feel bad about something you can't change anyway. You're trapped. Even if you want to do something different, it doesn't fit the persona you put on. You can't ever take off. The false self is impossible to get rid of, and all you can do is justify it. You're convinced that you've forfeited any other identity, so you must defend this one at all costs.
+
+When Jesus came to Paul, the blinding and incapacitation were a profound act of kindness. Saul had to stop, but he could not do so of his own will. Praise the Lord, because not a single one of us has the power to stop on our own. We're in too deep, busy lying to ourselves for so long. We have no ability to just hit the pause button and say "I was wrong. I haven't been living right. I want to change." Change into what? We are certain that we can only be the same bad person who has done so many bad things. We are just giving up our only defense: pretending it's not true. The Lord's incapacitation was a great mercy for Saul, because perhaps it let him do what his spirit was desperately aching to do and couldn't.
+
+There is a type of living death that every person is terrified of: it's the unflinchingly honest self-assessment. Maybe Saul, like Jason Bourne, got to a point where self-awareness was long ago abandoned in favor of a shallow conviction that whatever evil we did was justified, and it was the others' fault anyhow. This belief is absurd, but necessary, because maybe, like Bourne, Saul was absolutely sure that a genuine look within would reveal ugliness that had to be avoided at all costs. There is no reason to want to meet yourself if you're already certain what you'll find is a monster. That was Bourne's dilemma. Deciding to look inside is absolutely like death-the death of the ego, the old man.
+
+But praise the Lord, we don't do this alone. Jesus Christ is with us, calling out to us by name just like he called Saul. And when we do this with our Lord, we discover that in fact, the monster we imagined is a distortion. It is true that we are not justified and perfect like we pretended to be, but we're also not nearly as terrible as we thought. With Jesus by our side, we find out that we are just human beings, wounded but redeemable; a mix of good and bad traits. Some things run deeper than others, but there is nothing His grace can't heal.
+
+The real trick to life is to let go of two illusions, and embrace one truth: The first illusion is that our sins mark us as bad forever-that they're etched into our foreheads and we are inescapably defined by them. The second illusion is that we can change, erase, or undo the past. What was done was done. We let go of both condemnation as well as avoidance. The one truth is that God knows all of this, and He gives us the beautiful opportunity to take what we've done and turn it into the richness of wisdom and spiritual growth. We are not defined by our sin; we are informed by it. Today is a new day. With His grace we can gratefully use what we've learned to be more virtuous today, be closer to the Lord today.
+
+What did Saul do after this encounter with the Lord? He became Paul. Paul the new man did not erase Saul. He took himself, sins and all, and brought it all to the Lord to redeem. He used his past sins to develop an all-encompassing love for Christ and Christianity that fulfilled and exceeded all the bounds of his righteousness. The certainty he always had could finally be fulfilled in his work as Apostle. Saul's personality and identity was not erased-it was sanctified and perfected. This didn't happen by being stuck in the past or worried about the future, as the devil would have us do. It happens by being grateful right now for the chance to live and share the Gospel.
+
+Cain-Delta-Bourne-David has a chance to have a new life, in love, today-to end up choosing option three as his identity. So do we. May the Lord give us the strength to make that choice again and again, every day of our lives.
+
+## Discussion Questions
+
+1. Bourne's amnesia presents an interesting moral dilemma. Is he culpable for the sins he committed that he can't even recall? Is memory a prerequisite for morality? Why or why not?
+
+2. The character of Marie St. Jacque falls totally in love with Bourne, and is willing to join him in international intrigue and even exile. For the sake of love, she is willing to completely give over her life in sacrifice. Do you think her actions are plausible? Why or why not?
+
+3. After Bourne's accident, he spends several months recuperating in a small French village. No one from Treadstone 71 tries to find him. Was he left for dead? What moral obligations do you think the US government owed to Bourne, and to soldiers and operatives in general?
+
+4. If your memory was erased, and all that remained were your instincts and acquired skills and education, how do you think you would go about surviving? How would you figure out who you are? Do you think anything would lead you to back to Jesus Christ? Why or why not?
+
+5. Once Bourne discovers the truth and learns he is David Webb, do you think he was comfortable with the truth of who he is? Do you think David Webb is a moral character? Why or why not?
+
