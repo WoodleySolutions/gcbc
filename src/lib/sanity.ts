@@ -197,8 +197,8 @@ export const queries = {
   // Get all blog posts
   allPosts: `*[_type == "blogPost"] | order(publishedAt desc)`,
 
-  // Get featured blog posts
-  featuredPosts: `*[_type == "blogPost" && featured == true] | order(publishedAt desc)[0...3]{
+  // Get featured blog posts — most recent 3, regardless of featured flag
+  featuredPosts: `*[_type == "blogPost"] | order(publishedAt desc)[0...3]{
     _id,
     title,
     slug,
