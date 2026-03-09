@@ -560,17 +560,17 @@ const structuredData = {
   <!-- Confetti on page load — launch celebration -->
   <script is:inline src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script is:inline>
-    window.addEventListener('load', function () {
-      // Brand colors: flame, rust, champaign
-      var colors = ['#E8622A', '#C0392B', '#F5E6C8', '#F0A500', '#F5C87A'];
+    // Give the page a moment to render visually before firing
+    var colors = ['#E8622A', '#C0392B', '#F5E6C8', '#F0A500', '#F5C87A'];
+    setTimeout(function () {
       confetti({ particleCount: 90, spread: 80, origin: { y: 0.55 }, colors: colors, scalar: 1.1 });
-      setTimeout(function () {
-        confetti({ particleCount: 60, spread: 100, origin: { x: 0.15, y: 0.6 }, colors: colors, angle: 70 });
-      }, 350);
-      setTimeout(function () {
-        confetti({ particleCount: 60, spread: 100, origin: { x: 0.85, y: 0.6 }, colors: colors, angle: 110 });
-      }, 600);
-    });
+    }, 200);
+    setTimeout(function () {
+      confetti({ particleCount: 60, spread: 100, origin: { x: 0.15, y: 0.6 }, colors: colors, angle: 70 });
+    }, 550);
+    setTimeout(function () {
+      confetti({ particleCount: 60, spread: 100, origin: { x: 0.85, y: 0.6 }, colors: colors, angle: 110 });
+    }, 800);
   </script>
 
 </Layout>
