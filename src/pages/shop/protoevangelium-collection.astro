@@ -171,7 +171,7 @@ const structuredData = {
           <p class="text-flame-400 font-semibold font-headline tracking-widest uppercase text-sm mb-4">
             Great Catholic Book Club
           </p>
-          <h1 class="text-5xl sm:text-6xl font-bold text-champaign-100 mb-4 font-headline leading-tight drop-shadow-lg">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-champaign-100 mb-4 font-headline leading-tight drop-shadow-lg">
             The Protoevangelium Collection
           </h1>
           <div class="w-24 h-1 bg-gradient-to-r from-flame-400 to-rust-400 rounded-full mb-6"></div>
@@ -183,33 +183,31 @@ const structuredData = {
           </p>
 
           <!-- Purchase Options -->
-          <div class="flex flex-col sm:flex-row gap-4 mb-6">
+          <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 mb-6">
             <a
               href={SQUARE_PDF_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex-1 bg-flame-500 hover:bg-flame-600 text-midnight-blue text-center px-6 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg font-headline"
+              class="sm:flex-1 bg-flame-500 hover:bg-flame-600 text-midnight-blue text-center px-6 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg font-headline"
             >
               PDF Download — $14.99
             </a>
-            <div class="flex gap-3 flex-1">
-              <a
-                href={AMAZON_EBOOK_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex-1 bg-rust-800 hover:bg-rust-900 text-champaign-100 text-center px-4 py-4 rounded-lg font-semibold transition-colors shadow-lg"
-              >
-                Ebook — $9.99
-              </a>
-              <a
-                href={AMAZON_PAPERBACK_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex-1 bg-rust-800 hover:bg-rust-900 text-champaign-100 text-center px-4 py-4 rounded-lg font-semibold transition-colors shadow-lg"
-              >
-                Paperback — $18.99
-              </a>
-            </div>
+            <a
+              href={AMAZON_EBOOK_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="sm:flex-1 bg-rust-800 hover:bg-rust-900 text-champaign-100 text-center px-4 py-4 rounded-lg font-semibold transition-colors shadow-lg"
+            >
+              Ebook — $9.99
+            </a>
+            <a
+              href={AMAZON_PAPERBACK_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="sm:flex-1 bg-rust-800 hover:bg-rust-900 text-champaign-100 text-center px-4 py-4 rounded-lg font-semibold transition-colors shadow-lg"
+            >
+              Paperback — $18.99
+            </a>
           </div>
           <p class="text-champaign-400 text-sm italic">
             Ebook and paperback available on Amazon. As an Amazon Associate, we may earn a commission.
@@ -458,7 +456,7 @@ const structuredData = {
         Eleven books. Eleven guides. One journey from the question of meaning to the threshold of eternity. We think you'll find God in some unexpected places.
       </p>
 
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+      <div class="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center mb-8">
         <a
           href={SQUARE_PDF_LINK}
           target="_blank"
@@ -467,24 +465,22 @@ const structuredData = {
         >
           PDF Download — $14.99
         </a>
-        <div class="flex gap-4 justify-center">
-          <a
-            href={AMAZON_EBOOK_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-rust-800 hover:bg-rust-900 text-champaign-100 px-8 py-5 rounded-lg font-semibold text-lg transition-colors shadow-xl"
-          >
-            Ebook
-          </a>
-          <a
-            href={AMAZON_PAPERBACK_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-rust-800 hover:bg-rust-900 text-champaign-100 px-8 py-5 rounded-lg font-semibold text-lg transition-colors shadow-xl"
-          >
-            Paperback — $18.99
-          </a>
-        </div>
+        <a
+          href={AMAZON_EBOOK_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-rust-800 hover:bg-rust-900 text-champaign-100 px-8 py-5 rounded-lg font-semibold text-lg transition-colors shadow-xl"
+        >
+          Ebook — $9.99
+        </a>
+        <a
+          href={AMAZON_PAPERBACK_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-rust-800 hover:bg-rust-900 text-champaign-100 px-8 py-5 rounded-lg font-semibold text-lg transition-colors shadow-xl"
+        >
+          Paperback — $18.99
+        </a>
       </div>
       <p class="text-champaign-400 text-sm italic">
         Ebook and paperback available on Amazon. As an Amazon Associate, we may earn a commission from qualifying purchases at no additional cost to you.
@@ -557,20 +553,5 @@ const structuredData = {
     </div>
   </section>
 
-  <!-- Confetti on page load — launch celebration -->
-  <script is:inline src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <script is:inline>
-    // Give the page a moment to render visually before firing
-    var colors = ['#E8622A', '#C0392B', '#F5E6C8', '#F0A500', '#F5C87A'];
-    setTimeout(function () {
-      confetti({ particleCount: 90, spread: 80, origin: { y: 0.55 }, colors: colors, scalar: 1.1 });
-    }, 200);
-    setTimeout(function () {
-      confetti({ particleCount: 60, spread: 100, origin: { x: 0.15, y: 0.6 }, colors: colors, angle: 70 });
-    }, 550);
-    setTimeout(function () {
-      confetti({ particleCount: 60, spread: 100, origin: { x: 0.85, y: 0.6 }, colors: colors, angle: 110 });
-    }, 800);
-  </script>
 
 </Layout>
