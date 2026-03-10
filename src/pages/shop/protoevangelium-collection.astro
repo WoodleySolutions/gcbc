@@ -335,19 +335,6 @@ const structuredData = {
     </div>
   </section>
 
-  <script is:inline>
-    (function () {
-      function syncBookCards() {
-        var isDesktop = window.matchMedia('(min-width: 768px)').matches;
-        document.querySelectorAll('.book-card-details').forEach(function (el) {
-          if (isDesktop) el.setAttribute('open', '');
-        });
-      }
-      syncBookCards();
-      window.addEventListener('resize', syncBookCards);
-    })();
-  </script>
-
   <!-- ============================================================
        WHAT'S INCLUDED / FORMATS & PRICING
   ============================================================ -->
