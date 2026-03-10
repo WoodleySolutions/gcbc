@@ -212,6 +212,10 @@ const structuredData = {
           <p class="text-champaign-400 text-sm italic">
             Ebook and paperback available on Amazon. As an Amazon Associate, we may earn a commission.
           </p>
+          <div class="mt-4 bg-midnight-blue/60 border border-champaign-700/30 rounded-lg px-5 py-3 flex flex-col sm:flex-row sm:items-center gap-1 text-sm">
+            <span class="text-flame-400 font-semibold shrink-0">Buying for a group?</span>
+            <span class="text-champaign-300 sm:ml-1">Parishes, schools, and study groups — <a href="mailto:woodleys@greatcatholicbookclub.com?subject=Bulk%20Order%20Inquiry%20%E2%80%94%20Protoevangelium%20Collection" class="underline hover:text-champaign-100 transition-colors">contact us for bulk pricing</a>.</span>
+          </div>
         </div>
 
         <!-- Right: Cover Art -->
@@ -309,24 +313,40 @@ const structuredData = {
 
       <div class="grid md:grid-cols-2 gap-6">
         {books.map((book) => (
-          <article class="bg-black-olive border border-champaign-700/30 rounded-lg p-8 hover:border-flame-400/40 transition-colors">
-            <div class="flex items-start gap-4 mb-4">
-              <span class="text-flame-400 font-headline text-2xl font-bold shrink-0 w-10 text-right">{book.num}</span>
-              <div>
-                <h3 class="text-xl font-bold text-champaign-100 font-headline leading-tight">{book.title}</h3>
-                <p class="text-champaign-400 text-sm mt-1">By {book.author}</p>
+          <article class="bg-black-olive border border-champaign-700/30 rounded-lg hover:border-flame-400/40 transition-colors">
+            <details class="group book-card-details">
+              <summary class="flex items-center gap-4 p-6 cursor-pointer list-none select-none">
+                <span class="text-flame-400 font-headline text-2xl font-bold shrink-0 w-10 text-right">{book.num}</span>
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-lg font-bold text-champaign-100 font-headline leading-tight">{book.title}</h3>
+                  <p class="text-champaign-400 text-sm mt-0.5">By {book.author}</p>
+                </div>
+                <svg class="w-4 h-4 text-champaign-500 shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </summary>
+              <div class="px-6 pb-6 ml-14">
+                {book.teaser.split('\n\n').map((para) => (
+                  <p class="text-champaign-300 text-sm leading-relaxed mb-3">{para}</p>
+                ))}
               </div>
-            </div>
-            <div class="ml-14">
-              {book.teaser.split('\n\n').map((para) => (
-                <p class="text-champaign-300 text-sm leading-relaxed mb-3">{para}</p>
-              ))}
-            </div>
+            </details>
           </article>
         ))}
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    (function () {
+      function syncBookCards() {
+        var isDesktop = window.matchMedia('(min-width: 768px)').matches;
+        document.querySelectorAll('.book-card-details').forEach(function (el) {
+          if (isDesktop) el.setAttribute('open', '');
+        });
+      }
+      syncBookCards();
+      window.addEventListener('resize', syncBookCards);
+    })();
+  </script>
 
   <!-- ============================================================
        WHAT'S INCLUDED / FORMATS & PRICING
