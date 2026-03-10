@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Bulk Order Inquiry — Great Catholic Book Club"
+  description="Interested in The Protoevangelium Collection for your parish, school, or study group? Contact us for bulk pricing."
+>
+  <!-- Hero -->
+  <section class="bg-black-olive relative">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/A vast dimly lit library full of ancient interesting and colorful books.jpg');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-midnight-blue/90 via-black-olive/92 to-black-olive/95"></div>
+    <div class="max-w-3xl mx-auto px-4 py-16 relative z-10 text-center">
+      <p class="text-flame-400 font-semibold font-headline tracking-widest uppercase text-sm mb-3">The Protoevangelium Collection</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-4 font-headline drop-shadow-lg">Bulk Order Inquiry</h1>
+      <div class="w-24 h-1 bg-gradient-to-r from-flame-400 to-rust-400 rounded-full mx-auto mb-6"></div>
+      <p class="text-lg text-champaign-200 leading-relaxed">
+        We'd love to support your parish, school, or study group. Fill out the form below and we'll get back to you with pricing options.
+      </p>
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="py-16 bg-black-olive">
+    <div class="max-w-2xl mx-auto px-4">
+      <div class="bg-midnight-blue border border-champaign-700/30 rounded-xl shadow-2xl p-8 sm:p-10">
+
+        <form name="bulk-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success?form=bulk-inquiry" class="space-y-6">
+          <input type="hidden" name="form-name" value="bulk-inquiry" />
+          <input type="hidden" name="bot-field" />
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label for="firstName" class="block text-sm font-medium text-champaign-200 mb-2">First Name *</label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                required
+                class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-flame-500 focus:border-flame-500 outline-none"
+              />
+            </div>
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-champaign-200 mb-2">Last Name *</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                required
+                class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-flame-500 focus:border-flame-500 outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-champaign-200 mb-2">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-flame-500 focus:border-flame-500 outline-none"
+            />
+          </div>
+
+          <div>
+            <label for="groupType" class="block text-sm font-medium text-champaign-200 mb-2">Group Type *</label>
+            <select
+              id="groupType"
+              name="groupType"
+              required
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-flame-500 focus:border-flame-500 outline-none"
+            >
+              <option value="" disabled selected>Select one…</option>
+              <option value="Parish">Parish</option>
+              <option value="Catholic School">Catholic School</option>
+              <option value="Study Group">Study Group</option>
+              <option value="Independent Study">Independent Study</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="groupSize" class="block text-sm font-medium text-champaign-200 mb-2">Approximate Group Size *</label>
+            <select
+              id="groupSize"
+              name="groupSize"
+              required
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 rounded-lg focus:ring-2 focus:ring-flame-500 focus:border-flame-500 outline-none"
+            >
+              <option value="" disabled selected>Select one…</option>
+              <option value="5–10">5–10</option>
+              <option value="11–25">11–25</option>
+              <option value="26–50">26–50</option>
+              <option value="50+">50+</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium text-champaign-200 mb-2">Anything else we should know?</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              class="w-full px-4 py-3 border border-champaign-700/30 bg-black-olive text-champaign-100 placeholder-champaign-500 rounded-lg focus:ring-2 focus:ring-flame-500 focus:border-flame-500 outline-none"
+              placeholder="Format preference, timeline, questions, etc."
+            ></textarea>
+          </div>
+
+          <div class="text-center pt-2">
+            <button
+              type="submit"
+              class="bg-flame-500 hover:bg-flame-600 text-midnight-blue px-10 py-4 rounded-lg text-lg font-bold transition-colors shadow-lg font-headline"
+            >
+              Send Inquiry
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+      <p class="text-center text-champaign-400 text-sm mt-6">
+        Or email us directly at <a href="mailto:woodleys@greatcatholicbookclub.com" class="underline hover:text-champaign-200 transition-colors">woodleys@greatcatholicbookclub.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Back nav -->
+  <section class="py-8 bg-midnight-blue border-t border-champaign-700/20">
+    <div class="max-w-2xl mx-auto px-4 text-sm">
+      <a href="/shop/protoevangelium-collection" class="text-champaign-400 hover:text-champaign-200 transition-colors">
+        ← Back to The Protoevangelium Collection
+      </a>
+    </div>
+  </section>
+
+</Layout>
