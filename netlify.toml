@@ -79,3 +79,61 @@
 #   from = "/404"
 #   to = "/404.html"
 #   status = 404
+
+# ---------------------------------------------------------------
+# 301 redirects from old Wix site URLs
+# ---------------------------------------------------------------
+
+# Old about page
+[[redirects]]
+  from = "/about-3"
+  to = "/about"
+  status = 301
+
+# Old blog posts → matching new blog posts
+[[redirects]]
+  from = "/post/watchmen-a-catholic-take-on-means-and-ends-use-of-power"
+  to = "/blog/watchmen-a-catholic-take-on-means-and-ends-use-of-power-march-2025-book-of-the-month"
+  status = 301
+
+[[redirects]]
+  from = "/post/new-video-jane-austen-pride-and-prejudice-vs-the-new-york-times-a-catholic-perspective-on-mankee"
+  to = "/blog/jane-austen-pride-and-prejudice-vs-the-new-york-times-a-catholic-perspective-on-mankeeping"
+  status = 301
+
+[[redirects]]
+  from = "/post/theology-of-the-office-natural-reason-and-divine-revelation-explained-by-dwight-and-michael"
+  to = "/blog/the-theology-of-the-office-natural-reason-and-divine-revelation"
+  status = 301
+
+# Sadie's conversion story → about page (content not migrated)
+[[redirects]]
+  from = "/post/my-conversion-story-speech-by-sadie-woodley"
+  to = "/about"
+  status = 301
+
+# Old event pages → books (Flannery O'Connor event has a matching blog post)
+[[redirects]]
+  from = "/event-details-registration/the-catholic-imagination-of-flannery-oconnor"
+  to = "/blog/flannery-oconnor-and-the-catholic-imagination"
+  status = 301
+
+[[redirects]]
+  from = "/event-details-registration/book-club-pride-and-prejudice"
+  to = "/books"
+  status = 301
+
+[[redirects]]
+  from = "/event-details-registration/book-club-the-martian"
+  to = "/books"
+  status = 301
+
+[[redirects]]
+  from = "/event-details-registration/book-club-dune"
+  to = "/books"
+  status = 301
+
+[[redirects]]
+  from = "/event-details-registration/book-club-the-great-divorce"
+  to = "/books"
+  status = 301
