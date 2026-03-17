@@ -1,15 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Tyler Woodley",
+      "url": "https://greatcatholicbookclub.com/about",
+      "jobTitle": "Co-founder, Great Catholic Book Club"
+    },
+    {
+      "@type": "Person",
+      "name": "Sadie Woodley",
+      "url": "https://www.sadiewoodley.com",
+      "jobTitle": "Co-founder, Great Catholic Book Club",
+      "sameAs": ["https://www.sadiewoodley.com"]
+    }
+  ]
+};
 ---
 
-<Layout title="About Us - Great Catholic Book Club">
+<Layout
+  title="About Tyler & Sadie — Great Catholic Book Club"
+  description="Meet Tyler and Sadie Woodley, the husband-and-wife converts behind the Great Catholic Book Club. Based in Iowa, exploring great literature through the Catholic faith."
+  keywords="Tyler Woodley, Sadie Woodley, Great Catholic Book Club founders, Catholic book club Iowa, Catholic converts"
+  structuredData={personSchema}
+>
   <!-- Hero Section -->
   <section class="bg-black-olive relative">
     <!-- Background image with Catholic saints discussing books -->
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/SiteImages/Statues of catholic saints sitting around a warmly lit table discussing a book.jpg');"></div>
     <div class="absolute inset-0 bg-gradient-to-b from-black-olive/85 via-black-olive/90 to-black-olive/95"></div>
     <div class="max-w-4xl mx-auto px-4 py-16 relative z-10 text-center">
-      <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-6 font-headline drop-shadow-lg">About Us</h1>
+      <h1 class="text-4xl sm:text-5xl font-bold text-champaign-100 mb-6 font-headline drop-shadow-lg">About Tyler &amp; Sadie</h1>
       <p class="text-2xl text-rust-400 font-semibold font-headline">
         Hi, we're Tyler and Sadie!
       </p>

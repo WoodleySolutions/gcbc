@@ -32,11 +32,26 @@ const podcastPlatforms = [
     icon: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.8a7.2 7.2 0 1 1 0 14.4A7.2 7.2 0 0 1 12 4.8zm0 2.4a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 2.4a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8z"/></svg>`,
   },
 ];
+const podcastSchema = {
+  "@context": "https://schema.org",
+  "@type": "PodcastSeries",
+  "name": "Great Catholic Book Club Podcast",
+  "description": "Audio discussions on faith, literature, and the Catholic intellectual tradition.",
+  "url": "https://greatcatholicbookclub.com/podcast",
+  "author": { "@type": "Organization", "name": "Great Catholic Book Club" },
+  "sameAs": [
+    "https://podcasts.apple.com/us/podcast/great-catholic-book-club/id1880146229",
+    "https://open.spotify.com/show/1Fv9N1txCUr7oXPbqpfdAd",
+    "https://greatcatholicbookclub.podbean.com"
+  ]
+};
 ---
 
 <Layout
   title="Podcast - Great Catholic Book Club"
   description="Listen to the Great Catholic Book Club podcast. Audio discussions on faith, literature, and the Catholic intellectual tradition."
+  keywords="Catholic book club podcast, Catholic literature podcast, Catholic intellectual tradition, Tyler Woodley, Sadie Woodley"
+  structuredData={podcastSchema}
 >
   <!-- Header Section -->
   <section class="bg-black-olive relative">
